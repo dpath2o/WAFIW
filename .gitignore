@@ -10,3 +10,6 @@ __pycache__/
 afiw_data/
 demo_output/
 bulletins/
+notebook_output/
+example_pdf/
+.DS_Store
