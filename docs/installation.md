@@ -131,6 +131,8 @@ The current pause point has a valid Davis coastline and a downloaded `../../data
 
 ## Earthdata download authentication
 
+For the successful token/EULA checkpoint, credential precedence and the mandatory Azure outbound-access requirements, see [Earthdata and Azure setup](azure_earthdata_setup.md). This is part of the OS/runtime build specification, not just Python installation.
+
 WAFIW supports two local methods for ASF Sentinel-1 downloads:
 
 1. If `EARTHDATA_TOKEN` is set and nonempty, authenticate with that token. Invalid explicit tokens fail; they do not silently fall back to another account.

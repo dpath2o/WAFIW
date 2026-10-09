@@ -12,6 +12,7 @@ A laptop-first Python package for Davis Sentinel-1 acquisition, terrain-correcte
 
 - [Installation, conda and ADD coastline preparation](docs/installation.md)
 - [DEM download, storage and preparation](docs/dem_preparation.md)
+- [Earthdata/ASF access and Azure OS/network prerequisites](docs/azure_earthdata_setup.md)
 
 ## Start on your Mac
 
