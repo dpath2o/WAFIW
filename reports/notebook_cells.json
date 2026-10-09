@@ -1,0 +1,55 @@
+{
+  "execution_method": "sequential shared-namespace Python; Jupyter kernel sockets unavailable",
+  "cells": [
+    {
+      "cell_index": 1,
+      "status": "passed",
+      "stdout": "Python: 3.12.14 AOI: [75.5, -69.2, 80.5, -67.3]\n"
+    },
+    {
+      "cell_index": 3,
+      "status": "passed",
+      "stdout": ""
+    },
+    {
+      "cell_index": 5,
+      "status": "passed",
+      "stdout": "Segments: 80 features: (80, 3)\n"
+    },
+    {
+      "cell_index": 7,
+      "status": "passed",
+      "stdout": "/workspace/scratch/f04ae34d17ac/output/afiw_project/notebook_output/synthetic_demo/davis/products/20211010T000000_20211022T000000_8d3b759ff5/manifest.json\nPDF: /workspace/scratch/f04ae34d17ac/output/afiw_project/notebook_output/synthetic_bulletin/bulletin.pdf\n<IPython.core.display.Image object>\n"
+    },
+    {
+      "cell_index": 9,
+      "status": "passed",
+      "stdout": "{'common_ocean_km2': 5.0, 'gain_km2': 1.0, 'loss_km2': 1.0, 'persistent_km2': 2.0, 'net_change_km2': 0.0}\n"
+    },
+    {
+      "cell_index": 11,
+      "status": "passed",
+      "stdout": "CRS: EPSG:3031 bounds: BoundingBox(left=-48395.993000028044, bottom=-1625974.3120005303, right=361044.0069999719, top=-1125614.3120005303)\nRGB: (1251, 1024, 3) classes: [0 1 2]\n"
+    },
+    {
+      "cell_index": 13,
+      "status": "passed",
+      "stdout": "Scenes: 23 pairs: 12\nPair: 20211002T143959_20211014T143959_45c821c8 days: 12.0 overlap: 0.7013457641911439\n"
+    },
+    {
+      "cell_index": 15,
+      "status": "passed",
+      "stdout": "Real SAFE download and SNAP integration have not been executed.\n"
+    },
+    {
+      "cell_index": 17,
+      "status": "passed",
+      "stdout": ""
+    },
+    {
+      "cell_index": 19,
+      "status": "passed",
+      "stdout": "............                                                             [100%]\n=============================== warnings summary ===============================\ntests/test_pairing.py::test_pairs_require_geometry_orbit_polarization_and_days\ntests/test_pairing.py::test_pairs_require_geometry_orbit_polarization_and_days\ntests/test_pairing.py::test_pairs_require_geometry_orbit_polarization_and_days\ntests/test_pairing.py::test_pairs_require_geometry_orbit_polarization_and_days\ntests/test_pairing.py::test_pairs_require_geometry_orbit_polarization_and_days\ntests/test_pairing.py::test_pairs_require_geometry_orbit_polarization_and_days\n  /workspace/scratch/f04ae34d17ac/output/afiw_project/src/afiw/observations/sentinel1.py:19: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.\n    aoi=transform(tr.transform,box(*run.region.bbox));pairs=[]\n\ntests/test_pairing.py::test_pairs_require_geometry_orbit_polarization_and_days\ntests/test_pairing.py::test_pairs_require_geometry_orbit_polarization_and_days\ntests/test_pairing.py::test_pairs_require_geometry_orbit_polarization_and_days\ntests/test_pairing.py::test_pairs_require_geometry_orbit_polarization_and_days\n  /workspace/scratch/f04ae34d17ac/output/afiw_project/src/afiw/observations/sentinel1.py:29: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.\n    fp=transform(tr.transform,shape(f['geometry']));gp=transform(tr.transform,shape(g['geometry']))\n\ntests/test_workflow.py::test_demo_bulletin_never_claims_observed_ice\n  /workspace/scratch/f04ae34d17ac/output/afiw_project/src/afiw/plotting/primary.py:17: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication\n    x,y=grid['transform']*(grid['width']/2,grid['height']/2)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n12 passed, 11 warnings in 2.15s\n\n"
+    }
+  ]
+}

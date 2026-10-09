@@ -1,0 +1,24 @@
+............                                                             [100%]
+=============================== warnings summary ===============================
+tests/test_pairing.py::test_pairs_require_geometry_orbit_polarization_and_days
+tests/test_pairing.py::test_pairs_require_geometry_orbit_polarization_and_days
+tests/test_pairing.py::test_pairs_require_geometry_orbit_polarization_and_days
+tests/test_pairing.py::test_pairs_require_geometry_orbit_polarization_and_days
+tests/test_pairing.py::test_pairs_require_geometry_orbit_polarization_and_days
+tests/test_pairing.py::test_pairs_require_geometry_orbit_polarization_and_days
+  /workspace/scratch/f04ae34d17ac/output/afiw_project/src/afiw/observations/sentinel1.py:19: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+    aoi=transform(tr.transform,box(*run.region.bbox));pairs=[]
+
+tests/test_pairing.py::test_pairs_require_geometry_orbit_polarization_and_days
+tests/test_pairing.py::test_pairs_require_geometry_orbit_polarization_and_days
+tests/test_pairing.py::test_pairs_require_geometry_orbit_polarization_and_days
+tests/test_pairing.py::test_pairs_require_geometry_orbit_polarization_and_days
+  /workspace/scratch/f04ae34d17ac/output/afiw_project/src/afiw/observations/sentinel1.py:29: DeprecationWarning: The 'shapely.ops.transform()' function is deprecated. Use 'shapely.transform()' or 'shapely.transform_coordseq()' instead. See https://shapely.readthedocs.io/en/latest/manual.html#shapely.ops.transform for more details.
+    fp=transform(tr.transform,shape(f['geometry']));gp=transform(tr.transform,shape(g['geometry']))
+
+tests/test_workflow.py::test_demo_bulletin_never_claims_observed_ice
+  /workspace/scratch/f04ae34d17ac/output/afiw_project/src/afiw/plotting/primary.py:17: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+    x,y=grid['transform']*(grid['width']/2,grid['height']/2)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+12 passed, 11 warnings in 1.80s

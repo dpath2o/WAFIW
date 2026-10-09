@@ -1,0 +1,1526 @@
+[
+  {
+    "pair_id": "20211002T143959_20211014T143959_45c821c8",
+    "first": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              73.634834,
+              -65.853745
+            ],
+            [
+              78.552994,
+              -69.31131
+            ],
+            [
+              86.943359,
+              -67.181145
+            ],
+            [
+              81.348892,
+              -63.979149
+            ],
+            [
+              73.634834,
+              -65.853745
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -66.6545,
+        "centerLon": 80.1089,
+        "stopTime": "2021-10-02T14:41:03Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211002T143959_20211002T144103_039941_04BA0D_A88A-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 144,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211002T143959_20211002T144103_039941_04BA0D_A88A.zip",
+        "startTime": "2021-10-02T14:39:59Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211002T143959_20211002T144103_039941_04BA0D_A88A",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211002T143959_20211002T144103_039941_04BA0D_A88A.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 268326235,
+        "md5sum": "576998a2d80f9bf940ca63caa01016ab",
+        "frameNumber": 948,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 39941,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-02T14:39:59Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0948_0962_039941_144",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211002T143959_20211002T144103_039941_04BA0D_A88A.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211002T143959_20211002T144103_039941_04BA0D_A88A.zip"
+        ]
+      }
+    },
+    "second": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              73.636482,
+              -65.853432
+            ],
+            [
+              78.554893,
+              -69.310936
+            ],
+            [
+              86.944946,
+              -67.180679
+            ],
+            [
+              81.350319,
+              -63.978752
+            ],
+            [
+              73.636482,
+              -65.853432
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -66.6542,
+        "centerLon": 80.1105,
+        "stopTime": "2021-10-14T14:41:03Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211014T143959_20211014T144103_040116_04C013_EE6B-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 144,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211014T143959_20211014T144103_040116_04C013_EE6B.zip",
+        "startTime": "2021-10-14T14:39:59Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211014T143959_20211014T144103_040116_04C013_EE6B",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211014T143959_20211014T144103_040116_04C013_EE6B.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 269637638,
+        "md5sum": "51107a5e6595268eea6c9979f05dec24",
+        "frameNumber": 948,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 40116,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-14T14:39:59Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0948_0962_040116_144",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211014T143959_20211014T144103_040116_04C013_EE6B.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211014T143959_20211014T144103_040116_04C013_EE6B.zip"
+        ]
+      }
+    },
+    "baseline_days": 12.0,
+    "common_aoi_fraction": 0.7013457641911439
+  },
+  {
+    "pair_id": "20211003T152032_20211015T152032_dba0ba26",
+    "first": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              65.823921,
+              -67.799446
+            ],
+            [
+              71.569824,
+              -71.178429
+            ],
+            [
+              80.372925,
+              -68.865906
+            ],
+            [
+              73.975052,
+              -65.780327
+            ],
+            [
+              65.823921,
+              -67.799446
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -68.4868,
+        "centerLon": 72.9244,
+        "stopTime": "2021-10-03T15:21:36Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211003T152032_20211003T152136_039956_04BA93_F6FA-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 159,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211003T152032_20211003T152136_039956_04BA93_F6FA.zip",
+        "startTime": "2021-10-03T15:20:32Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211003T152032_20211003T152136_039956_04BA93_F6FA",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211003T152032_20211003T152136_039956_04BA93_F6FA.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 284611581,
+        "md5sum": "d2e89996cb2c98a6991caa40d54990e6",
+        "frameNumber": 941,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 39956,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-03T15:20:32Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0941_0954_039956_159",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211003T152032_20211003T152136_039956_04BA93_F6FA.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211003T152032_20211003T152136_039956_04BA93_F6FA.zip"
+        ]
+      }
+    },
+    "second": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              65.825645,
+              -67.799095
+            ],
+            [
+              71.571808,
+              -71.178009
+            ],
+            [
+              80.374481,
+              -68.865387
+            ],
+            [
+              73.976486,
+              -65.779877
+            ],
+            [
+              65.825645,
+              -67.799095
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -68.4863,
+        "centerLon": 72.9261,
+        "stopTime": "2021-10-15T15:21:36Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211015T152032_20211015T152136_040131_04C09E_4E12-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 159,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211015T152032_20211015T152136_040131_04C09E_4E12.zip",
+        "startTime": "2021-10-15T15:20:32Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211015T152032_20211015T152136_040131_04C09E_4E12",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211015T152032_20211015T152136_040131_04C09E_4E12.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 282284968,
+        "md5sum": "ed2296db6496da70ca10dba025578eff",
+        "frameNumber": 941,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 40131,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-15T15:20:32Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0941_0954_040131_159",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211015T152032_20211015T152136_040131_04C09E_4E12.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211015T152032_20211015T152136_040131_04C09E_4E12.zip"
+        ]
+      }
+    },
+    "baseline_days": 12.0,
+    "common_aoi_fraction": 0.6550175915041471
+  },
+  {
+    "pair_id": "20211005T150433_20211017T150433_ab99b8f3",
+    "first": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              67.921707,
+              -66.235863
+            ],
+            [
+              72.898453,
+              -69.698219
+            ],
+            [
+              81.392998,
+              -67.536507
+            ],
+            [
+              75.722954,
+              -64.333496
+            ],
+            [
+              67.921707,
+              -66.235863
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -67.0252,
+        "centerLon": 74.4748,
+        "stopTime": "2021-10-05T15:05:37Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211005T150433_20211005T150537_039985_04BB96_F9CB-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 13,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211005T150433_20211005T150537_039985_04BB96_F9CB.zip",
+        "startTime": "2021-10-05T15:04:33Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211005T150433_20211005T150537_039985_04BB96_F9CB",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211005T150433_20211005T150537_039985_04BB96_F9CB.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 260108553,
+        "md5sum": "3707051da5f242c9e58163ecd16411c4",
+        "frameNumber": 946,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 39985,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-05T15:04:33Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0946_0959_039985_013",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211005T150433_20211005T150537_039985_04BB96_F9CB.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211005T150433_20211005T150537_039985_04BB96_F9CB.zip"
+        ]
+      }
+    },
+    "second": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              67.922699,
+              -66.235603
+            ],
+            [
+              72.899139,
+              -69.697601
+            ],
+            [
+              81.393333,
+              -67.535835
+            ],
+            [
+              75.723755,
+              -64.333168
+            ],
+            [
+              67.922699,
+              -66.235603
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -67.0247,
+        "centerLon": 74.4756,
+        "stopTime": "2021-10-17T15:05:37Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211017T150433_20211017T150537_040160_04C1A3_3E65-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 13,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211017T150433_20211017T150537_040160_04C1A3_3E65.zip",
+        "startTime": "2021-10-17T15:04:33Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211017T150433_20211017T150537_040160_04C1A3_3E65",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211017T150433_20211017T150537_040160_04C1A3_3E65.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 254433823,
+        "md5sum": "619355cc175b24953d1246bb147a548f",
+        "frameNumber": 946,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 40160,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-17T15:04:33Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0947_0960_040160_013",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211017T150433_20211017T150537_040160_04C1A3_3E65.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211017T150433_20211017T150537_040160_04C1A3_3E65.zip"
+        ]
+      }
+    },
+    "baseline_days": 12.0,
+    "common_aoi_fraction": 0.6308952727486332
+  },
+  {
+    "pair_id": "20211008T152837_20211020T152837_ce2f6e75",
+    "first": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              64.450409,
+              -68.249916
+            ],
+            [
+              70.381828,
+              -71.615326
+            ],
+            [
+              79.27626,
+              -69.25602
+            ],
+            [
+              72.69886,
+              -66.192299
+            ],
+            [
+              64.450409,
+              -68.249916
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -68.9107,
+        "centerLon": 71.6917,
+        "stopTime": "2021-10-08T15:29:41Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211008T152837_20211008T152941_040029_04BD10_AAD7-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 57,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211008T152837_20211008T152941_040029_04BD10_AAD7.zip",
+        "startTime": "2021-10-08T15:28:37Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211008T152837_20211008T152941_040029_04BD10_AAD7",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211008T152837_20211008T152941_040029_04BD10_AAD7.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 290259798,
+        "md5sum": "a7f7feaf1ea0b190e6fea384bc317cca",
+        "frameNumber": 939,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 40029,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-08T15:28:37Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0939_0953_040029_057",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211008T152837_20211008T152941_040029_04BD10_AAD7.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211008T152837_20211008T152941_040029_04BD10_AAD7.zip"
+        ]
+      }
+    },
+    "second": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              64.449989,
+              -68.249908
+            ],
+            [
+              70.381439,
+              -71.615303
+            ],
+            [
+              79.275131,
+              -69.256248
+            ],
+            [
+              72.697739,
+              -66.192505
+            ],
+            [
+              64.449989,
+              -68.249908
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -68.9108,
+        "centerLon": 71.6909,
+        "stopTime": "2021-10-20T15:29:41Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211020T152837_20211020T152941_040204_04C32B_E167-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 57,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211020T152837_20211020T152941_040204_04C32B_E167.zip",
+        "startTime": "2021-10-20T15:28:37Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211020T152837_20211020T152941_040204_04C32B_E167",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211020T152837_20211020T152941_040204_04C32B_E167.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 288396018,
+        "md5sum": "a09e032adb0c0ea3ac75f2b55545c092",
+        "frameNumber": 939,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 40204,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-20T15:28:37Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0939_0952_040204_057",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211020T152837_20211020T152941_040204_04C32B_E167.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211020T152837_20211020T152941_040204_04C32B_E167.zip"
+        ]
+      }
+    },
+    "baseline_days": 12.0,
+    "common_aoi_fraction": 0.2883180207508896
+  },
+  {
+    "pair_id": "20211010T151226_20211022T151226_3b1b72b5",
+    "first": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              67.267418,
+              -67.353584
+            ],
+            [
+              72.79911,
+              -70.752838
+            ],
+            [
+              81.521355,
+              -68.482483
+            ],
+            [
+              75.325737,
+              -65.367599
+            ],
+            [
+              67.267418,
+              -67.353584
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -68.0681,
+        "centerLon": 74.2179,
+        "stopTime": "2021-10-10T15:13:30Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211010T151226_20211010T151330_040058_04BE0F_8037-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 86,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211010T151226_20211010T151330_040058_04BE0F_8037.zip",
+        "startTime": "2021-10-10T15:12:26Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211010T151226_20211010T151330_040058_04BE0F_8037",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211010T151226_20211010T151330_040058_04BE0F_8037.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 273586829,
+        "md5sum": "d820004ee74a15edddb3dbddfb2ab709",
+        "frameNumber": 942,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 40058,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-10T15:12:26Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0942_0956_040058_086",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211010T151226_20211010T151330_040058_04BE0F_8037.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211010T151226_20211010T151330_040058_04BE0F_8037.zip"
+        ]
+      }
+    },
+    "second": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              67.266022,
+              -67.353836
+            ],
+            [
+              72.798141,
+              -70.753441
+            ],
+            [
+              81.520714,
+              -68.483147
+            ],
+            [
+              75.324554,
+              -65.367928
+            ],
+            [
+              67.266022,
+              -67.353836
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -68.0686,
+        "centerLon": 74.2168,
+        "stopTime": "2021-10-22T15:13:31Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211022T151226_20211022T151331_040233_04C42A_259E-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 86,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211022T151226_20211022T151331_040233_04C42A_259E.zip",
+        "startTime": "2021-10-22T15:12:26Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211022T151226_20211022T151331_040233_04C42A_259E",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211022T151226_20211022T151331_040233_04C42A_259E.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 270449348,
+        "md5sum": "793036103cbc8522bbc0fc1e2af14ba5",
+        "frameNumber": 942,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 40233,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-22T15:12:26Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0942_0955_040233_086",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211022T151226_20211022T151331_040233_04C42A_259E.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211022T151226_20211022T151331_040233_04C42A_259E.zip"
+        ]
+      }
+    },
+    "baseline_days": 12.0,
+    "common_aoi_fraction": 0.9081187733042502
+  },
+  {
+    "pair_id": "20211012T145622_20211024T145622_bbf07308",
+    "first": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              69.82119,
+              -66.103874
+            ],
+            [
+              74.744568,
+              -69.571106
+            ],
+            [
+              83.212097,
+              -67.420593
+            ],
+            [
+              77.594879,
+              -64.210205
+            ],
+            [
+              69.82119,
+              -66.103874
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -66.9001,
+        "centerLon": 76.3341,
+        "stopTime": "2021-10-12T14:57:26Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211012T145622_20211012T145726_040087_04BF23_3F38-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 115,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211012T145622_20211012T145726_040087_04BF23_3F38.zip",
+        "startTime": "2021-10-12T14:56:22Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211012T145622_20211012T145726_040087_04BF23_3F38",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211012T145622_20211012T145726_040087_04BF23_3F38.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 253416817,
+        "md5sum": "2e8f86da10dc617af796365e11a4a2a7",
+        "frameNumber": 947,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 40087,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-12T14:56:22Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0947_0961_040087_115",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211012T145622_20211012T145726_040087_04BF23_3F38.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211012T145622_20211012T145726_040087_04BF23_3F38.zip"
+        ]
+      }
+    },
+    "second": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              69.819611,
+              -66.104134
+            ],
+            [
+              74.743904,
+              -69.572014
+            ],
+            [
+              83.211105,
+              -67.421753
+            ],
+            [
+              77.592812,
+              -64.210739
+            ],
+            [
+              69.819611,
+              -66.104134
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -66.9008,
+        "centerLon": 76.3327,
+        "stopTime": "2021-10-24T14:57:26Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211024T145622_20211024T145726_040262_04C53F_D26B-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 115,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211024T145622_20211024T145726_040262_04C53F_D26B.zip",
+        "startTime": "2021-10-24T14:56:22Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211024T145622_20211024T145726_040262_04C53F_D26B",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211024T145622_20211024T145726_040262_04C53F_D26B.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 250841730,
+        "md5sum": "f32eeee61b2daf2063aaff19b018fec0",
+        "frameNumber": 947,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 40262,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-24T14:56:22Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0947_0960_040262_115",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211024T145622_20211024T145726_040262_04C53F_D26B.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211024T145622_20211024T145726_040262_04C53F_D26B.zip"
+        ]
+      }
+    },
+    "baseline_days": 12.0,
+    "common_aoi_fraction": 0.7970972415802504
+  },
+  {
+    "pair_id": "20211014T143959_20211026T143959_fda8ab4f",
+    "first": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              73.636482,
+              -65.853432
+            ],
+            [
+              78.554893,
+              -69.310936
+            ],
+            [
+              86.944946,
+              -67.180679
+            ],
+            [
+              81.350319,
+              -63.978752
+            ],
+            [
+              73.636482,
+              -65.853432
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -66.6542,
+        "centerLon": 80.1105,
+        "stopTime": "2021-10-14T14:41:03Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211014T143959_20211014T144103_040116_04C013_EE6B-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 144,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211014T143959_20211014T144103_040116_04C013_EE6B.zip",
+        "startTime": "2021-10-14T14:39:59Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211014T143959_20211014T144103_040116_04C013_EE6B",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211014T143959_20211014T144103_040116_04C013_EE6B.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 269637638,
+        "md5sum": "51107a5e6595268eea6c9979f05dec24",
+        "frameNumber": 948,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 40116,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-14T14:39:59Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0948_0962_040116_144",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211014T143959_20211014T144103_040116_04C013_EE6B.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211014T143959_20211014T144103_040116_04C013_EE6B.zip"
+        ]
+      }
+    },
+    "second": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              73.683105,
+              -65.843567
+            ],
+            [
+              78.606293,
+              -69.299713
+            ],
+            [
+              86.93737,
+              -67.182404
+            ],
+            [
+              81.343605,
+              -63.980206
+            ],
+            [
+              73.683105,
+              -65.843567
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -66.649,
+        "centerLon": 80.1293,
+        "stopTime": "2021-10-26T14:41:03Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211026T143959_20211026T144103_040291_04C634_D056-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 144,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211026T143959_20211026T144103_040291_04C634_D056.zip",
+        "startTime": "2021-10-26T14:39:59Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211026T143959_20211026T144103_040291_04C634_D056",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211026T143959_20211026T144103_040291_04C634_D056.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 267169247,
+        "md5sum": "b41cc0815191fe1a638f950604f328c4",
+        "frameNumber": 948,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 40291,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-26T14:39:59Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0948_0961_040291_144",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211026T143959_20211026T144103_040291_04C634_D056.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211026T143959_20211026T144103_040291_04C634_D056.zip"
+        ]
+      }
+    },
+    "baseline_days": 12.0,
+    "common_aoi_fraction": 0.687867356074396
+  },
+  {
+    "pair_id": "20211002T143959_20211026T143959_195d6f14",
+    "first": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              73.634834,
+              -65.853745
+            ],
+            [
+              78.552994,
+              -69.31131
+            ],
+            [
+              86.943359,
+              -67.181145
+            ],
+            [
+              81.348892,
+              -63.979149
+            ],
+            [
+              73.634834,
+              -65.853745
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -66.6545,
+        "centerLon": 80.1089,
+        "stopTime": "2021-10-02T14:41:03Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211002T143959_20211002T144103_039941_04BA0D_A88A-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 144,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211002T143959_20211002T144103_039941_04BA0D_A88A.zip",
+        "startTime": "2021-10-02T14:39:59Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211002T143959_20211002T144103_039941_04BA0D_A88A",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211002T143959_20211002T144103_039941_04BA0D_A88A.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 268326235,
+        "md5sum": "576998a2d80f9bf940ca63caa01016ab",
+        "frameNumber": 948,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 39941,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-02T14:39:59Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0948_0962_039941_144",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211002T143959_20211002T144103_039941_04BA0D_A88A.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211002T143959_20211002T144103_039941_04BA0D_A88A.zip"
+        ]
+      }
+    },
+    "second": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              73.683105,
+              -65.843567
+            ],
+            [
+              78.606293,
+              -69.299713
+            ],
+            [
+              86.93737,
+              -67.182404
+            ],
+            [
+              81.343605,
+              -63.980206
+            ],
+            [
+              73.683105,
+              -65.843567
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -66.649,
+        "centerLon": 80.1293,
+        "stopTime": "2021-10-26T14:41:03Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211026T143959_20211026T144103_040291_04C634_D056-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 144,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211026T143959_20211026T144103_040291_04C634_D056.zip",
+        "startTime": "2021-10-26T14:39:59Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211026T143959_20211026T144103_040291_04C634_D056",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211026T143959_20211026T144103_040291_04C634_D056.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 267169247,
+        "md5sum": "b41cc0815191fe1a638f950604f328c4",
+        "frameNumber": 948,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 40291,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-26T14:39:59Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0948_0961_040291_144",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211026T143959_20211026T144103_040291_04C634_D056.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211026T143959_20211026T144103_040291_04C634_D056.zip"
+        ]
+      }
+    },
+    "baseline_days": 24.0,
+    "common_aoi_fraction": 0.687867356074396
+  },
+  {
+    "pair_id": "20211015T152032_20211027T152032_c87084df",
+    "first": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              65.825645,
+              -67.799095
+            ],
+            [
+              71.571808,
+              -71.178009
+            ],
+            [
+              80.374481,
+              -68.865387
+            ],
+            [
+              73.976486,
+              -65.779877
+            ],
+            [
+              65.825645,
+              -67.799095
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -68.4863,
+        "centerLon": 72.9261,
+        "stopTime": "2021-10-15T15:21:36Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211015T152032_20211015T152136_040131_04C09E_4E12-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 159,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211015T152032_20211015T152136_040131_04C09E_4E12.zip",
+        "startTime": "2021-10-15T15:20:32Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211015T152032_20211015T152136_040131_04C09E_4E12",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211015T152032_20211015T152136_040131_04C09E_4E12.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 282284968,
+        "md5sum": "ed2296db6496da70ca10dba025578eff",
+        "frameNumber": 941,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 40131,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-15T15:20:32Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0941_0954_040131_159",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211015T152032_20211015T152136_040131_04C09E_4E12.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211015T152032_20211015T152136_040131_04C09E_4E12.zip"
+        ]
+      }
+    },
+    "second": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              65.826508,
+              -67.798874
+            ],
+            [
+              71.572136,
+              -71.17746
+            ],
+            [
+              80.37381,
+              -68.865036
+            ],
+            [
+              73.976471,
+              -65.779808
+            ],
+            [
+              65.826508,
+              -67.798874
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -68.486,
+        "centerLon": 72.9262,
+        "stopTime": "2021-10-27T15:21:36Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211027T152032_20211027T152136_040306_04C6BB_AE28-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 159,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211027T152032_20211027T152136_040306_04C6BB_AE28.zip",
+        "startTime": "2021-10-27T15:20:32Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211027T152032_20211027T152136_040306_04C6BB_AE28",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211027T152032_20211027T152136_040306_04C6BB_AE28.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 280689741,
+        "md5sum": "8f1b58c6ad1b4885480d8adb1d66706f",
+        "frameNumber": 941,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 40306,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-27T15:20:32Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0941_0954_040306_159",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211027T152032_20211027T152136_040306_04C6BB_AE28.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211027T152032_20211027T152136_040306_04C6BB_AE28.zip"
+        ]
+      }
+    },
+    "baseline_days": 12.0,
+    "common_aoi_fraction": 0.6553915730682771
+  },
+  {
+    "pair_id": "20211003T152032_20211027T152032_46af8f64",
+    "first": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              65.823921,
+              -67.799446
+            ],
+            [
+              71.569824,
+              -71.178429
+            ],
+            [
+              80.372925,
+              -68.865906
+            ],
+            [
+              73.975052,
+              -65.780327
+            ],
+            [
+              65.823921,
+              -67.799446
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -68.4868,
+        "centerLon": 72.9244,
+        "stopTime": "2021-10-03T15:21:36Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211003T152032_20211003T152136_039956_04BA93_F6FA-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 159,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211003T152032_20211003T152136_039956_04BA93_F6FA.zip",
+        "startTime": "2021-10-03T15:20:32Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211003T152032_20211003T152136_039956_04BA93_F6FA",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211003T152032_20211003T152136_039956_04BA93_F6FA.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 284611581,
+        "md5sum": "d2e89996cb2c98a6991caa40d54990e6",
+        "frameNumber": 941,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 39956,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-03T15:20:32Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0941_0954_039956_159",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211003T152032_20211003T152136_039956_04BA93_F6FA.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211003T152032_20211003T152136_039956_04BA93_F6FA.zip"
+        ]
+      }
+    },
+    "second": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              65.826508,
+              -67.798874
+            ],
+            [
+              71.572136,
+              -71.17746
+            ],
+            [
+              80.37381,
+              -68.865036
+            ],
+            [
+              73.976471,
+              -65.779808
+            ],
+            [
+              65.826508,
+              -67.798874
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -68.486,
+        "centerLon": 72.9262,
+        "stopTime": "2021-10-27T15:21:36Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211027T152032_20211027T152136_040306_04C6BB_AE28-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 159,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211027T152032_20211027T152136_040306_04C6BB_AE28.zip",
+        "startTime": "2021-10-27T15:20:32Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211027T152032_20211027T152136_040306_04C6BB_AE28",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211027T152032_20211027T152136_040306_04C6BB_AE28.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 280689741,
+        "md5sum": "8f1b58c6ad1b4885480d8adb1d66706f",
+        "frameNumber": 941,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 40306,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-27T15:20:32Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0941_0954_040306_159",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211027T152032_20211027T152136_040306_04C6BB_AE28.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211027T152032_20211027T152136_040306_04C6BB_AE28.zip"
+        ]
+      }
+    },
+    "baseline_days": 24.0,
+    "common_aoi_fraction": 0.6549546599717752
+  },
+  {
+    "pair_id": "20211017T150433_20211029T150433_5562af69",
+    "first": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              67.922699,
+              -66.235603
+            ],
+            [
+              72.899139,
+              -69.697601
+            ],
+            [
+              81.393333,
+              -67.535835
+            ],
+            [
+              75.723755,
+              -64.333168
+            ],
+            [
+              67.922699,
+              -66.235603
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -67.0247,
+        "centerLon": 74.4756,
+        "stopTime": "2021-10-17T15:05:37Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211017T150433_20211017T150537_040160_04C1A3_3E65-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 13,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211017T150433_20211017T150537_040160_04C1A3_3E65.zip",
+        "startTime": "2021-10-17T15:04:33Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211017T150433_20211017T150537_040160_04C1A3_3E65",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211017T150433_20211017T150537_040160_04C1A3_3E65.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 254433823,
+        "md5sum": "619355cc175b24953d1246bb147a548f",
+        "frameNumber": 946,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 40160,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-17T15:04:33Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0947_0960_040160_013",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211017T150433_20211017T150537_040160_04C1A3_3E65.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211017T150433_20211017T150537_040160_04C1A3_3E65.zip"
+        ]
+      }
+    },
+    "second": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              67.924492,
+              -66.235199
+            ],
+            [
+              72.900742,
+              -69.6968
+            ],
+            [
+              81.393707,
+              -67.535164
+            ],
+            [
+              75.724564,
+              -64.332848
+            ],
+            [
+              67.924492,
+              -66.235199
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -67.0241,
+        "centerLon": 74.4767,
+        "stopTime": "2021-10-29T15:05:37Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211029T150433_20211029T150537_040335_04C7B6_41B6-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 13,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211029T150433_20211029T150537_040335_04C7B6_41B6.zip",
+        "startTime": "2021-10-29T15:04:33Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211029T150433_20211029T150537_040335_04C7B6_41B6",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211029T150433_20211029T150537_040335_04C7B6_41B6.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 252237170,
+        "md5sum": "e1e189cdc3b5c95ae71c7a3c16c3072e",
+        "frameNumber": 946,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 40335,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-29T15:04:33Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0946_0959_040335_013",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211029T150433_20211029T150537_040335_04C7B6_41B6.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211029T150433_20211029T150537_040335_04C7B6_41B6.zip"
+        ]
+      }
+    },
+    "baseline_days": 12.0,
+    "common_aoi_fraction": 0.6306254393121957
+  },
+  {
+    "pair_id": "20211005T150433_20211029T150433_a1a0de7a",
+    "first": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              67.921707,
+              -66.235863
+            ],
+            [
+              72.898453,
+              -69.698219
+            ],
+            [
+              81.392998,
+              -67.536507
+            ],
+            [
+              75.722954,
+              -64.333496
+            ],
+            [
+              67.921707,
+              -66.235863
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -67.0252,
+        "centerLon": 74.4748,
+        "stopTime": "2021-10-05T15:05:37Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211005T150433_20211005T150537_039985_04BB96_F9CB-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 13,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211005T150433_20211005T150537_039985_04BB96_F9CB.zip",
+        "startTime": "2021-10-05T15:04:33Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211005T150433_20211005T150537_039985_04BB96_F9CB",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211005T150433_20211005T150537_039985_04BB96_F9CB.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 260108553,
+        "md5sum": "3707051da5f242c9e58163ecd16411c4",
+        "frameNumber": 946,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 39985,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-05T15:04:33Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0946_0959_039985_013",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211005T150433_20211005T150537_039985_04BB96_F9CB.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211005T150433_20211005T150537_039985_04BB96_F9CB.zip"
+        ]
+      }
+    },
+    "second": {
+      "type": "Feature",
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              67.924492,
+              -66.235199
+            ],
+            [
+              72.900742,
+              -69.6968
+            ],
+            [
+              81.393707,
+              -67.535164
+            ],
+            [
+              75.724564,
+              -64.332848
+            ],
+            [
+              67.924492,
+              -66.235199
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "centerLat": -67.0241,
+        "centerLon": 74.4767,
+        "stopTime": "2021-10-29T15:05:37Z",
+        "fileID": "S1A_EW_GRDM_1SDH_20211029T150433_20211029T150537_040335_04C7B6_41B6-GRD_MD",
+        "flightDirection": "ASCENDING",
+        "pathNumber": 13,
+        "processingLevel": "GRD_MD",
+        "url": "https://datapool.asf.alaska.edu/GRD_MD/SA/S1A_EW_GRDM_1SDH_20211029T150433_20211029T150537_040335_04C7B6_41B6.zip",
+        "startTime": "2021-10-29T15:04:33Z",
+        "sceneName": "S1A_EW_GRDM_1SDH_20211029T150433_20211029T150537_040335_04C7B6_41B6",
+        "browse": [
+          "https://datapool.asf.alaska.edu/BROWSE/SA/S1A_EW_GRDM_1SDH_20211029T150433_20211029T150537_040335_04C7B6_41B6.jpg"
+        ],
+        "platform": "Sentinel-1A",
+        "bytes": 252237170,
+        "md5sum": "e1e189cdc3b5c95ae71c7a3c16c3072e",
+        "frameNumber": 946,
+        "granuleType": "SENTINEL_1A_FRAME",
+        "orbit": 40335,
+        "polarization": "HH+HV",
+        "processingDate": "2021-10-29T15:04:33Z",
+        "sensor": "C-SAR",
+        "groupID": "S1A_EWDH_0946_0959_040335_013",
+        "pgeVersion": "003.31",
+        "fileName": "S1A_EW_GRDM_1SDH_20211029T150433_20211029T150537_040335_04C7B6_41B6.zip",
+        "beamModeType": "EW",
+        "s3Urls": [
+          "s3://asf-ngap2w-p-s1-grd-7d1b4348/S1A_EW_GRDM_1SDH_20211029T150433_20211029T150537_040335_04C7B6_41B6.zip"
+        ]
+      }
+    },
+    "baseline_days": 24.0,
+    "common_aoi_fraction": 0.6306254393121948
+  }
+]

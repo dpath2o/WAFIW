@@ -1,0 +1,17 @@
+[
+  {
+    "archive": "SWOT_processing_v0.zip",
+    "file": "Complete_SWOT_download_forbbox.ipynb",
+    "literal_credentials_removed": 1
+  },
+  {
+    "archive": "SWOT_processing_v0.zip",
+    "file": "swot_L3_unsmoothed_dl.ipynb",
+    "literal_credentials_removed": 1
+  },
+  {
+    "archive": "SWOT_processing_v1.zip",
+    "file": "swot_L3_unsmoothed_dl.ipynb",
+    "literal_credentials_removed": 1
+  }
+]
