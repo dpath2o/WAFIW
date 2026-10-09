@@ -35,12 +35,12 @@ segmentation:
   crop_n_layers: 0
   max_pixels: 4000000
 snap:
-  executable: gpt # or /Applications/.../gpt on your Mac
+  executable: "/Applications/snap/bin/gpt" # or /Applications/.../gpt on your Mac
   dem_path: null # REQUIRED for raw Sentinel-1 processing
   dem_nodata: -9999
   dem_apply_egm: false # only correct for ellipsoidal WGS84 heights
   memory: 4G
   threads: 2
   timeout_seconds: 7200
-coastline: null # supply reviewed ADD land/ice-shelf polygons as CRS-bearing GeoJSON
+coastline: "../../../data/coastlines/davis_ADD_v7p9_exclusions.geojson"
 classifier: null # supply a trusted, trained Davis model to produce candidate extent
