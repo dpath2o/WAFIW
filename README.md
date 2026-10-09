@@ -60,7 +60,7 @@ A four-day observation target is an aspiration, not a forced pairing rule. The d
 ## Process one real pair
 
 1. Install ESA SNAP with the microwave/Sentinel-1 toolbox. Set `snap.executable` to the absolute GPT executable path if `gpt` is not on PATH.
-2. Supply a reviewed Antarctic DEM. SNAP's external DEM must have geographic WGS84 coordinates and elevations in metres. Resolve vertical datum explicitly: the config default disables EGM conversion only for ellipsoidal elevations. Ensure coverage of the AOI and geocoding margins, and appropriate zero-elevation coverage over ocean; DEM nodata must not silently erase sea ice. A projected REMA mosaic is not directly interchangeable with the required geographic external DEM.
+2. Supply a reviewed Antarctic DEM. SNAP's external DEM must have geographic WGS84 coordinates and elevations in metres. Resolve vertical datum explicitly: the config default disables EGM conversion only for ellipsoidal elevations. Ensure coverage of the AOI and geocoding margins, and geoid-consistent surface heights over ocean; DEM nodata must not silently erase sea ice. A projected REMA mosaic is not directly interchangeable with the required geographic external DEM.
 3. Supply a locally managed Earthdata token using the `EARTHDATA_TOKEN` environment variable. Do not put it in YAML, notebook cells or source files. Use your normal local credential handling.
 4. Run only one pair initially:
 

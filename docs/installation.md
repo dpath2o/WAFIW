@@ -126,4 +126,4 @@ python scripts/run_primary.py --config configs/davis.yaml search
 
 The first Davis search found 12 compatible October 2021 pairs. `search` retrieves public catalogue metadata only. Raw-scene download requires a locally managed Earthdata token. Never commit credentials. Raw SAFE processing requires a prepared DEM; classification also needs a trusted, region-specific model. Without a model the product remains segmentation only.
 
-The current pause point has a valid Davis coastline and a downloaded `../../data/DEMS/Davis.tif`. Leave `snap.dem_path: null` until that DEM has been inspected and prepared. Continue with [DEM preparation](dem_preparation.md).
+The current pause point has a valid Davis coastline and a downloaded `../../data/DEMS/Davis.tif`. The source metadata and sampled land/ocean coverage have now been inspected; ocean gaps remain to be prepared. Leave `snap.dem_path: null` until a separate prepared DEM passes verification. Continue with [DEM preparation](dem_preparation.md).
