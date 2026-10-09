@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.ipynb_checkpoints/
+.pytest_cache/
+.env
+*.part
+*.partial.tif
+afiw_data/
+demo_output/
+bulletins/
+notebook_output/
+example_pdf/
+.DS_Store
