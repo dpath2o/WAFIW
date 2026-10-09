@@ -1,0 +1,46 @@
+# All relative paths resolve from this file's directory.
+root: ../afiw_data
+run:
+  start_date: '2021-10-01'
+  end_date: '2021-10-31'
+  region:
+    name: Casey
+    bbox: [108.0, -67.0, 113.0, -65.1] # provisional starter AOI; review before processing
+    station_lon: 110.5266
+    station_lat: -66.2822
+acquisition:
+  beam_modes: [EW]
+  processing_levels: [GRD_HD, GRD_MD, GRD_HS]
+  polarization: HH
+  min_pair_days: 3
+  max_pair_days: 24
+  min_aoi_overlap: 0.25
+  max_results: 1000
+processing:
+  crs: EPSG:3031
+  resolution_m: 40
+  windows: [11, 21, 33]
+  tile_size: 512
+  input_units: db
+  min_valid_fraction: 0.8
+segmentation:
+  backend: slic # alternate laptop backend; not equivalent to SAM
+  downsample: 10
+  n_segments: 1200
+  compactness: 5
+  checkpoint: null
+  sam_model: vit_b
+  device: cpu
+  points_per_side: 32
+  crop_n_layers: 0
+  max_pixels: 4000000
+snap:
+  executable: "/Applications/snap/bin/gpt" # or /Applications/.../gpt on your Mac
+  dem_path: null # REQUIRED for raw Sentinel-1 processing
+  dem_nodata: -9999
+  dem_apply_egm: false # only correct for ellipsoidal WGS84 heights
+  memory: 4G
+  threads: 2
+  timeout_seconds: 7200
+coastline: "../../../data/coastlines/casey_ADD_v7p9_exclusions.geojson"
+classifier: null # supply a trusted, trained Casey model to produce candidate extent

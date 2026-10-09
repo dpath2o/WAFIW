@@ -8,6 +8,11 @@ A laptop-first Python package for Davis Sentinel-1 acquisition, terrain-correcte
 
 **What has not run:** an authenticated scene download; raw SAFE processing in SNAP; SAM inference; a scientifically trained Davis classifier; a real Davis extent/change assessment; macOS execution; SWOT retrieval. These need local assets or credentials not present here. The SNAP adapter is an integration candidate, not a validated replacement for the original external preprocessing chain.
 
+## Setup documentation
+
+- [Installation, conda and ADD coastline preparation](docs/installation.md)
+- [DEM download, storage and preparation](docs/dem_preparation.md)
+
 ## Start on your Mac
 
 Use Python 3.11 or 3.12. Python handles processing; SNAP is a separate application needed only for raw SAFE files. The pure-Python/Rasterio workflow also accepts existing georeferenced single-band dB backscatter TIFFs.
