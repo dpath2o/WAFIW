@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from datetime import datetime,timezone
 from pathlib import Path
 import json,os,zipfile
+import netrc
 from itertools import combinations
 from shapely.geometry import shape,box
 from shapely.ops import transform
@@ -38,6 +39,29 @@ def compatible_pairs(catalog,run,acquisition):
         pairs.append({'pair_id':pair_id,'first':f,'second':g,'baseline_days':days,'common_aoi_fraction':overlap})
     return sorted(pairs,key=lambda p:(p['second']['properties']['startTime'],p['baseline_days']))
 
+def earthdata_session(token_env='EARTHDATA_TOKEN'):
+    """Authenticate locally: explicit token first, otherwise Earthdata .netrc entry."""
+    import asf_search as asf
+    token = os.environ.get(token_env)
+    if token:
+        try:
+            return asf.ASFSession().auth_with_token(token)
+        except Exception:
+            raise RuntimeError(f'Earthdata token authentication failed; review {token_env} locally') from None
+    try:
+        # Default netrc() enforces private ownership/permissions on POSIX.
+        credentials = netrc.netrc().hosts.get('urs.earthdata.nasa.gov')
+    except (OSError, netrc.NetrcParseError):
+        # Parser errors can include file contents; never expose the original exception.
+        raise RuntimeError('Cannot read ~/.netrc; check its syntax and run chmod 600 ~/.netrc, or set an Earthdata token locally') from None
+    if not credentials or not credentials[0] or not credentials[2]:
+        raise RuntimeError(f'Provide the urs.earthdata.nasa.gov entry in ~/.netrc or set {token_env} locally')
+    try:
+        return asf.ASFSession().auth_with_creds(credentials[0], credentials[2])
+    except Exception:
+        raise RuntimeError('Earthdata .netrc authentication failed; check the Earthdata login/password and ASF application authorization locally') from None
+
+
 @dataclass
 class Sentinel1Client:
     run_cfg: object
@@ -56,14 +80,13 @@ class Sentinel1Client:
         return catalog
     def download_pair(self,pair,token_env='EARTHDATA_TOKEN'):
         import asf_search as asf
-        token=os.environ.get(token_env)
-        if not token:raise RuntimeError(f'Set {token_env} locally; credentials are never stored in config or notebooks')
-        session=asf.ASFSession().auth_with_token(token);out=[]
+        session=None;out=[]
         for f in [pair['first'],pair['second']]:
             p=f['properties'];name=Path(p['url'].split('?')[0]).name
             if not name.endswith('.zip') or '/' in name:raise ValueError('Expected an ASF SAFE ZIP URL')
             dst=self.paths.downloads/name
             if dst.exists() and valid_safe_zip(dst):out.append(dst);continue
+            if session is None:session=earthdata_session(token_env)
             staging=self.paths.downloads/'.partial';staging.mkdir(parents=True,exist_ok=True)
             asf.download_urls([p['url']],path=str(staging),session=session)
             src=staging/name

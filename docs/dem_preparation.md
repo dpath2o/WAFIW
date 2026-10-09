@@ -142,7 +142,7 @@ The example filename remains a future local output until preparation succeeds. R
 python scripts/run_primary.py --config configs/davis.yaml doctor
 ```
 
-`DEM: present` is only a file-presence check. It does not validate CRS, datum, coverage, ocean values or radiometry. Once resource checks and local Earthdata credentials are ready, test one pair:
+`DEM: present` is only a file-presence check. It does not validate CRS, datum, coverage, ocean values or radiometry. Once resource checks and local Earthdata credentials are ready ([token or `.netrc`](installation.md#earthdata-download-authentication)), test one pair:
 
 ```bash
 python scripts/run_primary.py --config configs/davis.yaml run-catalog \

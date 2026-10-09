@@ -124,6 +124,34 @@ python scripts/run_primary.py --config configs/davis.yaml doctor
 python scripts/run_primary.py --config configs/davis.yaml search
 ```
 
-The first Davis search found 12 compatible October 2021 pairs. `search` retrieves public catalogue metadata only. Raw-scene download requires a locally managed Earthdata token. Never commit credentials. Raw SAFE processing requires a prepared DEM; classification also needs a trusted, region-specific model. Without a model the product remains segmentation only.
+The first Davis search found 12 compatible October 2021 pairs. `search` retrieves public catalogue metadata only. Raw-scene download requires local Earthdata authentication through a token or the Earthdata entry in `~/.netrc`. Never commit credentials. Raw SAFE processing requires a prepared DEM; classification also needs a trusted, region-specific model. Without a model the product remains segmentation only.
 
 The current pause point has a valid Davis coastline and a downloaded `../../data/DEMS/Davis.tif`. The source metadata and sampled land/ocean coverage have now been inspected; ocean gaps remain to be prepared. Leave `snap.dem_path: null` until a separate prepared DEM passes verification. Continue with [DEM preparation](dem_preparation.md).
+
+
+## Earthdata download authentication
+
+WAFIW supports two local methods for ASF Sentinel-1 downloads:
+
+1. If `EARTHDATA_TOKEN` is set and nonempty, authenticate with that token. Invalid explicit tokens fail; they do not silently fall back to another account.
+2. Otherwise read **only the Earthdata account** from the standard `~/.netrc` file and authenticate through ASF's `auth_with_creds` method. The account must have a login and password under `machine urs.earthdata.nasa.gov`. Other machine entries are not passed to this authentication call.
+
+Keep the file private:
+
+```bash
+chmod 600 ~/.netrc
+```
+
+Edit the file locally with your usual editor. Do not print or paste its contents into chat, notebook output, logs or Git. WAFIW does not write credentials into configuration, manifests or provenance. Parsing/authentication failures give a generic message rather than reproducing credentials or parser contents. Authentication is deferred until a scene needs downloading; a pair with two valid cached ZIPs needs no login.
+
+After setting up the Earthdata entry, run the normal command:
+
+```bash
+python scripts/run_primary.py --config configs/davis.yaml run-catalog \
+  --pairs examples/davis_catalog_202110/pairs.json \
+  --pair-index 0 --max-pairs 1 --download
+```
+
+If an old `EARTHDATA_TOKEN` is set and you intend to use `.netrc`, run `unset EARTHDATA_TOKEN` in this shell first. If authentication still fails, verify your Earthdata account and ASF authorization in your own browser; WAFIW does not manage accounts. The `doctor` command checks local resources, not login validity.
+
+Reference: [ASF session authentication](https://docs.asf.alaska.edu/asf_search/ASFSession/).
