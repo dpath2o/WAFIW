@@ -116,5 +116,15 @@ class PairResult:
     manifest: Path
     texture: Path
     segments: Path
-    quicklook: Path
+    quicklook: Path  # Compatibility alias for the separate composite PNG (schema 2).
     classification: Path | None = None
+
+    @property
+    def composite_png(self):
+        return self.quicklook
+    @property
+    def composite_tif(self):
+        return self.directory / 'composite.tif'
+    @property
+    def classification_png(self):
+        return self.directory / 'classification.png' if self.classification else None

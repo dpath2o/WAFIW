@@ -4,12 +4,13 @@
 
 A laptop-first Python package for Davis Sentinel-1 acquisition, terrain-corrected backscatter preparation, multiscale normalized-product textures, segmentation, optional supervised classification, and independent weekly bulletin generation. The object-oriented API follows shuga's configuration-object/path-manager/workflow pattern. There are no PBS or Gadi dependencies.
 
-**What has actually run:** public Davis catalogue discovery; numerical and geospatial component tests; a synthetic tiled texture → SLIC segmentation → PDF/LaTeX workflow; inspection of supplied McMurdo arrays; reconstruction of the supplied illustrative PDF.
+**What has actually run:** public Davis catalogue discovery and numerical/geospatial tests; the user has completed authenticated scene downloads, SNAP preprocessing and the 2–14 October 2021 Davis texture/SLIC product on macOS. Separate PyGMT maps and a manually labelled synthetic SVM → classification → bulletin workflow have been tested on Linux.
 
-**What has not run:** an authenticated scene download; raw SAFE processing in SNAP; SAM inference; a scientifically trained Davis classifier; a real Davis extent/change assessment; macOS execution; SWOT retrieval. These need local assets or credentials not present here. The SNAP adapter is an integration candidate, not a validated replacement for the original external preprocessing chain.
+**What has not run:** a scientifically trained/independently validated Davis classifier; a real Davis extent/change assessment; SAM inference; visible-imagery integration; Azure deployment; SWOT retrieval. The new PyGMT outputs still need inspection on the user's Mac with the real Davis inputs.
 
 ## Setup documentation
 
+- [Separate PyGMT SAR/classification maps and manual training](docs/primary_maps.md)
 - [Installation, conda and ADD coastline preparation](docs/installation.md)
 - [SNAP installation and Sentinel-1 orbit preparation](docs/snap_setup.md)
 - [DEM download, storage and preparation](docs/dem_preparation.md)
@@ -19,19 +20,18 @@ A laptop-first Python package for Davis Sentinel-1 acquisition, terrain-correcte
 
 Use Python 3.11 or 3.12. Python handles processing; SNAP is a separate application needed only for raw SAFE files. The pure-Python/Rasterio workflow also accepts existing georeferenced single-band dB backscatter TIFFs.
 
-Extract the ZIP to a working project directory, then in Terminal:
+From a checked-out repository, use the conda environment so GMT and Ghostscript are installed alongside PyGMT:
 
 ```bash
-cd /path/to/afiw_project
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -e ".[test]"
+conda env create -f environment.yml
+conda activate WAFIW
 python -m pytest tests -q
 python scripts/run_primary.py --config configs/davis.yaml doctor
 python scripts/run_primary.py demo --output demo_output
 python scripts/generate_bulletin.py build --root demo_output --as-of 2021-10-24 --output demo_output/bulletin
 ```
+
+For an existing WAFIW environment, install `pygmt`, `gmt>=6.6` and `ghostscript` from conda-forge; see [map setup and regeneration](docs/primary_maps.md). `pip install` alone does not install the GMT shared library or Ghostscript.
 
 The last command produces a **clearly synthetic** PDF and an editable LaTeX file. It requires no satellite credentials, SNAP, SAM weights or TeX installation. Do not interpret it as Davis observations.
 
@@ -45,7 +45,7 @@ python -m jupyterlab notebooks/primary_components.ipynb
 
 Select **Python (AFIW)**. Offline notebook cells are enabled; real downloads, live catalogue refresh and SAM are opt-in switches. Notebook code cells were checked sequentially in Python here; starting an actual Jupyter kernel was blocked by this execution environment's socket restrictions, so the Mac kernel run remains a local check.
 
-On Windows activate `.venv\Scripts\Activate.ps1` instead. The workflow uses pathlib and subprocess argument lists, not shell-specific processing commands. macOS/Windows/Azure portability is designed for, but only Linux/Python component execution has been tested here.
+On Windows use the same conda environment setup. The workflow uses pathlib and subprocess argument lists, not shell-specific processing commands. macOS/Windows/Azure portability is designed for, but only Linux/Python component execution has been tested here.
 
 ## Discover Davis scenes
 
@@ -94,7 +94,7 @@ The module aligns data to a common EPSG:3031 station grid and computes three tex
 - **SAM:** install `python -m pip install -e ".[sam]"`, supply a local checkpoint and select `backend: sam`. CPU is the default. `device: mps` is optional, checked for availability, and requires Mac testing. The lightweight vit_b defaults differ from the supplied vit_h/95-point/two-crop-layer settings. Reproduce the research settings explicitly when resources and weights permit.
 - **SVM:** the module provides the supplied notebook's mean-RGB segment features and an SVC training/prediction API. Manual labels and a scientifically assessed Davis model were not supplied. Existing prediction TIFFs are not treated as training truth. The model must declare the matching region, and a synthetic model is rejected for real scenes. Load only trusted local joblib files.
 
-A candidate extent requires `classifier` **and** reviewed ADD-style coastline/exclusion polygons. Provide a CRS-bearing GeoJSON with `surface` values (`land`, `ice shelf`, `ice tongue`, `rumple`). All four are excluded from sea-ice detection. No arbitrary mask erosion is applied. Without a classifier the output and bulletin explicitly say **segmentation only**.
+A candidate extent requires `classifier` **and** reviewed ADD-style coastline/exclusion polygons. Provide a CRS-bearing GeoJSON with `surface` values (`land`, `ice shelf`, `ice tongue`, `rumple`). All four are excluded from sea-ice detection. No arbitrary mask erosion is applied. Without a classifier the manifest remains **segmentation only**, the composite is exported, and no classification figure/raster or ice-extent estimate is fabricated. Segmentation labels remain analytical diagnostics.
 
 Class IDs: 0 pack/ocean, 1 excluded land/shelf, 2 candidate fast ice, 3 legacy melt-affected fast-ice class, 255 unknown. Segment ID 0 denotes unassigned/invalid; other segment IDs are not classes. The default segmentation grid is about 400 m for 40 m input with 10× downsampling; the exact resulting spacing is recorded. Upsampling would not restore 40 m classification detail.
 
@@ -105,7 +105,7 @@ python scripts/generate_bulletin.py build \
   --root afiw_data --region Davis --as-of 2021-10-31 --output bulletins/2021-10-31
 ```
 
-This reads completed pair manifests without reprocessing SAR. Outputs are PDF, LaTeX, quicklook and a structured text/quality record. Add `--compile-latex` if MacTeX/TeX Live is installed; `main.pdf` will then be the compiled LaTeX version. The direct PDF uses ReportLab and needs no TeX. Both were inspected as one-page outputs.
+This reads completed pair manifests without reprocessing SAR. Schema-2 products contain separate composite/classification PNGs; the bulletin assembles them into its own `primary.png` only at publication time. Outputs are PDF, LaTeX, assembled graphic and a structured text/quality record. Add `--compile-latex` if MacTeX/TeX Live is installed; `main.pdf` will then be the compiled LaTeX version. The direct PDF uses ReportLab and needs no TeX. Both were inspected as one-page outputs.
 
 Automatically selected text is currently conservative: observation dates/baseline, status, candidate area when classified, change only on common observed ocean cells, effective segmentation spacing, mask status, and stale-observation warnings. Missing swath pixels cannot count as retreat. Comparisons require identical grids and compatible processing/model/mask settings. Area uses pixel-centre projection-scale correction, not raw EPSG:3031 pixel area. This is not a navigation recommendation.
 
@@ -143,7 +143,7 @@ catalogue = workflow.search()
 
 ## Layout
 
-`src/afiw/core` holds specs, paths and provenance; `observations` holds acquisition adapters; `processing` holds SNAP/grid/texture components; `classify` holds segmentation and SVM; `metrics` holds extent/change calculations; `plotting` holds quicklooks; `products` holds PDF/LaTeX generation; `workflows` coordinates these components. `scripts` are thin CLI entry points, and `notebooks` tests public APIs.
+`src/afiw/core` holds specs, paths and provenance; `observations` holds acquisition adapters; `processing` holds SNAP/grid/texture components; `classify` holds segmentation and SVM; `metrics` holds extent/change calculations; `plotting` holds PyGMT maps and raster display exports; `products` holds PDF/LaTeX generation; `workflows` coordinates these components. `scripts` are thin CLI entry points, and `notebooks` tests public APIs.
 
 `legacy/` retains the supplied Python/notebook/MATLAB source for traceability, with notebook outputs removed and source checksums recorded. These files are reference material, not automatically executed. The two SWOT versions remain distinct; MATLAB is retained, not automatically translated. No supplied HPC cleanup script is invoked. See `docs/source_audit.md` for adoption decisions and `docs/validation.md` for test evidence/limits.
 

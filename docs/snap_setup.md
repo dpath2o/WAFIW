@@ -102,3 +102,7 @@ At this documentation checkpoint, the user's Mac failed before orbit correction.
 - [SNAP GPT command-line help](https://step.esa.int/main/wp-content/help/versions/9.0.0/snap/org.esa.snap.snap.gpf.ui/gpf/GraphProcessingTool.html)
 - [Public precise-orbit mirror](https://step.esa.int/auxdata/orbits/Sentinel-1/POEORB/)
 - [Copernicus Sentinel-1 auxiliary/orbit products](https://documentation.dataspace.copernicus.eu/Data/SentinelMissions/Sentinel1.html)
+
+## After SNAP completion
+
+See [separate PyGMT maps and classification](primary_maps.md) for the updated map runtime and output contract. Successful SNAP preprocessing supplies the backscatter inputs; it does not supply an ice classifier. Completed products can be regenerated into separate maps without repeating SNAP.

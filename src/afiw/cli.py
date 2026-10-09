@@ -28,6 +28,10 @@ def primary_main(argv=None):
         print('Coastline:', 'present' if spec.coastline and Path(spec.coastline).is_file() else 'not supplied')
         print('Classifier:', 'present' if spec.classifier and Path(spec.classifier).is_file() else 'not supplied; segmentation only')
         print('Segmentation:',spec.segmentation.backend,'device:',spec.segmentation.device)
+        from .plotting.primary import require_pygmt
+        try:
+            pygmt=require_pygmt(); print('Plotting: PyGMT',pygmt.__version__); pygmt.show_versions()
+        except RuntimeError as error:print('Plotting:',error)
     elif args.command=='search':
         catalog=workflow.search();pairs=json.loads((workflow.paths.catalog/'pairs.json').read_text());print(f"{len(catalog['features'])} scenes; {len(pairs)} compatible pairs. Catalog: {workflow.paths.catalog}")
     elif args.command=='process-raster':print(workflow.from_rasters(args.first,args.second,args.first_time,args.second_time).manifest)

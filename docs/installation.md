@@ -172,3 +172,7 @@ Reference: [ASF session authentication](https://docs.asf.alaska.edu/asf_search/A
 ## SNAP and orbit setup
 
 ESA SNAP with the Microwave Toolbox is a separate runtime installation. Follow [SNAP installation and Sentinel-1 orbit preparation](snap_setup.md) to configure GPT, populate the precise-orbit cache and validate processing. `run-catalog --prepare-orbits` prepares the selected pairs before processing; this also belongs in the scheduled Azure acquisition workflow.
+
+## PyGMT map runtime and separate products
+
+Primary maps now require conda-forge PyGMT, GMT and Ghostscript. Follow [separate SAR/classification maps](primary_maps.md) to update WAFIW, regenerate completed products without SNAP, prepare reviewed labels and assemble PNG panels only at bulletin production. The TIFF exports retain their native georeferencing.

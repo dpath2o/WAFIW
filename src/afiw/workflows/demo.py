@@ -5,7 +5,7 @@ import numpy as np
 import rasterio
 from rasterio.transform import from_origin
 from pyproj import Transformer
-from afiw.core.types import WorkflowSpec,RunSpec,ProcessingSpec,SegmentationSpec
+from afiw.core.types import WorkflowSpec,RunSpec,RegionSpec,ProcessingSpec,SegmentationSpec
 from afiw.processing.raster import profile
 from .primary import PrimaryWorkflow
 
@@ -20,5 +20,10 @@ def run_demo(root):
         p=raw/name
         with rasterio.open(p,'w',**profile(grid)) as dst:dst.write(arr,1)
         paths.append(p)
-    spec=WorkflowSpec(root=str(root),processing=ProcessingSpec(resolution_m=100,windows=(5,9,13),tile_size=64),segmentation=SegmentationSpec(downsample=2,n_segments=120))
+    # Frame the small synthetic raster rather than the full Davis AOI.
+    from rasterio.warp import transform_bounds
+    from rasterio.transform import array_bounds
+    bounds=transform_bounds(grid['crs'],'EPSG:4326',*array_bounds(256,256,grid['transform']),densify_pts=21)
+    region=RegionSpec(bbox=bounds)
+    spec=WorkflowSpec(root=str(root),run=RunSpec(region=region),processing=ProcessingSpec(resolution_m=100,windows=(5,9,13),tile_size=64),segmentation=SegmentationSpec(downsample=2,n_segments=120))
     return PrimaryWorkflow(spec).from_rasters(*paths,first_time='2021-10-10T00:00:00Z',second_time='2021-10-22T00:00:00Z',synthetic=True,grid_override=grid)

@@ -15,7 +15,7 @@ def write_json(path,data):
 
 def runtime():
     versions={}
-    for name in ['numpy','rasterio','scipy','scikit-image','scikit-learn','asf-search']:
+    for name in ['numpy','rasterio','scipy','scikit-image','scikit-learn','asf-search','pygmt']:
         try:versions[name]=importlib.metadata.version(name)
         except importlib.metadata.PackageNotFoundError:pass
     return {'created_utc':datetime.now(timezone.utc).isoformat(),'python':platform.python_version(),'versions':versions}

@@ -10,6 +10,7 @@ from reportlab.lib.colors import HexColor,red,white
 from reportlab.lib.utils import ImageReader
 from reportlab.lib.pagesizes import A4
 from afiw.core.provenance import write_json
+from .panels import assemble_primary_panels
 from afiw.metrics.change import change_metrics,cell_areas_km2
 from afiw.observations.sentinel1 import utc
 
@@ -46,7 +47,7 @@ class BulletinBuilder:
         if not records:raise FileNotFoundError('No processed pair available by bulletin date')
         path,current=records[-1]
         # Never blend real and synthetic results in one historical comparison.
-        previous=next(((p,d) for p,d in reversed(records[:-1]) if d['synthetic']==current['synthetic'] and d['status']==current['status']),None)
+        previous=next(((p,d) for p,d in reversed(records[:-1]) if d['synthetic']==current['synthetic'] and d['status']==current['status'] and utc(d['second_time'])<utc(current['second_time'])),None)
         text=summary_text(current);metrics={};change_path=None
         age=(date.fromisoformat(as_of)-utc(current['second_time']).date()).days
         if age>self.max_age_days:text+=f' Latest observation is {age} days old; no current-conditions assessment is available.'
@@ -62,7 +63,7 @@ class BulletinBuilder:
                         with rasterio.open(change_path,'w',**profile) as dst:dst.write(change,1)
                         if metrics['common_ocean_km2']>0:text+=f" On common observed coverage: gain {metrics['gain_km2']:.1f} km², loss {metrics['loss_km2']:.1f} km² since {pd['second_time'][:10]}."
             if not metrics:text+=' No comparable prior classification is available for change assessment.'
-        image=out/'primary.png';shutil.copy(path.parent/current['outputs']['quicklook'],image)
+        image=out/'primary.png';panel_sources=assemble_primary_panels(path,current,image)
         quality=f"Segmentation pixel spacing: {current['segmentation_pixel_size_m'][0]:.0f} × {current['segmentation_pixel_size_m'][1]:.0f} m; valid texture fraction {100*current['valid_texture_fraction']:.1f}%. Acquisition baseline: {current['baseline_days']:.1f} days."
         limits='Land/ice-shelf mask supplied.' if current['mask_provided'] else 'No reviewed land/ice-shelf mask supplied. Segmentation includes unmasked surfaces.'
         limits+=' '+ ' '.join(current['limitations'])
@@ -71,7 +72,7 @@ class BulletinBuilder:
         if compile_latex:
             if not shutil.which('pdflatex'):raise FileNotFoundError('Install TeX Live or MacTeX, or use the generated PDF directly')
             subprocess.run(['pdflatex','-interaction=nonstopmode','-halt-on-error','main.tex'],cwd=out,check=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
-        write_json(out/'bulletin.json',{'region':self.region,'issue_date':as_of,'source_manifest':str(path),'previous_manifest':str(previous[0]) if previous else None,'synthetic':current['synthetic'],'observation_age_days':age,'summary':text,'quality':quality,'limitations':limits,'change_metrics':metrics,'change_raster':str(change_path) if change_path else None,'swot_status':'not implemented in primary-product milestone'})
+        write_json(out/'bulletin.json',{'region':self.region,'issue_date':as_of,'source_manifest':str(path),'panel_sources':panel_sources,'panel_assembly':'bulletin_only','previous_manifest':str(previous[0]) if previous else None,'synthetic':current['synthetic'],'observation_age_days':age,'summary':text,'quality':quality,'limitations':limits,'change_metrics':metrics,'change_raster':str(change_path) if change_path else None,'swot_status':'not implemented in primary-product milestone'})
         return out/'bulletin.pdf'
     def _latex(self,as_of,text,quality,limits):
         e=escape_latex
