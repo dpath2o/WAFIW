@@ -168,3 +168,7 @@ python scripts/run_primary.py --config configs/davis.yaml run-catalog \
 If an old `EARTHDATA_TOKEN` is set and you intend to use `.netrc`, run `unset EARTHDATA_TOKEN` in this shell first. If authentication still fails, verify your Earthdata account and ASF authorization in your own browser; WAFIW does not manage accounts. The `doctor` command checks local resources, not login validity.
 
 Reference: [ASF session authentication](https://docs.asf.alaska.edu/asf_search/ASFSession/).
+
+## SNAP and orbit setup
+
+ESA SNAP with the Microwave Toolbox is a separate runtime installation. Follow [SNAP installation and Sentinel-1 orbit preparation](snap_setup.md) to configure GPT, populate the precise-orbit cache and validate processing. `run-catalog --prepare-orbits` prepares the selected pairs before processing; this also belongs in the scheduled Azure acquisition workflow.

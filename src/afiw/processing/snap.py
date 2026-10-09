@@ -15,7 +15,7 @@ class SnapPreprocessor:
     region: object
     polarization: str='HH'
     def graph(self,source,output):
-        if not self.spec.dem_path or not Path(self.spec.dem_path).is_file():raise FileNotFoundError('Supply a reviewed Antarctic DEM in snap.dem_path (WGS84 geographic, metres, correct vertical datum, ocean=0)')
+        if not self.spec.dem_path or not Path(self.spec.dem_path).is_file():raise FileNotFoundError('Supply a reviewed Antarctic DEM in snap.dem_path (WGS84 geographic, metres, documented vertical datum and matching ocean elevations; see docs/dem_preparation.md)')
         graph=ET.Element('graph',id='AFIW_S1_gamma0');ET.SubElement(graph,'version').text='1.0'
         def node(name,op,previous,params):
             n=ET.SubElement(graph,'node',id=name);ET.SubElement(n,'operator').text=op
@@ -43,8 +43,12 @@ class SnapPreprocessor:
         command=[exe or self.spec.executable,str(graph_path),'-c',self.spec.memory,'-q',str(self.spec.threads)]
         if dry_run:return command
         # No shell or platform-specific commands. Scene log preserves processing failures.
-        with output.with_suffix('.snap.log').open('w') as log:
-            subprocess.run(command,check=True,stdout=log,stderr=subprocess.STDOUT,timeout=self.spec.timeout_seconds)
+        log_path=output.with_suffix('.snap.log')
+        with log_path.open('w') as log:
+            try:
+                subprocess.run(command,check=True,stdout=log,stderr=subprocess.STDOUT,timeout=self.spec.timeout_seconds)
+            except subprocess.CalledProcessError as error:
+                raise RuntimeError(f'SNAP failed with exit status {error.returncode}; inspect {log_path}. For missing orbit files, run scripts/prepare_orbits.py; see docs/snap_setup.md') from None
         if not output.is_file():raise RuntimeError('SNAP completed without expected GeoTIFF')
         write_json(output.with_suffix('.provenance.json'),{**runtime(),'source':str(source),'source_sha256':sha256(source),'graph':str(graph_path),'graph_sha256':sha256(graph_path),'radiometry':'gamma0_db','dem':self.spec.dem_path})
         return output

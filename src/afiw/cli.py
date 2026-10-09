@@ -14,6 +14,8 @@ def primary_main(argv=None):
     demo=sub.add_parser('demo');demo.add_argument('--output',default='demo_output')
     raw=sub.add_parser('process-raster');raw.add_argument('--first',required=True);raw.add_argument('--second',required=True);raw.add_argument('--first-time',required=True);raw.add_argument('--second-time',required=True)
     cat=sub.add_parser('run-catalog');cat.add_argument('--pairs');cat.add_argument('--pair-index',type=int,default=0);cat.add_argument('--max-pairs',type=int,default=1);cat.add_argument('--download',action='store_true')
+    cat.add_argument('--prepare-orbits',action='store_true',help='Prepare validated precise orbits in the local SNAP cache before processing')
+    cat.add_argument('--orbit-cache-root',help='Sentinel-1 cache root; must match the cache used by SNAP')
     pre=sub.add_parser('preprocess');pre.add_argument('--safe',required=True);pre.add_argument('--output',required=True);pre.add_argument('--dry-run',action='store_true')
     args=p.parse_args(argv)
     if args.command=='demo':print(run_demo(args.output).manifest);return
@@ -37,7 +39,11 @@ def primary_main(argv=None):
         if args.pair_index<0 or args.max_pairs<1:raise ValueError('Invalid pair selection')
         selected=pairs[args.pair_index:args.pair_index+args.max_pairs]
         if not selected:raise ValueError('No pairs selected; run search and inspect pairs.json')
-        for pair in selected:print(workflow.from_safe_pair(pair,args.download).manifest)
+        for pair in selected:
+            if args.prepare_orbits:
+                from .observations.orbits import prepare_pair_orbits
+                for path in prepare_pair_orbits(pair,args.orbit_cache_root):print('Validated precise orbit:',path,flush=True)
+            print(workflow.from_safe_pair(pair,args.download).manifest)
 
 def bulletin_main(argv=None):
     p=argparse.ArgumentParser(description='Independent AFIW bulletin workflow')

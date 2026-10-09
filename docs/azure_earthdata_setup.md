@@ -159,3 +159,7 @@ Assign responsibility for account/EULA approval and token renewal to the applica
 - [Azure Key Vault authentication](https://learn.microsoft.com/en-us/azure/key-vault/general/authentication)
 
 See also [installation and coastline setup](installation.md) and [DEM preparation](dem_preparation.md).
+
+## SNAP orbit prerequisite
+
+See [SNAP installation and orbit preparation](snap_setup.md) for the public `step.esa.int:443` orbit download route, persistent cache permissions and Python-versus-Java proxy/TLS setup. `run-catalog --prepare-orbits` can populate precise orbits before processing; orbit access is independent of Earthdata token authentication.
