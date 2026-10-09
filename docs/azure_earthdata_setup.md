@@ -123,7 +123,7 @@ python scripts/run_primary.py --config configs/davis.yaml run-catalog \
   --pair-index 0 --max-pairs 1 --download
 ```
 
-The diagnostic's `NETRC` assignment is process-local and does not persist into the subsequent command. Configure `NETRC` separately in the launcher for the download too. Preserve existing valid downloads; use a reviewed fresh test root when an uncached test is required.
+For a local interactive run, `scripts/run_with_earthdata_token.py` supplies both variables to the primary CLI child process; see the [installation command](installation.md#earthdata-download-authentication). The diagnostic's `NETRC` assignment is process-local and does not persist into the subsequent command. Configure `NETRC` separately in the launcher for the download too. Preserve existing valid downloads; use a reviewed fresh test root when an uncached test is required.
 
 Deployment acceptance requires:
 

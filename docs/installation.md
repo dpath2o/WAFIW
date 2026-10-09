@@ -138,6 +138,17 @@ WAFIW supports two local methods for ASF Sentinel-1 downloads:
 1. If `EARTHDATA_TOKEN` is set and nonempty, authenticate with that token. Invalid explicit tokens fail; they do not silently fall back to another account.
 2. Otherwise read **only the Earthdata account** from the standard `~/.netrc` file and authenticate through ASF's `auth_with_creds` method. The account must have a login and password under `machine urs.earthdata.nasa.gov`. Other machine entries are not passed to this authentication call.
 
+For an interactive token-only run, use the launcher below. It prompts for the token and supplies `EARTHDATA_TOKEN` and `NETRC=os.devnull` to the primary CLI child process, including the scene downloads. Proxy and CA environment settings are preserved; the parent shell and existing `.netrc` are unchanged. A token entered in an earlier diagnostic does not persist into a later command.
+
+```bash
+python scripts/run_with_earthdata_token.py --visible-token \
+  --config configs/davis.yaml run-catalog \
+  --pairs examples/davis_catalog_202110/pairs.json \
+  --pair-index 0 --max-pairs 1 --download
+```
+
+Omit `--visible-token` for hidden input. Paste only the raw token at the prompt. The launcher delegates to `run_primary.py`; it downloads missing scenes and then proceeds to SNAP processing and primary figures. It returns the primary command's exit status. Scheduled Azure jobs should use secret injection rather than this interactive launcher.
+
 Keep the file private:
 
 ```bash
