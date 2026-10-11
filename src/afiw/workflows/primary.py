@@ -30,7 +30,7 @@ class PrimaryWorkflow:
     def preflight_classification(self):
         if self.spec.require_classification:
             if not self.spec.classifier or not Path(self.spec.classifier).is_file():
-                raise ValueError('Complete primary product requires an existing classifier; train-research can reuse Gabby annotations')
+                raise ValueError('Complete primary product requires an existing classifier; train-research can reuse Research segment annotations')
             if not self.spec.coastline or not Path(self.spec.coastline).is_file():
                 raise ValueError('Complete primary product requires a reviewed land/shelf exclusion mask')
     @logged_workflow

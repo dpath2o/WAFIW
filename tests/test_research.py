@@ -99,6 +99,42 @@ def test_portable_model_refit_matches_estimator(tmp_path):
     with pytest.raises(ValueError, match='Invalid portable'):SegmentClassifier.load(malformed)
 
 
+def test_model_bundle_is_not_an_annotation_root(tmp_path, monkeypatch):
+    from afiw.classify import research
+    bundle = tmp_path / 'models'
+    bundle.mkdir()
+    (bundle / 'fastice_HH_svm.npz').write_bytes(b'fixture')
+    (bundle / 'fastice_HH_svm.training.json').write_text('{}')
+    def unexpected_read(*args):
+        pytest.fail('Preflight must reject model bundles before reading scenes')
+    monkeypatch.setattr(research, 'read_scene', unexpected_read)
+    output = tmp_path / 'new_model.npz'
+    with pytest.raises(FileNotFoundError, match = 'produce --classifier') as error:
+        train_research(bundle, output, 'fixture')
+    assert 'fastice_HH_svm.npz' in str(error.value)
+    assert not output.exists() and not output.with_suffix('.training.json').exists()
+
+
+def test_missing_training_root_and_scene_folders(tmp_path):
+    with pytest.raises(FileNotFoundError, match = 'must be a directory'):
+        train_research(tmp_path / 'absent', tmp_path / 'model.npz', 'fixture')
+    name = 'prydz_20210101_20210113'
+    scene(tmp_path, name)
+    with pytest.raises(FileNotFoundError, match = 'missing annotated scene folders'):
+        train_research(tmp_path, tmp_path / 'model.npz', 'fixture', scenes = [name, 'thwaites_20210101_20210113'])
+
+
+def test_training_cli_explains_model_bundle_error(tmp_path, capsys):
+    from afiw.cli import primary_main
+    (tmp_path / 'fastice_HH_svm.npz').write_bytes(b'fixture')
+    with pytest.raises(SystemExit) as error:
+        primary_main(['train-research', '--training-root', str(tmp_path),
+                      '--output', str(tmp_path / 'new.npz'), '--label-source', 'fixture',
+                      '--log-dir', str(tmp_path / 'logs')])
+    assert error.value.code == 2
+    assert 'produce --classifier' in capsys.readouterr().err
+
+
 def test_reference_date_conflicts_and_invalid_geometry(tmp_path):
     from afiw.workflows.validation import reviewed_polygons
     with pytest.raises(ValueError, match='dates conflict'):

@@ -22,7 +22,8 @@ def primary_main(argv=None):
     cat.add_argument('--orbit-cache-root',help='Sentinel-1 cache root; must match the cache used by SNAP')
     pre=sub.add_parser('preprocess');pre.add_argument('--safe',required=True);pre.add_argument('--output',required=True);pre.add_argument('--dry-run',action='store_true')
     train = sub.add_parser('train-research', help='Reuse research segment annotations; save model and grouped assessment')
-    train.add_argument('--training-root', required = True)
+    train.add_argument('--training-root', required = True,
+                       help='Original SVM_trainingdata scene directory; use produce --classifier for an existing .npz model')
     train.add_argument('--output', required = True)
     train.add_argument('--label-source', required = True)
     train.add_argument('--polarization', choices = ['HH', 'HV'], default = 'HH')
@@ -57,7 +58,11 @@ def primary_main(argv=None):
     if args.command=='demo':print(run_demo(args.output).manifest);return
     if args.command == 'train-research':
         from .classify.research import train_research
-        print(train_research(args.training_root, args.output, args.label_source, args.polarization, args.scenes))
+        try:
+            result = train_research(args.training_root, args.output, args.label_source, args.polarization, args.scenes)
+        except FileNotFoundError as error:
+            p.exit(2, f'train-research: {error}\n')
+        print(result)
         return
     if args.command == 'train-labels':
         from .workflows.maps import train_from_manifest

@@ -1,4 +1,4 @@
-"""Gabby/Tony boxcar NormProd_SmoVar, with explicit masks and numerical guards.
+"""Research boxcar NormProd_SmoVar, with explicit masks and numerical guards.
 
 On fully valid data, the interior formula follows process_image_pairs.py:
 mean[(I1-mean(I1))*(I2-mean(I2))] /

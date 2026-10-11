@@ -1,6 +1,6 @@
 # Research review and adoption decisions
 
-This review used the supplied `gabby_wafiw_review.tar.gz`, the actual annotation arrays, the newer `posthonours/Fastice_Mapping` notebooks/scripts, the standalone `normalized_product` package and WAFIW's completed Davis manifest. The audit hashes and training results are in `reports/`; the external arrays/checkpoints are not redistributed in this repository.
+This review used the supplied research review archive, the actual annotation arrays, the newer `posthonours/Fastice_Mapping` notebooks/scripts, the standalone `normalized_product` package and WAFIW's completed Davis manifest. The audit hashes and training results are in `reports/`; the external arrays/checkpoints are not redistributed in this repository.
 
 ## Finding: shared training is supported; station performance remains an assessment question
 
@@ -56,9 +56,9 @@ The report records confusion matrices and unseen test classes so a single summar
 
 Seventeen shapefile datasets were inspected. They all declare EPSG:3031, but that does not make all of them suitable reference truth:
 
-- `mcmurdo_gabby_20210901_20210913` is empty.
-- `EPB_gabby_20211015_20211-27`, `thwaites_gabby_20240906_20240918`, and the file under `thwaites_gabby_20241012_20241024` include invalid geometry.
-- The latter directory contains `thwaites_gabby_20240720_20210801.shp`, conflicting with its directory dates and with an expected 2024 acquisition sequence. Its correct identity cannot be guessed.
+- The McMurdo 2021-09-01/2021-09-13 outline is empty.
+- The EPB October 2021 outline, the Thwaites 2024-09-06/2024-09-18 outline, and the file under the Thwaites 2024-10-12/2024-10-24 directory include invalid geometry.
+- The latter directory contains an outline named with the conflicting dates 2024-07-20/2021-08-01, conflicting with its directory dates and with an expected 2024 acquisition sequence. Its correct identity cannot be guessed.
 - Most attributes contain an empty `id`; some contain manually stored areas. They are outline geometries, not a fully coded multi-class raster or a declared exhaustive evaluation domain.
 
 No source reference was silently repaired or renamed. The new validation command rejects empty/invalid geometry and conflicting declared/file dates, requires pair date matching, and requires a separate reviewed evaluation-domain polygon. Unknown/unobserved and excluded land cells remain outside the confusion matrix; unassessed ocean coverage is reported.
