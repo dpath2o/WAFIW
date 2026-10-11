@@ -1,6 +1,9 @@
 """Mean-RGB SVM matching the supplied notebook's feature definition.
 Training data and a scientifically assessed model must be supplied externally.
 """
+import logging
+from afiw.core.logging import logged_step
+
 from dataclasses import dataclass
 from pathlib import Path
 import numpy as np
@@ -8,12 +11,15 @@ from sklearn.svm import SVC
 import joblib
 from .segmentation import segment_features
 
+logger = logging.getLogger(__name__)
+
 @dataclass
 class SegmentClassifier:
     model   : object
     metadata: dict
 
     @classmethod
+    @logged_step
     def train(cls, rgb, segments, training_classes, metadata = None):
         if training_classes.shape != segments.shape:
             raise ValueError('Training raster shape mismatch')
@@ -32,24 +38,29 @@ class SegmentClassifier:
             y.append(classes[counts.argmax()])
         if len(set(y)) < 2:
             raise ValueError('At least two manually labelled classes are required')
+        logger.info('SVM training: eligible segments=%s accepted=%s class counts=%s', len(ids), len(y), dict(zip(*np.unique(y, return_counts = True))))
         model = SVC().fit(np.asarray(rows), np.asarray(y))
         return cls(model, {'features'          : 'mean_RGB_uint8',
                            'training_segments' : len(y),
                            'validated'         : False, **(metadata or {})})
 
+    @logged_step
     def save(self, path):
         joblib.dump({'model'    : self.model,
                      'metadata' : self.metadata}, path)
         return Path(path)
 
     @classmethod
+    @logged_step
     def load(cls, path):
         # Load only trusted local artifacts: joblib/pickle can execute code.
+        logger.info('Loading trusted local classifier: %s', path)
         d = joblib.load(path)
         if d['metadata'].get('features') != 'mean_RGB_uint8':
             raise ValueError('Unsupported classifier features')
         return cls(d['model'], d['metadata'])
 
+    @logged_step
     def predict(self, rgb, segments, valid, excluded = None):
         ids, X = segment_features(rgb, segments)
         out    = np.full(segments.shape, 255, np.uint8)
@@ -62,4 +73,5 @@ class SegmentClassifier:
         out[~valid] = 255
         if excluded is not None:
             out[excluded] = 1
+        logger.info('Predicted class counts: %s', dict(zip(*np.unique(out, return_counts = True))))
         return out

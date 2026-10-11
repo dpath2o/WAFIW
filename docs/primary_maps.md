@@ -126,3 +126,64 @@ Visible imagery is **not implemented in this change**. A later adapter should re
 For a robust fallback, the second Sentinel-1 backscatter raster is already contemporaneous with the SAR pair end and independent of solar illumination. A neutral ocean with the reviewed ADD land/shelf context is also clear when optical coverage is poor. Avoid a textured underlay that makes SAR colour interpretation harder; candidate class boundaries or controlled transparency may be preferable to opaque overlays. Optical choice and its network/authentication route will be assessed separately.
 
 References: [PyGMT installation](https://www.pygmt.org/latest/install.html), [grdimage/image projection](https://www.pygmt.org/latest/api/generated/pygmt.Figure.grdimage.html), [NASA corrected reflectance imagery](https://forum.earthdata.nasa.gov/viewtopic.php?t=5203).
+
+## Workflow logging
+
+Operational CLI workflows now use Python `logging` with console output (stderr)
+and a unique UTC timestamped log file. For Davis the default directory is
+`~/afiw_data/davis/logs/`, independent of the configured analytical-data root.
+Mawson and Casey use their corresponding station directories. Region is inferred
+from the config/manifest, bulletin region, coastline station selection, or a
+`[station]/catalog/pairs.json` path. Station-independent tasks such as downloading
+a geoid use `~/afiw_data/general/logs/`; use `--log-station davis` if preferred.
+
+The default console level is INFO; the file always records DEBUG diagnostics.
+Stage start/completion, elapsed seconds, paths, grid and validity summaries,
+segmentation/model decisions, output lists and exception tracebacks are recorded.
+SNAP stdout/stderr is mirrored live into both destinations and also retained in
+its per-scene `.snap.log`. Existing shell-friendly final output-path prints remain
+on stdout. Arguments, environments and authentication credentials are not dumped.
+
+All operational scripts accept `--log-dir`, `--log-level` and `--log-station`.
+For the primary and bulletin CLIs place these global flags **before** the command:
+
+```bash
+python scripts/run_primary.py --config configs/davis.yaml --log-level DEBUG search
+python scripts/render_primary.py --manifest "$MANIFEST" --output "$NEW_OUTPUT" --log-level DEBUG
+```
+
+Direct workflow calls in notebooks enable default logging as well. For explicit
+control before running a workflow:
+
+```python
+from afiw.core.logging import configure_logging
+configure_logging(station = 'davis', workflow = 'notebook', level = 'DEBUG')
+```
+
+## Why only the composite was produced
+
+A manifest with `config.classifier: null`, `classification_available: false` and
+`status: segmentation_only` has no ice classification to plot. `segments.tif`
+contains object IDs, not fast-ice class labels. Re-rendering such a manifest without
+`--classifier` produces `composite.png` and `composite.tif` and now emits an explicit
+WARNING explaining why classification PNG/TIF outputs were skipped.
+
+Apply a trusted local Davis classifier trained from reviewed manual labels, using
+a **new** output directory (the earlier derived product is retained):
+
+```bash
+DAVIS_PAIR=20211002T143959_20211014T143959_45c821c8
+python scripts/render_primary.py \
+    --manifest "afiw_data/davis/products/$DAVIS_PAIR/manifest.json" \
+    --output "afiw_data/davis/products/${DAVIS_PAIR}_pygmt_classified" \
+    --classifier "/path/to/reviewed_davis_model.joblib"
+```
+
+See the manual-label/training workflow above if a suitable model is not yet
+available. Successful classification produces `classification.png`, a single-band
+GIS class raster `classification.tif`, and `classification_rgb.tif` for RGBA display.
+The manifest exposes the GIS raster under both `classification` (existing consumer
+key) and `classification_tif` (explicit TIFF alias). A source manifest that already
+contains `outputs.classification` can be re-rendered without supplying the model
+again; its classes, grid and metrics are retained. Training remains distinct from
+independent validation.

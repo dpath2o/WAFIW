@@ -1,5 +1,7 @@
 """Prepare ADD exclusion polygons; clip in source CRS before reprojection."""
 from __future__ import annotations
+import logging
+from afiw.core.logging import add_logging_arguments, setup_from_args, logged_step
 
 import argparse
 import hashlib
@@ -14,13 +16,17 @@ import pyogrio
 from shapely.geometry import box
 import yaml
 
+logger = logging.getLogger('afiw.scripts.prepare_coastline')
+
 REPO = Path(__file__).resolve().parents[1]
 STATIONS = {name: REPO / 'configs' / f'{name}.yaml'
             for name in ('davis', 'mawson', 'casey')}
 SURFACES = ('land', 'ice shelf', 'ice tongue', 'rumple')
 
 
+@logged_step
 def prepare(source, config, output, margin=0.2, update_config=False, overwrite=False):
+    logger.info('Coastline preparation: source=%s config=%s output=%s margin=%s update config=%s', source, config, output, margin, update_config)
     source, config, output = map(lambda p: Path(p).expanduser().resolve(),
                                  (source, config, output))
     if not math.isfinite(margin) or margin < 0:
@@ -46,9 +52,11 @@ def prepare(source, config, output, margin=0.2, update_config=False, overwrite=F
         raise ValueError('Source CRS is missing')
     # Densification preserves curved geographic edges in the projected CRS.
     aoi = gpd.GeoSeries([box(*bounds).segmentize(0.02)], crs='EPSG:4326').to_crs(info['crs'])
+    logger.info('Reading source polygons in CRS=%s, clip bounds=%s', info['crs'], aoi.total_bounds)
     data = gpd.read_file(source, engine='pyogrio', bbox=tuple(aoi.total_bounds))
     if 'surface' not in data:
         raise ValueError("ADD 'surface' attribute missing")
+    logger.info('Source selection: %s polygons; clipping reviewed surfaces before reprojection', len(data))
     source_counts = data.surface.value_counts().to_dict()
     data = data[data.surface.isin(SURFACES)].copy()
     if data.empty or data.geometry.isna().any() or not data.geometry.is_valid.all():
@@ -90,14 +98,15 @@ def prepare(source, config, output, margin=0.2, update_config=False, overwrite=F
         text = re.sub(r'^coastline:.*$', lambda _: 'coastline: ' + json.dumps(relative),
                       text, flags=re.MULTILINE)
         config.write_text(text)
-    print('Saved:', output)
-    print('Bounds:', data.total_bounds)
-    print('Surface counts:', record['output_surface_counts'])
-    print('All geometries valid:', bool(data.geometry.is_valid.all()))
-    print('Provenance:', record_path)
+    logger.info('Saved: %s', output)
+    logger.info('Bounds: %s', data.total_bounds)
+    logger.info('Surface counts: %s', record['output_surface_counts'])
+    logger.info('All geometries valid: %s', bool(data.geometry.is_valid.all()))
+    logger.info('Provenance: %s', record_path)
     return output
 
 
+@logged_step
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     selection = parser.add_mutually_exclusive_group(required=True)
@@ -108,7 +117,9 @@ def main(argv=None):
     parser.add_argument('--margin-deg', type=float, default=0.2)
     parser.add_argument('--update-config', action='store_true')
     parser.add_argument('--overwrite', action='store_true')
+    add_logging_arguments(parser)
     args = parser.parse_args(argv)
+    setup_from_args(args, 'prepare_coastline')
     config = args.config or STATIONS[args.station]
     name = yaml.safe_load(config.read_text())['run']['region']['name']
     if not re.fullmatch(r'[A-Za-z0-9_-]+', name):

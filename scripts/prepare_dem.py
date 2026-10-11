@@ -1,4 +1,6 @@
 """Prepare a verified ellipsoidal REMA DEM with EGM96 ocean heights for SNAP."""
+import logging
+from afiw.core.logging import add_logging_arguments, setup_from_args, logged_step
 import argparse
 import json
 import os
@@ -10,8 +12,12 @@ from rasterio.vrt import WarpedVRT
 from rasterio.warp import Resampling
 from dem_utils import checksum, combine, exclusions, grid, land_mask
 
+logger = logging.getLogger('afiw.scripts.prepare_dem')
 
+
+@logged_step
 def prepare(source, geoid, config, output, resolution, mask_bounds, bounds=None):
+    logger.info('DEM preparation: source=%s geoid=%s config=%s output=%s resolution=%s mask bounds=%s', source, geoid, config, output, resolution, mask_bounds)
     source, geoid, config, output = [Path(p).resolve() for p in (source, geoid, config, output)]
     record = output.with_suffix('.provenance.json')
     if output in (source, geoid) or output.exists() or record.exists():
@@ -40,7 +46,9 @@ def prepare(source, geoid, config, output, resolution, mask_bounds, bounds=None)
                  rasterio.open(temporary, 'w', driver='GTiff', **target, count=1,
                                dtype='float32', nodata=-9999, tiled=True, blockxsize=512,
                                blockysize=512, compress='deflate', predictor=3, BIGTIFF='IF_SAFER') as dst:
-                for _, window in dst.block_windows(1):
+                for index, (_, window) in enumerate(dst.block_windows(1), 1):
+                    if index == 1 or index % 25 == 0:
+                        logger.info('DEM block %s; window=%s counts=%s', index, window, totals)
                     land = land_mask(shapes, (int(window.height), int(window.width)), dst.window_transform(window))
                     values = combine(terrain.read(1, window=window, masked=True),
                                      sea.read(1, window=window, masked=True), land)
@@ -50,6 +58,7 @@ def prepare(source, geoid, config, output, resolution, mask_bounds, bounds=None)
                 dst.update_tags(vertical_datum='WGS84 ellipsoid', vertical_units='metres',
                                 ocean_model='EGM96 geoid undulation; approximate mean sea level',
                                 land_model='REMA; horizontally resampled, heights unchanged')
+        logger.info('Validating every written DEM block')
         # Reopen and check all written blocks, not a sample.
         with rasterio.open(temporary) as dst:
             for _, window in dst.block_windows(1):
@@ -71,12 +80,13 @@ def prepare(source, geoid, config, output, resolution, mask_bounds, bounds=None)
                           snap_validated=False)
         record.write_text(json.dumps(provenance, indent=2) + '\n')
         os.replace(temporary, output)
-        print(json.dumps(dict(output=str(output), provenance=str(record), **totals), indent=2))
+        logger.info('%s', json.dumps(dict(output=str(output), provenance=str(record), **totals), indent=2))
     finally:
         if os.path.exists(temporary):
             os.unlink(temporary)
 
 
+@logged_step
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ('source', 'geoid', 'config', 'output'):
@@ -85,7 +95,9 @@ def main():
     parser.add_argument('--resolution-deg', nargs=2, required=True, type=float, metavar=('LON', 'LAT'))
     parser.add_argument('--mask-bounds', nargs=4, required=True, type=float, metavar=('W', 'S', 'E', 'N'), help='Geographic clip bounds used to prepare the ADD mask, NOT polygon envelope')
     parser.add_argument('--bounds', nargs=4, type=float, help='Output W,S,E,N; defaults to configured region bbox')
+    add_logging_arguments(parser)
     args = parser.parse_args()
+    setup_from_args(args, 'prepare_dem')
     prepare(args.source, args.geoid, args.config, args.output,
             args.resolution_deg, args.mask_bounds, args.bounds)
 

@@ -1,3 +1,6 @@
+import logging
+from afiw.core.logging import logged_workflow
+
 from dataclasses import dataclass
 from pathlib import Path
 import hashlib,json,math
@@ -17,13 +20,18 @@ from afiw.metrics.change import extent_metrics,cell_areas_km2
 from afiw.observations.sentinel1 import Sentinel1Client,utc
 from afiw.processing.snap import SnapPreprocessor
 
+logger = logging.getLogger(__name__)
+
 @dataclass
 class PrimaryWorkflow:
     spec: object
     @property
     def paths(self):return AFIWPaths(self.spec.root,self.spec.run).ensure()
+    @logged_workflow
     def search(self):return Sentinel1Client(self.spec.run,self.spec.acquisition,self.paths).search()
+    @logged_workflow
     def from_safe_pair(self,pair,download=True):
+        logger.info('Processing catalogue pair=%s download=%s', pair['pair_id'], download)
         require_pygmt()
         if self.spec.processing.input_units!='db':raise ValueError('The SNAP adapter outputs dB; set processing.input_units=db')
         client=Sentinel1Client(self.spec.run,self.spec.acquisition,self.paths)
@@ -37,7 +45,9 @@ class PrimaryWorkflow:
             # Raw processing is explicit; do not silently reuse stale preprocessing.
             processed.append(pre.run(source,output))
         return self.from_rasters(*processed,first_time=pair['first']['properties']['startTime'],second_time=pair['second']['properties']['startTime'],pair_id=pair['pair_id'],catalog_metadata=pair)
+    @logged_workflow
     def from_rasters(self,first,second,first_time,second_time,pair_id=None,synthetic=False,catalog_metadata=None,grid_override=None):
+        logger.info('Input rasters: %s and %s; acquisition times: %s -> %s; region=%s classifier=%s', first, second, first_time, second_time, self.spec.run.region.name, self.spec.classifier or 'not supplied')
         require_pygmt()
         if utc(second_time)<=utc(first_time):raise ValueError('Acquisitions must be ordered and distinct')
         baseline=(utc(second_time)-utc(first_time)).total_seconds()/86400
@@ -54,9 +64,11 @@ class PrimaryWorkflow:
         if manifest.exists():
             old=json.loads(manifest.read_text())
             if old.get('fingerprint')==fingerprint and old.get('synthetic')==synthetic and all((directory/v).is_file() for v in old['outputs'].values()):
+                logger.info('Reusing complete product with matching fingerprint: %s', manifest)
                 o=old['outputs'];return PairResult(directory,manifest,directory/o['texture'],directory/o['segments'],directory/o.get('composite_png',o.get('quicklook')),directory/o['classification'] if 'classification'in o else None)
             raise FileExistsError(f'Existing pair product differs or is incomplete: {directory}; choose a new pair ID/output root')
         grid=grid_override or grid_for_region(self.spec.run.region,self.spec.processing)
+        logger.info('Pair=%s; baseline=%.2f days; output=%s; grid=%s', pair_id, baseline, directory, grid)
         first_aligned=align_raster(first,directory/'first_db.tif',grid,self.spec.processing.tile_size,self.spec.processing.input_units)
         second_aligned=align_raster(second,directory/'second_db.tif',grid,self.spec.processing.tile_size,self.spec.processing.input_units)
         texture=texture_raster(first_aligned,second_aligned,directory/'texture.tif',self.spec.processing,self.spec.coastline)
@@ -68,6 +80,7 @@ class PrimaryWorkflow:
             transform=from_bounds(*src.bounds,w,h);crs=src.crs
             seg_grid=dict(crs=crs,transform=transform,width=w,height=h)
         rgb,valid=rgb_texture(stack);labels=Segmenter(self.spec.segmentation).segment(rgb,valid)
+        logger.info('Segmentation: backend=%s grid=%s segments=%s valid fraction=%.4f', self.spec.segmentation.backend, labels.shape, len(np.unique(labels[labels > 0])), valid.mean())
         segments=directory/'segments.tif'
         with rasterio.open(segments,'w',**profile(seg_grid,dtype='uint32',nodata=0)) as dst:dst.write(labels,1)
         np.save(directory/'rgb.npy',rgb);np.save(directory/'segments.npy',labels)
@@ -86,10 +99,14 @@ class PrimaryWorkflow:
             classes=classifier.predict(rgb,labels,valid,mask);classification=directory/'classification.tif'
             export_classification(classes,seg_grid,classification)
             metrics=extent_metrics(classes,cell_areas_km2(classes.shape,transform,crs))
+        else:
+            logger.warning('Classification PNG/TIF skipped: config.classifier is not supplied. Train a region-specific model from reviewed labels, then set classifier or re-render with --classifier; see docs/primary_maps.md.')
         composite=export_composite(texture,directory/'composite.tif',self.spec.coastline)
         outputs={'texture':texture.name,'segments':segments.name,'rgb':'rgb.npy','validity':'validity.tif'}
         outputs.update(render_maps(composite,classification,directory,self.spec.run.region,first_time,second_time,synthetic,self.spec.processing.windows))
         quicklook=directory/outputs['composite_png']
         record={**runtime(),'schema_version':2,'plotting_backend':'pygmt','classification_available':classification is not None,'implementation_hash':code_hash,'resource_hashes':resources,'fingerprint':fingerprint,'region':self.spec.run.region.name,'first_time':first_time,'second_time':second_time,'baseline_days':baseline,'synthetic':synthetic,'status':'candidate_classification' if classification else 'segmentation_only','config':self.spec.as_dict(),'source_files':[{'path':str(first),'sha256':hashes[0]},{'path':str(second),'sha256':hashes[1]}],'catalog_pair':catalog_metadata,'outputs':outputs,'segment_count':int(len(np.unique(labels[labels>0]))),'valid_texture_fraction':float(valid.mean()),'segmentation_pixel_size_m':[abs(transform.a),abs(transform.e)],'mask_provided':bool(self.spec.coastline),'metrics':metrics,'registration_qc':'not assessed; common grid does not prove subpixel registration','limitations':['Not validated for operational use','SLIC differs from the supplied SAM research workflow'] if self.spec.segmentation.backend=='slic' else ['Not validated for operational use']}
+        record['classification_note'] = ('Unvalidated candidate classes; training is not independent validation.' if classification else 'No classifier supplied; no classification raster or figure generated.')
+        logger.info('Product status=%s; outputs=%s; metrics=%s', record['status'], outputs, metrics)
         write_json(manifest,record)
         return PairResult(directory,manifest,texture,segments,quicklook,classification)

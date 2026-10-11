@@ -1,4 +1,7 @@
 """Public ASF discovery; authenticated downloads run only when requested locally."""
+import logging
+from afiw.core.logging import logged_step
+
 from dataclasses import dataclass
 from datetime import datetime,timezone
 from pathlib import Path
@@ -10,10 +13,13 @@ from shapely.ops import transform
 from pyproj import Transformer
 from afiw.core.provenance import write_json
 
+logger = logging.getLogger(__name__)
+
 def utc(value):
     t = datetime.fromisoformat(value.replace('Z','+00:00'))
     return t.replace(tzinfo=timezone.utc) if t.tzinfo is None else t.astimezone(timezone.utc)
 
+@logged_step
 def compatible_pairs(catalog,run,acquisition):
     import hashlib
     features = catalog.get('features',[])
@@ -51,6 +57,7 @@ def compatible_pairs(catalog,run,acquisition):
                       'second'              : g,
                       'baseline_days'       : days,
                       'common_aoi_fraction' : overlap})
+    logger.info('Pairing: %s scenes -> %s compatible pairs; baseline=%s..%s days; min overlap=%s', len(features), len(pairs), acquisition.min_pair_days, acquisition.max_pair_days, acquisition.min_aoi_overlap)
     return sorted(pairs, key = lambda p:(p['second']['properties']['startTime'], p['baseline_days']))
 
 def earthdata_session(token_env = 'EARTHDATA_TOKEN'):
@@ -82,8 +89,10 @@ class Sentinel1Client:
     acquisition_cfg : object
     paths           : object
 
+    @logged_step
     def search(self):
         import asf_search as asf
+        logger.info('ASF search: region=%s bbox=%s dates=%s..%s', self.run_cfg.region.name, self.run_cfg.region.bbox, self.run_cfg.start_date, self.run_cfg.end_date)
         cfg=self.acquisition_cfg
         results = asf.geo_search(platform        = asf.PLATFORM.SENTINEL1,
                                  intersectsWith  = box(*self.run_cfg.region.bbox).wkt,
@@ -101,8 +110,10 @@ class Sentinel1Client:
         self.paths.ensure()
         write_json(self.paths.catalog / 'scenes.geojson', catalog)
         write_json(self.paths.catalog / 'pairs.json', compatible_pairs(catalog,self.run_cfg, cfg))
+        logger.info('ASF search returned %s scenes; catalog directory: %s; possibly truncated=%s', len(results), self.paths.catalog, catalog['afiw']['possibly_truncated'])
         return catalog
 
+    @logged_step
     def download_pair(self, pair, token_env = 'EARTHDATA_TOKEN'):
         import asf_search as asf
         session = None
@@ -114,17 +125,20 @@ class Sentinel1Client:
                 raise ValueError('Expected an ASF SAFE ZIP URL')
             dst = self.paths.downloads/name
             if dst.exists() and valid_safe_zip(dst):
+                logger.info('Reusing validated SAFE ZIP: %s', dst)
                 out.append(dst)
                 continue
             if session is None:
                 session = earthdata_session(token_env)
             staging = self.paths.downloads / '.partial'
             staging.mkdir(parents = True, exist_ok = True)
+            logger.info('Downloading SAFE ZIP: %s -> %s', name, staging)
             asf.download_urls([p['url']], path = str(staging), session = session)
             src = staging/name
             if not valid_safe_zip(src):
                 raise RuntimeError('Incomplete or invalid SAFE ZIP; retained in .partial')
             src.replace(dst)
+            logger.info('Validated SAFE ZIP: %s (%s bytes)', dst, dst.stat().st_size)
             out.append(dst)
         return out
 

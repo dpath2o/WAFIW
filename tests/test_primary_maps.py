@@ -140,3 +140,18 @@ def test_unclassified_product_does_not_invent_classes(product,tmp_path):
     assert not (derived.parent/'classification.tif').exists()
     assert not (derived.parent/'primary.png').exists()
     assert record['metrics']=={}
+
+
+def test_rerender_preserves_existing_classification(product, tmp_path):
+    manifest, manual, _, _, _ = product
+    model   = train_from_manifest(manifest, manual, tmp_path / 'model.joblib', 'synthetic fixture labels')
+    first   = render_from_manifest(manifest, tmp_path / 'classified', model)
+    second  = render_from_manifest(first, tmp_path / 'rerendered')
+    record  = json.loads(second.read_text())
+    assert record['classification_available']
+    assert record['outputs']['classification_tif'] == record['outputs']['classification']
+    for name in ('classification', 'classification_png', 'classification_rgb_tif'):
+        assert (second.parent / record['outputs'][name]).is_file()
+    with rasterio.open(first.parent / 'classification.tif') as a, rasterio.open(second.parent / 'classification.tif') as b:
+        np.testing.assert_array_equal(a.read(1), b.read(1))
+        assert (a.crs, a.transform, a.shape) == (b.crs, b.transform, b.shape)

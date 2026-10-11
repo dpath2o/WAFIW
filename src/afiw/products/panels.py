@@ -1,8 +1,14 @@
 """Bulletin-only assembly of already rendered PyGMT map PNGs."""
+import logging
+from afiw.core.logging import logged_step
+
 from pathlib import Path
 from PIL import Image
 
+logger = logging.getLogger(__name__)
 
+
+@logged_step
 def assemble_primary_panels(manifest_path, record, output):
     directory = Path(manifest_path).parent
     outputs = record['outputs']

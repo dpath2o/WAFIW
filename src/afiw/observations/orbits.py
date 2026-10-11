@@ -2,6 +2,9 @@
 
 Public ESA STEP downloads only; no Earthdata/CDSE credential is required.
 """
+import logging
+from afiw.core.logging import logged_step, logged_workflow
+
 from datetime import datetime, timedelta, timezone
 from html.parser import HTMLParser
 from io import BytesIO
@@ -12,6 +15,8 @@ import xml.etree.ElementTree as ET
 import zipfile
 import requests
 from afiw.core.provenance import sha256, write_json
+
+logger = logging.getLogger(__name__)
 
 BASE_URL  = 'https://step.esa.int/auxdata/orbits/Sentinel-1/POEORB/'
 NAME      = re.compile(r'(S1[ABCD])_OPER_AUX_POEORB_OPOD_(\d{8}T\d{6})_V(\d{8}T\d{6})_(\d{8}T\d{6})\.EOF(?:\.zip)?')
@@ -84,6 +89,7 @@ class Links(HTMLParser):
 def public_get(url, session, limit = MAX_BYTES):
     # Explicit no-op auth prevents Requests consulting developer netrc entries.
     # Reject redirects: new destinations require a reviewed provider change.
+    logger.info('ESA orbit request: %s', url)
     with session.get(url, auth = lambda request: request, allow_redirects = False, timeout = (15, 120), stream = True) as response:
         if response.status_code == 404:
             return None
@@ -96,16 +102,19 @@ def public_get(url, session, limit = MAX_BYTES):
                 raise ValueError('ESA orbit response exceeds size limit')
         return bytes(data)
 
+@logged_step
 def prepare_scene_orbit(feature, cache_root=None, check_only=False, session=None):
     mission, start, end, acquisition = scene_window(feature)
     root = Path(cache_root).expanduser() if cache_root else Path.home() / '.snap/auxdata/Orbits/Sentinel-1'
     folder = root / 'POEORB' / mission / f'{acquisition:%Y/%m}'
+    logger.info('Orbit lookup: spacecraft=%s coverage=%s..%s cache=%s check only=%s', mission, start, end, folder, check_only)
     # SNAP searches the acquisition month. Store uncompressed EOF there.
     for path in sorted(folder.glob('*.EOF'), reverse=True):
         try:
             validate_eof(path.read_bytes(), path.name, mission, start, end)
         except (ValueError, ET.ParseError):
             continue
+        logger.info('Reusing validated precise orbit: %s', path)
         return path
     if check_only:
         raise FileNotFoundError(f'No validated precise orbit covers the scene: {folder}')
@@ -168,6 +177,7 @@ def prepare_scene_orbit(feature, cache_root=None, check_only=False, session=None
                                                            'snap_processing_validated' : False})
     return destination
 
+@logged_workflow
 def prepare_pair_orbits(pair, cache_root=None, check_only=False):
     with requests.Session() as session:
         return [prepare_scene_orbit(pair[key], cache_root, check_only, session) for key in ('first', 'second')]

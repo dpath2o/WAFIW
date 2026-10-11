@@ -1,4 +1,6 @@
 """Download the public PROJ EGM96 grid without overwriting an existing file."""
+import logging
+from afiw.core.logging import add_logging_arguments, setup_from_args, logged_step
 import argparse
 import json
 import os
@@ -8,13 +10,18 @@ from urllib.request import urlopen
 import rasterio
 from dem_utils import checksum
 
+logger = logging.getLogger('afiw.scripts.download_geoid')
+
 URL = 'https://cdn.proj.org/us_nga_egm96_15.tif'
 
 
+@logged_step
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', required=True, type=Path)
+    add_logging_arguments(parser)
     args = parser.parse_args()
+    setup_from_args(args, 'download_geoid')
     output = args.output.resolve()
     record = output.with_suffix('.download.json')
     if output.exists() or record.exists():
@@ -32,8 +39,8 @@ def main():
                             crs=str(src.crs), description=src.descriptions[0])
         record.write_text(json.dumps(metadata, indent=2) + '\n')
         os.replace(temporary, output)
-        print('Saved:', output)
-        print('SHA256:', metadata['sha256'])
+        logger.info('Saved: %s', output)
+        logger.info('SHA256: %s', metadata['sha256'])
     finally:
         if os.path.exists(temporary):
             os.unlink(temporary)

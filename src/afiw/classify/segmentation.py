@@ -1,15 +1,20 @@
+import logging
+from afiw.core.logging import logged_step
+
 from dataclasses import dataclass
 from pathlib import Path
 import numpy as np
 from scipy.ndimage import label as connected_components
 from skimage.segmentation import slic
 
+logger = logging.getLogger(__name__)
+
 @dataclass
 class Segmenter:
     spec: object
+    @logged_step
     def segment(self, rgb, valid):
-        import torch
-        from segment_anything import sam_model_registry, SamAutomaticMaskGenerator
+        logger.info('Segmenter: backend=%s device=%s RGB shape=%s valid pixels=%s/%s', self.spec.backend, self.spec.device, rgb.shape, np.count_nonzero(valid), valid.size)
         if rgb.shape[:2] != valid.shape or rgb.ndim != 3 or rgb.shape[-1] != 3:
             raise ValueError('RGB/mask shape mismatch')
         if valid.size > self.spec.max_pixels:
@@ -28,6 +33,8 @@ class Segmenter:
                         enforce_connectivity = True).astype('uint32')
         if not self.spec.checkpoint or not Path(self.spec.checkpoint).is_file():
             raise FileNotFoundError('Provide a local SAM checkpoint')
+        import torch
+        from segment_anything import sam_model_registry, SamAutomaticMaskGenerator
         if self.spec.device=='mps' and not torch.backends.mps.is_available():
             raise RuntimeError('MPS not available; select CPU')
         if self.spec.device=='cuda' and not torch.cuda.is_available():
@@ -51,6 +58,7 @@ class Segmenter:
         # Preserve unassigned pixels as 0; never interpret SAM gaps as pack/ocean.
         return labels
 
+@logged_step
 def segment_features(rgb,labels):
     ids      = np.unique(labels)
     ids      = ids[ids > 0]
