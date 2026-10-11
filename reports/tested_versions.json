@@ -1,17 +1,20 @@
 {
-  "platform": "Linux",
+  "created_utc": "2026-10-11T01:30:50.011475+00:00",
   "python": "3.12.14",
   "versions": {
     "numpy": "2.3.5",
-    "scipy": "1.17.0",
     "rasterio": "1.5.2",
-    "pyproj": "3.8.0",
-    "shapely": "2.2.0",
+    "scipy": "1.17.0",
     "scikit-image": "0.26.0",
     "scikit-learn": "1.8.0",
     "asf-search": "14.0.3",
-    "reportlab": "4.4.9",
-    "nbformat": "5.11.1",
-    "pytest": "9.1.1"
-  }
+    "pygmt": "0.19.0"
+  },
+  "gmt": "6.7.0",
+  "ghostscript": "10.08.0",
+  "platform": "Linux",
+  "evidence": "actual HH array import/assessment, synthetic classified primary processing/render/validation/publication, sequential notebook API execution; no SAM or real Davis inference",
+  "pytest_result": "58 passed, 19 warnings",
+  "notebook_result": "5 code cells passed by sequential shared-namespace execution; not a Jupyter UI/kernel test",
+  "cli_result": "actual HH research training and complete synthetic classified maps + bulletin via produce"
 }

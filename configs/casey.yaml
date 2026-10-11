@@ -44,3 +44,8 @@ snap:
   timeout_seconds: 7200
 coastline: "../../../data/coastlines/casey_ADD_v7p9_exclusions.geojson"
 classifier: null # supply a trusted, trained Casey model to produce candidate extent
+
+# Set true for complete primary products; missing model/mask then fails early.
+require_classification: false
+# Explicitly enable only for reviewed candidate transfer across sites/settings.
+allow_model_transfer: false

@@ -31,7 +31,7 @@ def test_default_station_directory_and_console(tmp_path, monkeypatch, capsys):
     assert 'tile window diagnostic' in path.read_text()
     assert logging.getLogger().handlers == root_handlers
     replacement = configure_logging('Davis', 'render_primary')
-    assert replacement != path and len(LOGGER.handlers) == 2
+    assert replacement != path and sum(getattr(handler, '_afiw_handler', False) for handler in LOGGER.handlers) == 2
     logger.info('only one copy')
     assert replacement.read_text().count('only one copy') == 1
     assert 'only one copy' not in path.read_text()
@@ -101,3 +101,12 @@ def test_consecutive_notebook_workflows_use_their_own_station(tmp_path, monkeypa
         manifest.write_text(json.dumps({'region': region}))
         workflow(manifest)
         assert len(list((tmp_path / 'afiw_data' / region.lower() / 'logs').glob('*.log'))) == 1
+
+
+def test_configure_preserves_host_handlers(tmp_path):
+    host = logging.NullHandler()
+    LOGGER.addHandler(host)
+    configure_logging('Davis', 'workflow', tmp_path)
+    assert host in LOGGER.handlers
+    configure_logging('Davis', 'next', tmp_path)
+    assert host in LOGGER.handlers

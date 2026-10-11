@@ -35,9 +35,12 @@ def configure_logging(station = 'general', workflow = 'workflow', log_dir = None
     file = logging.FileHandler(path, encoding = 'utf-8')
     file.setLevel(logging.DEBUG)
     file.setFormatter(formatter)
+    console._afiw_handler = True
+    file._afiw_handler = True
     for handler in list(LOGGER.handlers):
-        LOGGER.removeHandler(handler)
-        handler.close()
+        if getattr(handler, '_afiw_handler', False):
+            LOGGER.removeHandler(handler)
+            handler.close()
     LOGGER.setLevel(logging.DEBUG)
     LOGGER.propagate = False
     LOGGER.addHandler(console)
@@ -47,11 +50,13 @@ def configure_logging(station = 'general', workflow = 'workflow', log_dir = None
     return path
 
 
-def add_logging_arguments(parser):
-    parser.add_argument('--log-dir', help='Override ~/afiw_data/[station]/logs')
-    parser.add_argument('--log-level', choices = ['DEBUG', 'INFO', 'WARNING', 'ERROR'], default = 'INFO',
+def add_logging_arguments(parser, suppress_defaults = False):
+    import argparse
+    optional_default = argparse.SUPPRESS if suppress_defaults else None
+    parser.add_argument('--log-dir', default = optional_default, help='Override ~/afiw_data/[station]/logs')
+    parser.add_argument('--log-level', choices = ['DEBUG', 'INFO', 'WARNING', 'ERROR'], default = argparse.SUPPRESS if suppress_defaults else 'INFO',
                         help='Console verbosity; file always includes DEBUG')
-    parser.add_argument('--log-station', help='Station for workflows without config/manifest; otherwise inferred')
+    parser.add_argument('--log-station', default = optional_default, help='Station for workflows without config/manifest; otherwise inferred')
 
 
 def station_from_inputs(manifest = None, config = None, region = None, pairs = None):
@@ -110,7 +115,7 @@ def logged_workflow(function):
     @wraps(function)
     def wrapped(*args, **kwargs):
         depth = WORKFLOW_DEPTH.get()
-        if depth == 0 and (not LOGGER.handlers or AUTOMATIC):
+        if depth == 0 and (not any(getattr(handler, '_afiw_handler', False) for handler in LOGGER.handlers) or AUTOMATIC):
             values = inspect.signature(function).bind(*args, **kwargs).arguments
             owner  = values.get('self')
             spec   = getattr(owner, 'spec', None)

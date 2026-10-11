@@ -39,18 +39,51 @@ def preprocessing_contract(record):
     config = record['config']
     return json.loads(json.dumps({'processing'   : config['processing'],
                                   'segmentation' : config['segmentation'],
+                                  'acquisition'  : {key: config['acquisition'][key] for key in ('polarization', 'beam_modes')},
+                                  'resource_hashes' : {key: record.get('resource_hashes', {}).get(key) for key in ('sam_checkpoint', 'coastline')},
                                   'features'     : 'mean_RGB_uint8',
                                   'rgb_encoding' : 'normprod_clipped_-0.5_1_uint8'}))
 
 @logged_step
 def check_classifier(classifier, record):
-    if classifier.metadata.get('region') != record['region']:
-        raise ValueError('Classifier must declare the matching region')
-    if classifier.metadata.get('synthetic', False) and not record['synthetic']:
+    metadata = classifier.metadata
+    if metadata.get('synthetic', False) and not record['synthetic']:
         raise ValueError('Synthetic classifier cannot classify real scenes')
-    contract = classifier.metadata.get('preprocessing_contract')
+    if metadata.get('features') != 'mean_RGB_uint8':
+        raise ValueError('Unsupported classifier features')
+    config   = record['config']
+    transfer = config.get('allow_model_transfer', False)
+    issues   = []
+    if metadata.get('region') != record['region']:
+        issues.append('training region differs or model was trained across research sites')
+    contract = metadata.get('preprocessing_contract')
     if contract is not None and contract != preprocessing_contract(record):
-        raise ValueError('Classifier preprocessing contract differs (texture/segmentation settings)')
+        issues.append('preprocessing contract differs (texture/segmentation settings)')
+    if metadata.get('requires_transfer_review') or contract is None:
+        issues.append('source preprocessing provenance is incomplete')
+    polarization = metadata.get('polarization')
+    if not polarization and contract:
+        polarization = contract.get('acquisition', {}).get('polarization')
+    if polarization and polarization != config['acquisition']['polarization']:
+        raise ValueError('Classifier polarization differs; HH and HV features are not interchangeable')
+    if issues and not transfer:
+        raise ValueError('Classifier ' + '; '.join(issues) +
+                         '. Review transfer suitability and explicitly set allow_model_transfer=true for candidate output')
+    if issues:
+        logger.warning('Candidate model transfer to %s: %s. Independent station validation remains required.', record['region'], '; '.join(issues))
+    return {'accepted_transfer' : bool(issues), 'issues' : issues,
+            'training_regions' : metadata.get('training_regions', [metadata.get('region')]),
+            'validated' : bool(metadata.get('validated', False))}
+
+
+def classifier_limitations(metadata, review):
+    limitations = []
+    if review.get('accepted_transfer'):
+        limitations.append('Candidate model transfer: source preprocessing/station differs or is incompletely documented.')
+    count = metadata.get('class_counts', {}).get('3')
+    if count is not None and int(count) == 1:
+        limitations.append('Melting-fast-ice class 3 has only one training segment; its performance is not established.')
+    return limitations
 
 @logged_workflow
 def train_from_manifest(manifest, labels, output, label_source):
@@ -83,10 +116,12 @@ def train_from_manifest(manifest, labels, output, label_source):
     return output
 
 @logged_workflow
-def render_from_manifest(manifest, output, classifier_path=None):
+def render_from_manifest(manifest, output, classifier_path = None, allow_model_transfer = False, require_classification = False):
     """New derived manifest; do not overwrite analytical inputs or old product."""
     logger.info('Render request: manifest=%s output=%s classifier=%s', manifest, output, classifier_path or 'not supplied')
     manifest, source, rgb, segments, validity, grid = inputs_from_manifest(manifest)
+    if require_classification and not classifier_path and not source['outputs'].get('classification'):
+        raise ValueError('Complete primary product requires a classifier or existing classification raster')
     require_pygmt()
     output = Path(output).resolve()
     if output == manifest.parent or (output.exists() and any(output.iterdir())):
@@ -97,6 +132,7 @@ def render_from_manifest(manifest, output, classifier_path=None):
         raise ValueError('Coastline changed since source processing; restore the reviewed source mask or recompute the product')
     output.mkdir(parents = True, exist_ok = True)
     record         = deepcopy(source)
+    record['config']['allow_model_transfer'] = bool(allow_model_transfer or source['config'].get('allow_model_transfer', False))
     classification = None
     if classifier_path:
         logger.info('Applying supplied classifier: %s', classifier_path)
@@ -104,7 +140,9 @@ def render_from_manifest(manifest, output, classifier_path=None):
             raise ValueError('Classification requires a reviewed land/shelf exclusion mask')
         classifier_path = Path(classifier_path).resolve()
         classifier      = SegmentClassifier.load(classifier_path)
-        check_classifier(classifier, source)
+        record['classifier_review'] = check_classifier(classifier, record)
+        record['classifier_metadata'] = classifier.metadata
+        record['limitations'] = list(dict.fromkeys(record.get('limitations', []) + classifier_limitations(classifier.metadata, record['classifier_review'])))
         classes        = classifier.predict(rgb, segments, validity == 1, validity == 2)
         classification = export_classification(classes, grid, output / 'classification.tif')
         record['config']['classifier']          = str(classifier_path)
@@ -118,7 +156,7 @@ def render_from_manifest(manifest, output, classifier_path=None):
             classes = src.read(1)
         classification = export_classification(classes, grid, output / 'classification.tif')
     else:
-        logger.warning('Classification PNG/TIF skipped: no --classifier supplied and source manifest has no classification raster. Segments are object IDs, not ice classes. Supply a trusted model trained using reviewed manual labels; see docs/primary_maps.md.')
+        logger.warning('Classification PNG/TIF skipped: no --classifier supplied and source manifest has no classification raster. Segments are object IDs, not ice classes. Supply a trusted model trained using reviewed manual labels; see docs/workflow.md.')
     outputs   = {key: str((manifest.parent / source['outputs'][key]).resolve()) for key in ('texture', 'segments', 'rgb', 'validity')}
     composite = export_composite(outputs['texture'], output / 'composite.tif', coastline)
     region    = RegionSpec(**source['config']['run']['region'])

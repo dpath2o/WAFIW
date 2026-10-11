@@ -4,7 +4,6 @@ from afiw.core.logging import logged_step
 from dataclasses import dataclass
 from pathlib import Path
 import numpy as np
-from scipy.ndimage import label as connected_components
 from skimage.segmentation import slic
 
 logger = logging.getLogger(__name__)
@@ -42,15 +41,17 @@ class Segmenter:
         model     = sam_model_registry[self.spec.sam_model](checkpoint = self.spec.checkpoint).to(self.spec.device)
         generator = SamAutomaticMaskGenerator(model,
                                               points_per_side                = self.spec.points_per_side,
-                                              pred_iou_thresh                = .85,
-                                              stability_score_thresh         = .85,
+                                              pred_iou_thresh                = self.spec.pred_iou_thresh,
+                                              stability_score_thresh         = self.spec.stability_score_thresh,
                                               crop_n_layers                  = self.spec.crop_n_layers,
                                               crop_n_points_downscale_factor = 2,
-                                              crop_overlap_ratio             = .5,
-                                              box_nms_thresh                 = .3,
-                                              min_mask_region_area           = 50,
+                                              crop_overlap_ratio             = self.spec.crop_overlap_ratio,
+                                              box_nms_thresh                 = self.spec.box_nms_thresh,
+                                              min_mask_region_area           = self.spec.min_mask_region_area,
                                               output_mode                    = 'binary_mask')
-        masks     = generator.generate(rgb)
+        with torch.inference_mode():
+            masks = generator.generate(rgb)
+        logger.info('SAM masks returned: %s', len(masks))
         labels    = np.zeros(valid.shape, dtype = np.uint32)
         # Assign smaller masks last. SAM overlap resolution is explicit and deterministic.
         for i,m in enumerate(sorted(masks, key = lambda x:x['area'], reverse = True), 1):
@@ -60,8 +61,14 @@ class Segmenter:
 
 @logged_step
 def segment_features(rgb,labels):
-    ids      = np.unique(labels)
-    ids      = ids[ids > 0]
-    features = np.array([rgb[labels==i].mean(axis=0) for i in ids], dtype = float).reshape(-1, 3)
-    return ids, features
-
+    rgb, labels = np.asarray(rgb), np.asarray(labels)
+    if rgb.dtype != np.uint8 or rgb.shape != (*labels.shape, 3):
+        raise ValueError('Features require H,W,3 uint8 RGB matching the segment grid')
+    if not np.issubdtype(labels.dtype, np.integer) or np.any(labels < 0):
+        raise ValueError('Features require nonnegative integer segment IDs')
+    ids, inverse, counts = np.unique(labels, return_inverse = True, return_counts = True)
+    inverse = inverse.ravel()
+    features = np.stack([np.bincount(inverse, weights = rgb[...,channel].ravel()) / counts
+                         for channel in range(3)], axis = 1)
+    selected = ids > 0
+    return ids[selected], features[selected]

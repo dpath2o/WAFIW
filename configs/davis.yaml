@@ -43,4 +43,9 @@ snap:
   threads: 2
   timeout_seconds: 7200
 coastline: "../../../data/coastlines/davis_ADD_v7p9_exclusions.geojson"
-classifier: null # supply a trusted, trained Davis model to produce candidate extent
+classifier: null # train once from reviewed existing labels; see docs/workflow.md
+
+# Set true for complete primary products; missing model/mask then fails early.
+require_classification: false
+# Explicitly enable only for reviewed candidate transfer across sites/settings.
+allow_model_transfer: false

@@ -105,4 +105,4 @@ At this documentation checkpoint, the user's Mac failed before orbit correction.
 
 ## After SNAP completion
 
-See [separate PyGMT maps and classification](primary_maps.md) for the updated map runtime and output contract. Successful SNAP preprocessing supplies the backscatter inputs; it does not supply an ice classifier. Completed products can be regenerated into separate maps without repeating SNAP.
+See [separate PyGMT maps and classification](workflow.md) for the updated map runtime and output contract. Successful SNAP preprocessing supplies the backscatter inputs; it does not supply an ice classifier. Completed products can be regenerated into separate maps without repeating SNAP.

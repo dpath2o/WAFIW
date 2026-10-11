@@ -124,9 +124,9 @@ python scripts/run_primary.py --config configs/davis.yaml doctor
 python scripts/run_primary.py --config configs/davis.yaml search
 ```
 
-The first Davis search found 12 compatible October 2021 pairs. `search` retrieves public catalogue metadata only. Raw-scene download requires local Earthdata authentication through a token or the Earthdata entry in `~/.netrc`. Never commit credentials. Raw SAFE processing requires a prepared DEM; classification also needs a trusted, region-specific model. Without a model the product remains segmentation only.
+The first Davis search found 12 compatible October 2021 pairs. `search` retrieves public catalogue metadata only. Raw-scene download requires local Earthdata authentication through a token or the Earthdata entry in `~/.netrc`. Never commit credentials. Raw SAFE processing requires a prepared DEM; classification also needs a trusted model trained on compatible labelled features. Reuse of Gabby annotations and complete-product commands are covered in the consolidated workflow.
 
-The current pause point has a valid Davis coastline and a downloaded `../../data/DEMS/Davis.tif`. The source metadata and sampled land/ocean coverage have now been inspected; ocean gaps remain to be prepared. Leave `snap.dem_path: null` until a separate prepared DEM passes verification. Continue with [DEM preparation](dem_preparation.md).
+
 
 
 ## Earthdata download authentication
@@ -175,4 +175,4 @@ ESA SNAP with the Microwave Toolbox is a separate runtime installation. Follow [
 
 ## PyGMT map runtime and separate products
 
-Primary maps now require conda-forge PyGMT, GMT and Ghostscript. Follow [separate SAR/classification maps](primary_maps.md) to update WAFIW, regenerate completed products without SNAP, prepare reviewed labels and assemble PNG panels only at bulletin production. The TIFF exports retain their native georeferencing.
+Primary maps now require conda-forge PyGMT, GMT and Ghostscript. Follow [separate SAR/classification maps](workflow.md) to update WAFIW, regenerate completed products without SNAP, reuse reviewed annotations, assess transfer, and assemble PNG panels at bulletin production. The TIFF exports retain their native georeferencing.

@@ -155,3 +155,73 @@ def test_rerender_preserves_existing_classification(product, tmp_path):
     with rasterio.open(first.parent / 'classification.tif') as a, rasterio.open(second.parent / 'classification.tif') as b:
         np.testing.assert_array_equal(a.read(1), b.read(1))
         assert (a.crs, a.transform, a.shape) == (b.crs, b.transform, b.shape)
+
+
+def test_complete_produce_requires_classifier_before_creating_output(product, tmp_path):
+    manifest, _, _, _, _ = product
+    output = tmp_path / 'missing-model'
+    with pytest.raises(ValueError, match = 'requires a classifier'):
+        render_from_manifest(manifest, output, require_classification = True)
+    assert not output.exists()
+
+
+def test_outline_validation_matches_only_reviewed_observed_domain(product, tmp_path):
+    from afiw.workflows.validation import validate_outline
+    manifest, manual, _, grid, _ = product
+    model = train_from_manifest(manifest, manual, tmp_path / 'model.joblib', 'synthetic fixture')
+    derived = render_from_manifest(manifest, tmp_path / 'classified', model)
+    from rasterio.transform import array_bounds
+    left, bottom, right, top = array_bounds(grid['height'],grid['width'],grid['transform'])
+    def polygon(path, ytop):
+        return write_json(path, {'type':'FeatureCollection', 'crs':{'type':'name','properties':{'name':'EPSG:3031'}},
+           'features':[{'type':'Feature','properties':{},'geometry':{'type':'Polygon','coordinates':[
+               [[left,bottom],[right,bottom],[right,ytop],[left,ytop],[left,bottom]]]}}]})
+    reference = polygon(tmp_path / 'outline_20211002_20211014.geojson', (top+bottom)/2)
+    domain = polygon(tmp_path / 'domain.geojson', top)
+    output = validate_outline(derived, reference, domain, tmp_path / 'assessment.json',
+                              '2021-10-02','2021-10-14','synthetic independent outline fixture')
+    assessment = json.loads(output.read_text())
+    assert assessment['iou'] == 1 and assessment['precision'] == 1 and assessment['recall'] == 1
+    assert assessment['area_km2']['unassessed_ocean'] > 0
+    assert assessment['model_validation_updated'] is False
+    with pytest.raises(ValueError, match = 'exactly match'):
+        validate_outline(derived,reference,domain,tmp_path/'wrong.json','2021-10-01','2021-10-14','fixture')
+
+
+def test_classified_raster_workflow_is_complete_and_reusable(product, tmp_path):
+    from afiw.core.types import ProcessingSpec, SegmentationSpec
+    from afiw.workflows.primary import PrimaryWorkflow
+    manifest, _, grid, _, record = product
+    rng = np.random.default_rng(42)
+    first = rng.normal(-15,2,(64,64)).astype('float32')
+    second = first.copy()
+    second[:,32:] = rng.normal(-15,2,(64,32))
+    first[:2] = np.nan
+    paths = []
+    for name,values in [('first.tif',first),('second.tif',second)]:
+        path = tmp_path/name
+        with rasterio.open(path,'w',**profile(grid)) as dst:dst.write(values,1)
+        paths.append(path)
+    rgb = np.full((8,8,3),30,np.uint8);rgb[4:] = 220
+    segments = np.ones((8,8),np.uint32);segments[4:] = 2
+    labels = np.zeros((8,8),np.uint8);labels[4:] = 2
+    model = SegmentClassifier.train(rgb,segments,labels,{'region':'Davis','synthetic':True}).save(tmp_path/'fixture.joblib')
+    spec = WorkflowSpec(run=RunSpec(region=RegionSpec(**record['config']['run']['region'])),
+                        root=str(tmp_path/'new_primary'),coastline=record['config']['coastline'],classifier=str(model),
+                        processing=ProcessingSpec(resolution_m=200,windows=(5,9,13),tile_size=64),
+                        segmentation=SegmentationSpec(downsample=2,n_segments=16),
+                        require_classification=True,allow_model_transfer=True)
+    workflow = PrimaryWorkflow(spec)
+    arguments = dict(first_time='2021-10-02T14:39:59Z',second_time='2021-10-14T14:39:59Z',synthetic=True,grid_override=grid)
+    result = workflow.from_rasters(*paths,**arguments)
+    completed = json.loads(result.manifest.read_text())
+    assert completed['classification_available'] and completed['classifier_review']['accepted_transfer']
+    assert completed['synthetic'] and completed['status'] == 'candidate_classification'
+    for key in ('composite_png','composite_tif','classification','classification_png','classification_rgb_tif'):
+        assert (result.directory/completed['outputs'][key]).is_file()
+    with rasterio.open(result.classification) as src:
+        assert src.shape == (32,32) and src.nodata == 255
+        assert set(np.unique(src.read(1))) <= {0,1,2,255}
+    original = result.manifest.read_bytes()
+    assert workflow.from_rasters(*paths,**arguments).manifest == result.manifest
+    assert result.manifest.read_bytes() == original
