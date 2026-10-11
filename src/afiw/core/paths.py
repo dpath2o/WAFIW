@@ -31,6 +31,10 @@ class AFIWPaths:
     def bulletins(self):
         return self.station/'bulletins'
 
+    @property
+    def logs(self):
+        return Path.home() / 'afiw_data' / self.run_cfg.region.name.lower() / 'logs'
+
     def pair(self, pair_id):
         if not pair_id or any(c not in '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_' for c in pair_id):
             raise ValueError('Unsafe pair ID')

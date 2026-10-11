@@ -70,4 +70,6 @@ def test_all_station_configs_load():
         w, s, e, n = spec.run.region.bbox
         assert w < spec.run.region.station_lon < e
         assert s < spec.run.region.station_lat < n
-        assert spec.snap.dem_path is None
+        configured = yaml.safe_load((root / 'configs' / f'{name}.yaml').read_text())['snap'].get('dem_path')
+        expected   = str((root / 'configs' / configured).resolve()) if configured else None
+        assert spec.snap.dem_path == expected

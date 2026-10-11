@@ -1,4 +1,7 @@
 """Separate PyGMT maps and GIS rasters; panel assembly belongs to products."""
+import logging
+from afiw.core.logging import logged_step
+
 from pathlib import Path
 import tempfile
 import numpy as np
@@ -8,6 +11,8 @@ from rasterio.transform import from_bounds
 from rasterio.warp import reproject, Resampling
 from afiw.processing.raster import profile, load_exclusions, exclusion_mask
 from afiw.processing.texture import rgb_texture
+
+logger = logging.getLogger(__name__)
 
 PALETTE     = np.full((256, 3), 235, dtype=np.uint8)
 PALETTE[0]  = [15, 35, 48]
@@ -29,14 +34,18 @@ def require_pygmt():
         raise RuntimeError('PyGMT/GMT unavailable. Install conda-forge pygmt, gmt and ghostscript; see docs/primary_maps.md') from error
     return pygmt
 
+@logged_step
 def export_composite(texture, destination, coastline=None):
     """Full texture-resolution RGBA; missing observations remain transparent."""
+    logger.info('Composite GeoTIFF: texture=%s destination=%s coastline=%s', texture, destination, coastline)
     destination = Path(destination)
     with rasterio.open(texture) as src:
         grid   = {key: getattr(src, key) for key in ('crs', 'transform', 'width', 'height')}
         shapes = load_exclusions(coastline, src.crs)
         with rasterio.open(destination, 'w', **profile(grid, count = 4, dtype = 'uint8', nodata = None)) as dst:
-            for _, window in src.block_windows(1):
+            for index, (_, window) in enumerate(src.block_windows(1), 1):
+                if index == 1 or index % 100 == 0:
+                    logger.info('Raster export block %s; destination=%s window=%s', index, destination, window)
                 rgb, valid    = rgb_texture(src.read(window = window, masked = True).filled(np.nan))
                 excluded      = exclusion_mask(shapes, grid, window)
                 rgb[excluded] = PALETTE[1]
@@ -49,7 +58,9 @@ def export_composite(texture, destination, coastline=None):
                             source_texture = str(Path(texture).resolve()))
     return destination
 
+@logged_step
 def export_classification(classes, grid, destination):
+    logger.info('Classification GeoTIFF: destination=%s grid=%s class counts=%s', destination, grid, dict(zip(*np.unique(classes, return_counts = True))))
     if classes.dtype != np.uint8 or not np.isin(classes, [0, 1, 2, 3, 255]).all():
         raise ValueError('Classification requires uint8 codes 0,1,2,3,255')
     destination = Path(destination)
@@ -60,11 +71,14 @@ def export_classification(classes, grid, destination):
         dst.update_tags(class_codes = ';'.join(f'{key} = {value}' for key, value in CLASS_NAMES.items()), status = 'candidate_classification', validated = 'false')
     return destination
 
+@logged_step
 def export_classification_rgb(classification, destination):
     with rasterio.open(classification) as src:
         grid = {key: getattr(src, key) for key in ('crs', 'transform', 'width', 'height')}
         with rasterio.open(destination, 'w', **profile(grid, count=4, dtype='uint8', nodata=None)) as dst:
-            for _, window in src.block_windows(1):
+            for index, (_, window) in enumerate(src.block_windows(1), 1):
+                if index == 1 or index % 100 == 0:
+                    logger.info('Raster export block %s; destination=%s window=%s', index, destination, window)
                 classes = src.read(1, window=window)
                 if not np.isin(classes, [0, 1, 2, 3, 255]).all():
                     raise ValueError('Unknown classification code')
@@ -74,6 +88,7 @@ def export_classification_rgb(classification, destination):
             dst.update_tags(product = 'classification_display_RGBA', source = str(Path(classification).resolve()))
     return Path(destination)
 
+@logged_step
 def _geographic_image(source, destination, bbox, max_dimension=1800):
     """Temporary nearest-neighbour display reprojection, never analytical data."""
     west, south, east, north = bbox
@@ -96,8 +111,10 @@ def _geographic_image(source, destination, bbox, max_dimension=1800):
         dst.colorinterp = (ColorInterp.red, ColorInterp.green, ColorInterp.blue)
     return destination
 
+@logged_step
 def map_figure(raster, path, region, title, subtitle, classification=False):
     """PyGMT stereographic map with lon/lat graticule, station and legend."""
+    logger.info('PyGMT map: raster=%s PNG=%s region=%s bbox=%s classified=%s', raster, path, region.name, region.bbox, classification)
     pygmt      = require_pygmt()
     path       = Path(path)
     west, south, east, north = region.bbox
@@ -136,6 +153,7 @@ def map_figure(raster, path, region, title, subtitle, classification=False):
             fig.savefig(str(path), dpi=200, crop='+m0.2c')
     return path
 
+@logged_step
 def render_maps(composite, classification, directory, region, first_time, second_time, synthetic=False, windows=(11, 21, 33)):
     directory     = Path(directory)
     title         = f'{region.name}: {first_time[:10]} to {second_time[:10]}'
@@ -145,5 +163,6 @@ def render_maps(composite, classification, directory, region, first_time, second
     if classification:
         display = export_classification_rgb(classification, directory / 'classification_rgb.tif')
         png     = map_figure(display, directory / 'classification.png', region, 'Candidate classification | ' + title, subtitle, classification = True)
-        outputs.update(classification = Path(classification).name, classification_png = png.name, classification_rgb_tif = display.name)
+        outputs.update(classification = Path(classification).name, classification_tif = Path(classification).name, classification_png = png.name, classification_rgb_tif = display.name)
+    logger.info('Rendered map outputs: %s', outputs)
     return outputs

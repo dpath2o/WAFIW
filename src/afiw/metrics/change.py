@@ -1,7 +1,12 @@
 """Common-coverage change metrics; unknown cells never count as ice retreat."""
+import logging
+from afiw.core.logging import logged_step
+
 import numpy as np
 from pyproj import Proj,Transformer
 from affine import Affine
+
+logger = logging.getLogger(__name__)
 
 def cell_areas_km2(shape, transform, crs):
     if not crs.is_projected:
@@ -14,6 +19,7 @@ def cell_areas_km2(shape, transform, crs):
     projected = abs(transform.a * transform.e - transform.b * transform.d) / 1e6
     return projected/np.asarray(factors.areal_scale) # centre-point projection-scale correction
 
+@logged_step
 def extent_metrics(classes, areas):
     valid = np.isin(classes,[0,2,3])
     fast  = np.isin(classes,[2,3])
@@ -23,6 +29,7 @@ def extent_metrics(classes, areas):
             'area_method'            : 'pixel-centre projection scale correction',
             'fast_classes'           : [2,3]}
 
+@logged_step
 def change_metrics(previous,current,areas):
     if previous.shape != current.shape or previous.shape != areas.shape:
         raise ValueError('Change maps require matching grids')

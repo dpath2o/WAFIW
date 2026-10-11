@@ -1,4 +1,7 @@
 """Deterministic, explicitly synthetic local demonstration; never real Davis ice."""
+import logging
+from afiw.core.logging import logged_workflow
+
 from pathlib import Path
 from dataclasses import replace
 import numpy as np
@@ -9,6 +12,9 @@ from afiw.core.types import WorkflowSpec,RunSpec,RegionSpec,ProcessingSpec,Segme
 from afiw.processing.raster import profile
 from .primary import PrimaryWorkflow
 
+logger = logging.getLogger(__name__)
+
+@logged_workflow
 def run_demo(root):
     root=Path(root).resolve();raw=root/'synthetic_inputs';raw.mkdir(parents=True,exist_ok=True)
     x,y=Transformer.from_crs(4326,3031,always_xy=True).transform(77.9689,-68.5762)
