@@ -1,0 +1,640 @@
+{
+  "archive_sha256": "9962fa4a506f3737c703b04174df6febbcc1537c5749e672d1bdb4015fe44e8f",
+  "research_sources": [
+    {
+      "path": "Tony_FastIce24.py.txt",
+      "sha256": "24d3b4dfb76da95c9b4c0eaeffc36cc7feeba685c28825fd1ee0aef790de017a"
+    },
+    {
+      "path": "honours/normprod_standalone/Agglomerative.ipynb",
+      "sha256": "6f2dcfad593a20b11ab386137cabaf81f4094d11f19cbba0877e5d9a4afaafba"
+    },
+    {
+      "path": "honours/normprod_standalone/Birch.ipynb",
+      "sha256": "5c81228a88766508d50af8aa828864f278f586738ba00066ee3c6275be12bfbc"
+    },
+    {
+      "path": "honours/normprod_standalone/Copy_of_how_to_segment_anything_with_sam.ipynb",
+      "sha256": "53d20fcd44e4c0a451f1733c763e3d527f36fad592d061289c97854a576d7192"
+    },
+    {
+      "path": "honours/normprod_standalone/EW_SAFE_searcher.ipynb",
+      "sha256": "63e15e3bbe7c0df6c48629756639d1c9b35316cbdcecd8e846e25af5be8801be"
+    },
+    {
+      "path": "honours/normprod_standalone/GPU figs.ipynb",
+      "sha256": "a3d01ca31b1dcea782013b15c87f19c3b477f1639be472c229a387a6f72d5ca4"
+    },
+    {
+      "path": "honours/normprod_standalone/MeanShift.ipynb",
+      "sha256": "9a802464b754688c0314c00c4674ab7c36395f4141d6975573d25e09a7f73d8b"
+    },
+    {
+      "path": "honours/normprod_standalone/NormProd.ipynb",
+      "sha256": "941e6494068502464d67d818b71c7729a6b2e0ffd8197fc6cd8ff90bd74bda73"
+    },
+    {
+      "path": "honours/normprod_standalone/NormProd_FlowChart.ipynb",
+      "sha256": "b019915d5be76f26a624560737e6d9321422986af9d42fb0888ac9980892b680"
+    },
+    {
+      "path": "honours/normprod_standalone/Normprod_standalone.ipynb",
+      "sha256": "5a467d0acc3da6821b7d126de50e3110a72e22314873936c9ac2e965c96fcd5b"
+    },
+    {
+      "path": "honours/normprod_standalone/SAM vs Gabby.ipynb",
+      "sha256": "5517d9a7f69f79b238d178f346906b60e9ee54d85c2e4717b940fabfce4fabdc"
+    },
+    {
+      "path": "honours/normprod_standalone/SAM-SVM.ipynb",
+      "sha256": "9f53598d448214192351dd141100d8f5ebffda7ef22214c9ef03de0f362d573c"
+    },
+    {
+      "path": "honours/normprod_standalone/SAM.ipynb",
+      "sha256": "8d296d62efc88658917bc22c2568ccbeda62ed8cd1aff3aa1b51752013cb722a"
+    },
+    {
+      "path": "honours/normprod_standalone/SAM_2.0.ipynb",
+      "sha256": "b61aae20daa2ace0bab75e8ca708e800f9c979c4c54e93648a30df185906db62"
+    },
+    {
+      "path": "honours/normprod_standalone/SAM_Gabby.ipynb",
+      "sha256": "3eb1a09617f0c324a62f90f425f24d071fbed062f236ea4f88fab2e827d69811"
+    },
+    {
+      "path": "honours/normprod_standalone/SAM_flowchart.ipynb",
+      "sha256": "7941573dabe9d687a8c4a95f32bbbb864416341eb16dff030426cdf7a14a7eee"
+    },
+    {
+      "path": "honours/normprod_standalone/SAR figures.ipynb",
+      "sha256": "2599629df12d71824eb414ecd9a72a1b514c4224c003e7d30c405acb7c3edbe0"
+    },
+    {
+      "path": "honours/normprod_standalone/SSIM.ipynb",
+      "sha256": "91cdfcdcff203debded1d7fe71521eba102d1b8670d75b716b4182c613023fc4"
+    },
+    {
+      "path": "honours/normprod_standalone/SVM.ipynb",
+      "sha256": "ae00242c901976d2e2ed4ba4b7076197230ba00b3b69bfe738e3668e934c7af3"
+    },
+    {
+      "path": "honours/normprod_standalone/SVM_classification.ipynb",
+      "sha256": "80c79fa4fb350712047c494ae5e8cba22a15a9b5df4301fdb6c0fc2c32294587"
+    },
+    {
+      "path": "honours/normprod_standalone/SVM_flowchart.ipynb",
+      "sha256": "4576e38bbcc3bf8d34320bb69214faa20d7e61bdba6e590c87de81c227939dd6"
+    },
+    {
+      "path": "honours/normprod_standalone/Spectral.ipynb",
+      "sha256": "55817894069abeea09386c43176a506756e0946fd53d457c0265ce4f21431f27"
+    },
+    {
+      "path": "honours/normprod_standalone/Untitled1.ipynb",
+      "sha256": "cdb20cb21c1c2594cba2b8e9bc8694c9a38972870ac231cbc24133e8e09e5ad6"
+    },
+    {
+      "path": "honours/normprod_standalone/area_calculator.ipynb",
+      "sha256": "d04ad81cde18d204af9582c688ac28985eed79838640f3599540646f4b62b395"
+    },
+    {
+      "path": "honours/normprod_standalone/clustering from the ground.ipynb",
+      "sha256": "7c3ac1305e607def2dceeaf9c68a1ea18b43382d1145ee671b001bf607908817"
+    },
+    {
+      "path": "honours/normprod_standalone/confidence.ipynb",
+      "sha256": "8762d5e454f02373dc82a0708d291ea1aab77164c508f344a59cc5269bb9fd5e"
+    },
+    {
+      "path": "honours/normprod_standalone/minibatchkmeans.ipynb",
+      "sha256": "5c81228a88766508d50af8aa828864f278f586738ba00066ee3c6275be12bfbc"
+    },
+    {
+      "path": "honours/normprod_standalone/pbs_jobs/process_image_pairs.py",
+      "sha256": "478096d545076ff2485f571e9690c9b60278e042c1fd2f0d8c2cfb7c684a4627"
+    },
+    {
+      "path": "honours/normprod_standalone/pbs_jobs/process_image_pairs_V2.py",
+      "sha256": "9ffc0d760671287383d6bc6459c6916de716426e0af717bfd23584c3b98c2512"
+    },
+    {
+      "path": "honours/normprod_standalone/pbs_jobs/process_image_pairs_V3.py",
+      "sha256": "a1400af070c5af98d8807ae5d45bd3af5938039668def5efe5a3675d78df31d4"
+    },
+    {
+      "path": "honours/normprod_standalone/pbs_jobs/run_single_pair.py",
+      "sha256": "0ca0698f28a363f0def1b0fd41c36e052a82003e9a0f62929e5da99bdf3a0998"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/CODE_OF_CONDUCT.md",
+      "sha256": "d4d00a8ac00c1735cd2f3fb50ca67c83960ef9123fc5656f2e69056c905ed244"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/CONTRIBUTING.md",
+      "sha256": "8d9d12cc7fcbc300c4f8c55dea9834bd917745eecdb2fbc8ff58cb21636aa0af"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/README.md",
+      "sha256": "cab2c4900910c9e4afd64833f57d106b8fc1a27fca963d4439ae5b8f94cdbce1"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/demo/README.md",
+      "sha256": "a17f8a377e16a377b42932cdeeacab7a84afed5a2ef29907c0427ae5a493fed8"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/notebooks/automatic_mask_generator_example.ipynb",
+      "sha256": "9a5d3ccba33a3cf28f6f7d3cc661313238346bd146ffb2e2843ab2b8463cc824"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/notebooks/onnx_model_example.ipynb",
+      "sha256": "0468449922eab9aaefe788a5e9da01b7756fb15795eaef71af71e0b590afb816"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/notebooks/predictor_example.ipynb",
+      "sha256": "dd02280bcd3aab53ecb8fec3c808fc6b8976d094e6dba93d8e53b1a5f62a5752"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/scripts/amg.py",
+      "sha256": "24b3edd3f3880e75b64d2b8d67e1b7d9519f46f6479d1137c9ac3309e9d43105"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/scripts/export_onnx_model.py",
+      "sha256": "c0270d82d96cfb3348471f349b6cb5b224833a0ea101bd8091dc5c364695b3b2"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/segment_anything/__init__.py",
+      "sha256": "c8d8eb649610b2d51f138481a89617a3dcb61106465121dcb1c2f23affc84c30"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/segment_anything/automatic_mask_generator.py",
+      "sha256": "71c698d2b6cbf5a62eafa5f12106fdf3bff676102adf1aed2287df3b3990b4e0"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/segment_anything/build_sam.py",
+      "sha256": "77bc4faf728118625ddd184dc4e6375bd1b5c636fc66fb429f9fc5276f331cc5"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/segment_anything/modeling/__init__.py",
+      "sha256": "47f6363b86c0bfaa7a6abf723975136d17fae4a5f002d2814a5cce8834d18980"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/segment_anything/modeling/common.py",
+      "sha256": "59a53bfa5d0a4d446df7f2bb57d2e95808b130601592b934600fb663d256ce17"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/segment_anything/modeling/image_encoder.py",
+      "sha256": "1665ada2902722c9a8cd566c840e324d623ef2b12f7d9ae9f38b24aed0e39886"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/segment_anything/modeling/mask_decoder.py",
+      "sha256": "6a2455e990515c67a061187c92c236b879b189f21ef6ebfce1627cae9a6b2f93"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/segment_anything/modeling/prompt_encoder.py",
+      "sha256": "bd8f2f5903f0647f55c21c608bcbb334eec2901ebe76aa41061b1c513df4a06f"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/segment_anything/modeling/sam.py",
+      "sha256": "2d501173b7345f6829f745a2ade240c98026f6b3237bf6cf8e9473405e86c54e"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/segment_anything/modeling/transformer.py",
+      "sha256": "566a8f6db8b608398de939548bd0f485b21752fda2bdda36900e6444ef938d11"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/segment_anything/predictor.py",
+      "sha256": "ab66c29ac0b5b204d23997ef49d8a2476f71b596ce97e35efbf116cfc2118fce"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/segment_anything/utils/__init__.py",
+      "sha256": "34bd8069c54764e7b8d73a78905dbe6467140a2f73170875128f6ca4d8cdd0aa"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/segment_anything/utils/amg.py",
+      "sha256": "5c10f8dd63facb642ff090f61426b35b3c6c3a07e72839595cb04d74828b1d39"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/segment_anything/utils/onnx.py",
+      "sha256": "b4410ac1dc9a7bb3a09827520fa08454f9b397608775e2fe4ebfb7c8dbb02666"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/segment_anything/utils/transforms.py",
+      "sha256": "26a649f2bca8a4a24b4d56617487a9a54c4279e559b2b813c9de38f58a60107c"
+    },
+    {
+      "path": "honours/normprod_standalone/segment-anything/setup.py",
+      "sha256": "be8672c2c99f3295d25721faa4524b314c8c08965d853e55fc42183b809d3842"
+    },
+    {
+      "path": "honours/normprod_standalone/studysitemaps.ipynb",
+      "sha256": "7881b6c354ebc10f2cf1c0ebd5697f944fae48dcab349431959ebac9aec9d741"
+    },
+    {
+      "path": "honours/normprod_standalone/subset.ipynb",
+      "sha256": "fda0b5512c98622863e2808015d8ea37a7399610f7461d76c9da2e277dabcee6"
+    },
+    {
+      "path": "honours/normprod_standalone/temp_plots.ipynb",
+      "sha256": "1f046cb47124677027577f99e2d95cb47735251c70e42994c9dd67385f247fb1"
+    },
+    {
+      "path": "honours/normprod_standalone/tifdownsamplegeo.ipynb",
+      "sha256": "cc2502e9937b33cf2f3a0b20a14c11e1420e0ddbd0f6ecd3ae376cc19941b334"
+    },
+    {
+      "path": "honours/normprod_standalone/validation.ipynb",
+      "sha256": "fecd80e809e6ab007b455a47ca494d53d26d1df468e32b1aac22bb29c85bab8d"
+    },
+    {
+      "path": "honours_data/SVM_trainingdata/prydz_20210129_20210210/code_cell_20210129_20210210.txt",
+      "sha256": "d52a78a854021df5f5f85735a80e9612ff8a56fe7e3d9142f38fb9975dc5ccf0"
+    },
+    {
+      "path": "honours_data/SVM_trainingdata/prydz_20210330_20210411/code_cell_20210330_20210411.txt",
+      "sha256": "d52a78a854021df5f5f85735a80e9612ff8a56fe7e3d9142f38fb9975dc5ccf0"
+    },
+    {
+      "path": "honours_data/SVM_trainingdata/prydz_20210728_20210809/code_cell_20210728_20210809.txt",
+      "sha256": "d52a78a854021df5f5f85735a80e9612ff8a56fe7e3d9142f38fb9975dc5ccf0"
+    },
+    {
+      "path": "honours_data/SVM_trainingdata/prydz_20210821_20210902/code_cell_20210821_20210902.txt",
+      "sha256": "d52a78a854021df5f5f85735a80e9612ff8a56fe7e3d9142f38fb9975dc5ccf0"
+    },
+    {
+      "path": "honours_data/SVM_trainingdata/prydz_20211020_20211101/code_cell_20211020_20211101.txt",
+      "sha256": "d52a78a854021df5f5f85735a80e9612ff8a56fe7e3d9142f38fb9975dc5ccf0"
+    },
+    {
+      "path": "honours_data/SVM_trainingdata/prydz_20240708_20240720/code_cell_20240708_20240720.txt",
+      "sha256": "d52a78a854021df5f5f85735a80e9612ff8a56fe7e3d9142f38fb9975dc5ccf0"
+    },
+    {
+      "path": "honours_data/SVM_trainingdata/thwaites_20240708_20240720/code_cell_20240708_20240720.txt",
+      "sha256": "8aa54fec4983ba256939f4d9bffbf217af2a41e5e1dc45935791d7f60c947230"
+    },
+    {
+      "path": "honours_data/SVM_trainingdata/thwaites_20240813_20240825/code_cell_20240813_20240825.txt",
+      "sha256": "8aa54fec4983ba256939f4d9bffbf217af2a41e5e1dc45935791d7f60c947230"
+    },
+    {
+      "path": "honours_data/SVM_trainingdata/thwaites_20241012_20241024/code_cell_20241012_20241024.txt",
+      "sha256": "8aa54fec4983ba256939f4d9bffbf217af2a41e5e1dc45935791d7f60c947230"
+    },
+    {
+      "path": "honours_data/SVM_trainingdata/thwaites_20241024_20241105/code_cell_20241024_20241105.txt",
+      "sha256": "8aa54fec4983ba256939f4d9bffbf217af2a41e5e1dc45935791d7f60c947230"
+    },
+    {
+      "path": "honours_data/SVM_trainingdata/thwaites_20241105_20241117/code_cell_20241105_20241117.txt",
+      "sha256": "8aa54fec4983ba256939f4d9bffbf217af2a41e5e1dc45935791d7f60c947230"
+    },
+    {
+      "path": "honours_data/sam_env.yml",
+      "sha256": "e2557e01b218eb6cafa0b998e4540390eb2e6e841e0f4fb692959502173df96e"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/NormProd.ipynb",
+      "sha256": "90efc2727b6a3cd90b630ae61abc490c8a6e8c945b7dbc6a5d135bbff6ffae38"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/README.md",
+      "sha256": "2c0a9afead8ae205261553aeccb2ed4e373ef10661f8014e52549c69cfa6fdbb"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/SAM-SVM.ipynb",
+      "sha256": "efc3b72dfd5abc61e58b3e2f6c98f5687fe9a4a9f8e3bbcad0e44f1c95478e3c"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/SAM_weights/pbs_jobs/run_single_pair.py",
+      "sha256": "0ca0698f28a363f0def1b0fd41c36e052a82003e9a0f62929e5da99bdf3a0998"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/SAR_figs.ipynb",
+      "sha256": "cff91178c02f7e7f9a5cd555670ef763ce2d88950238a8ded47cd9b45d4a0251"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/SVM_training_HH_HV.ipynb",
+      "sha256": "1433d59d5bd5a2a8ef70a108209950c2e22c7ec449c2f83977d1709e518d8657"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/bounds_for_sienna.ipynb",
+      "sha256": "fd1b349d636f16071b45e3293f34c844a21c7c60836565c7359bae16c6f36b94"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/figures/SVM_HV.ipynb",
+      "sha256": "c3dcc6621e0115e284f247df1313d2f916f4918ed137762495d21139a124ba15"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/figures/fig8_temporal_baselines.ipynb",
+      "sha256": "d8632e7682c60681a6520f1cf08d126063b2801d20ced9a823c675839f652183"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/figures/temporal_bselines_prydz.ipynb",
+      "sha256": "c84c0b11b3aa12bd039839b4aef691261318845f30d1d9a3fea8572c08cd9c90"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/figures/time_series.ipynb",
+      "sha256": "e3a7a1596e94df5ae2f01768513eb0139a042fbc0e58985da8cadf6a01a29a29"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/figures/validation_plots.ipynb",
+      "sha256": "76dce1fa61cc94bce9a758ec5677450f3d739b3006826aa30bd8bfc79d7c0c5a"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/paper_figures_gabby/area_calculator_2.ipynb",
+      "sha256": "28eebd0cbafb4d645599f1eab07710bfa4a45a4aa212adf41b0d560d1f09de90"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/paper_figures_gabby/fig1_map.ipynb",
+      "sha256": "eb92ddf2a3d81a370369a292f3872c34337343d5b869cf3357972cea7487fa22"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/paper_figures_gabby/fig2_flowchart.ipynb",
+      "sha256": "ca6f185d8b3ad2bb3064c47770d90ae2a5d36a671dc22affdb9c766568689188"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/paper_figures_gabby/fig6_SVM.ipynb",
+      "sha256": "3ee68b0349c570e1e8223ea18a7c8097bfdbf6e39ccacdb4442c2e4396885863"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/paper_figures_gabby/fig7_validation.ipynb",
+      "sha256": "3db5b48763aff1ff9c64b059ad1f173cab370b01a98637b9d5b09fa2d18aaf95"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/paper_figures_gabby/fig9_timeseries.ipynb",
+      "sha256": "e7980fda1456cca4b871d8049c3cbc8f85691f45e5c4512a78f7bbe973a456e8"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/pbs_jobs/run_single_pair.py",
+      "sha256": "ec8f0b81e3a9aef454ab189cfcbacef05641fb0c46a7e2decf190b35ad3244a6"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/process_image_pairs.py",
+      "sha256": "f039cef4f713168d0222fc124d687960791136920b423f196085be451b460155"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/run_single_pair.py",
+      "sha256": "5666baea3c08c03f1960eac10bab2080f175d56f49124f119f1046695bf32e20"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/sam_env.yml",
+      "sha256": "e2557e01b218eb6cafa0b998e4540390eb2e6e841e0f4fb692959502173df96e"
+    },
+    {
+      "path": "posthonours/Fastice_Mapping/visualise_SAM_segments.ipynb",
+      "sha256": "f0eb32b88c248c069d931e8e12fdb1d9dd716d08c35632bf3cd7da8877387f85"
+    },
+    {
+      "path": "posthonours/normalized_product/README.md",
+      "sha256": "23e9fd8b6d7b4c5fb90658a383efc104762606ab12e21efb5226fe6503cb0bd8"
+    },
+    {
+      "path": "posthonours/normalized_product/build/lib/normalized_product/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "posthonours/normalized_product/build/lib/normalized_product/normprod.py",
+      "sha256": "356f1b2f0dc3fc759529caaf33ada71ed8d6fc379184b02b390a7b206a8c2920"
+    },
+    {
+      "path": "posthonours/normalized_product/build/lib/normalized_product/normprod_utils.py",
+      "sha256": "886cd21d71fddd6c86175bf9a57bf24e1411856299f366bbdd9023fca3eabd4e"
+    },
+    {
+      "path": "posthonours/normalized_product/examples/hpc_support/processing/batch_process_normprod_smovar.py",
+      "sha256": "1fbc85b13831a6c0765765ebef509e6546cb20a890e7a777dcb5c8311b48bdff"
+    },
+    {
+      "path": "posthonours/normalized_product/examples/hpc_support/processing/preprocess_full_test_site.py",
+      "sha256": "ab132077a1d0da984afc52d2adf3baed541a05b1821e750adc038d900be66898"
+    },
+    {
+      "path": "posthonours/normalized_product/examples/hpc_support/processing/utils/config_loader.py",
+      "sha256": "ed70770d3f65b8b72fd19dd986ec5490d98d621d46df38ca328643d313ba8f82"
+    },
+    {
+      "path": "posthonours/normalized_product/examples/hpc_support/processing/utils/run_single_pair_as_separate_job.py",
+      "sha256": "47978227eb11221c08120708120164934a150e290930aebc423cd3c495543f71"
+    },
+    {
+      "path": "posthonours/normalized_product/examples/process_single_img_pair_locally.py",
+      "sha256": "84a5b7c1e59b7c4bc2a7fcf74ec2aa748f782bf01cb36040c52b5ba39553e4af"
+    },
+    {
+      "path": "posthonours/normalized_product/setup.py",
+      "sha256": "fd7adfaee0d99607ceda205ee5ebfdc811f6f530d3d35218542c1cd7d1b35132"
+    },
+    {
+      "path": "posthonours/normalized_product/src/normalized_product/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "posthonours/normalized_product/src/normalized_product/normprod.py",
+      "sha256": "356f1b2f0dc3fc759529caaf33ada71ed8d6fc379184b02b390a7b206a8c2920"
+    },
+    {
+      "path": "posthonours/normalized_product/src/normalized_product/normprod_utils.py",
+      "sha256": "886cd21d71fddd6c86175bf9a57bf24e1411856299f366bbdd9023fca3eabd4e"
+    },
+    {
+      "path": "posthonours/normalized_product/tests/test_normprod.py",
+      "sha256": "0660f509999632bec45b07ab23f91517a04b8c1856d57e4059912d088579ba23"
+    },
+    {
+      "path": "posthonours/normalized_product/tests/test_normprod_utils.py",
+      "sha256": "b71ce071036a469001183a7de05b7285614b11f16a2aed8adb5b688c3a5c0ed4"
+    }
+  ],
+  "validation_polygons": [
+    {
+      "path": "honours_data/validation_polygons/Darnley_gabby_20210716_20210728/Darnley_gabby_20210716_20210728.shp",
+      "sha256": "6b1955fba42249464e6015937e5203e3b01329be6eacaf9af9d31986cf37cc8a",
+      "features": 1,
+      "crs": "EPSG:3031",
+      "invalid_geometries": 0,
+      "columns": [
+        "id",
+        "geometry"
+      ]
+    },
+    {
+      "path": "honours_data/validation_polygons/EPB_gabby_20210716_20210728/EPB_gabby_20210716_20210728.shp",
+      "sha256": "bc96193fb83b625a958e047af38a16a0c92bf04b5882bdf9145e6efddbce3b6c",
+      "features": 1,
+      "crs": "EPSG:3031",
+      "invalid_geometries": 0,
+      "columns": [
+        "id",
+        "area",
+        "geometry"
+      ]
+    },
+    {
+      "path": "honours_data/validation_polygons/EPB_gabby_20211010_20211022/EPB_gabby_20211010_20211022.shp",
+      "sha256": "3f51bc391082a7be5e76d623a98ec6844c15606ca1e03caf598eb8c9939bfb70",
+      "features": 1,
+      "crs": "EPSG:3031",
+      "invalid_geometries": 0,
+      "columns": [
+        "id",
+        "geometry"
+      ]
+    },
+    {
+      "path": "honours_data/validation_polygons/EPB_gabby_20211015_20211-27/EPB_gabby_20211015_20211027.shp",
+      "sha256": "80c85d90b2a638f427e4361dd573598bf6bf575c5ab870df760cd4e63abf4d0a",
+      "features": 1,
+      "crs": "EPSG:3031",
+      "invalid_geometries": 1,
+      "columns": [
+        "id",
+        "geometry"
+      ]
+    },
+    {
+      "path": "honours_data/validation_polygons/darnley_gabby_20211010_20211022/darnley_gabby_20211010_20211022.shp",
+      "sha256": "397776480d5ac65a9f5f4fd189229352e148a9f88e91dda7d10226a4279d7089",
+      "features": 1,
+      "crs": "EPSG:3031",
+      "invalid_geometries": 0,
+      "columns": [
+        "id",
+        "geometry"
+      ]
+    },
+    {
+      "path": "honours_data/validation_polygons/darnley_gabby_20211015_20211027/darnley_gabby_20211015_20211027.shp",
+      "sha256": "3085ab20ae660167f7a24daafb8ddb9bf1990a21e1fd4b3a7c13be4669c7ccce",
+      "features": 1,
+      "crs": "EPSG:3031",
+      "invalid_geometries": 0,
+      "columns": [
+        "id",
+        "geometry"
+      ]
+    },
+    {
+      "path": "honours_data/validation_polygons/mcmurdo_gabby_20210901_20210913/mcmurdo_gabby_20210901_20210913.shp",
+      "sha256": "afd62dde4d802deedb2c1bb6513f1db785c815f0893003238b342b58b74cd4c4",
+      "features": 0,
+      "crs": "EPSG:3031",
+      "invalid_geometries": 0,
+      "columns": [
+        "id",
+        "geometry"
+      ]
+    },
+    {
+      "path": "honours_data/validation_polygons/mcmurdo_gabby_20210913_20210925.shp",
+      "sha256": "29947086cdfbd3674c94e6416061699355f4f923f011eb93642c7d24a2bdfc2c",
+      "features": 1,
+      "crs": "EPSG:3031",
+      "invalid_geometries": 0,
+      "columns": [
+        "id",
+        "geometry"
+      ]
+    },
+    {
+      "path": "honours_data/validation_polygons/mcmurdo_gabby_20210925_20211007/mcmurdo_gabby_20210925_20211007.shp",
+      "sha256": "55d6a6ec580c9eacd250254b6374f5aee74979d0741b0ecb4cc41a0b68942315",
+      "features": 1,
+      "crs": "EPSG:3031",
+      "invalid_geometries": 0,
+      "columns": [
+        "id",
+        "geometry"
+      ]
+    },
+    {
+      "path": "honours_data/validation_polygons/mcmurdo_gabby_20211007_20211019.shp",
+      "sha256": "aa0444f111012f1e85b9569f85cb91ad87e0ebea52c28c39ecf9983eee10b878",
+      "features": 1,
+      "crs": "EPSG:3031",
+      "invalid_geometries": 0,
+      "columns": [
+        "id",
+        "geometry"
+      ]
+    },
+    {
+      "path": "honours_data/validation_polygons/prydz_gabby_20210914_20210926.shp",
+      "sha256": "cd705748b04d13db465fc65aa31e14a6cff4a47b1453a483e190ee8cb03451c3",
+      "features": 2,
+      "crs": "EPSG:3031",
+      "invalid_geometries": 0,
+      "columns": [
+        "id",
+        "geometry"
+      ]
+    },
+    {
+      "path": "honours_data/validation_polygons/prydz_gabby_20211008_20211020.shp",
+      "sha256": "bb9cac1543e60cdf87e160c549f64c1f66364caa8aadd9cef2bf5ce5ae17dd0c",
+      "features": 2,
+      "crs": "EPSG:3031",
+      "invalid_geometries": 0,
+      "columns": [
+        "id",
+        "geometry"
+      ]
+    },
+    {
+      "path": "honours_data/validation_polygons/thwaites_gabby_20240720_20240801/thwaites_gabby_20240720_20240801.shp",
+      "sha256": "b4545e036b35815ea8f364db9033f213dae15f87eebadb7aba9c4cdcbb38cd88",
+      "features": 1,
+      "crs": "EPSG:3031",
+      "invalid_geometries": 0,
+      "columns": [
+        "id",
+        "geometry"
+      ]
+    },
+    {
+      "path": "honours_data/validation_polygons/thwaites_gabby_20240906_20240918/thwaites_gabby_20240906_20240918.shp",
+      "sha256": "84c5fa5eda6676ba51ab3e0e329576ae13c029e3f5cd7e43004f067019b8bfb2",
+      "features": 2,
+      "crs": "EPSG:3031",
+      "invalid_geometries": 1,
+      "columns": [
+        "id",
+        "geometry"
+      ]
+    },
+    {
+      "path": "honours_data/validation_polygons/thwaites_gabby_20241012_20241024/thwaites_gabby_20240720_20210801.shp",
+      "sha256": "3884c527463a25ef0b2008047e3eb282bc3c59cbde138f1411bed57d444b424d",
+      "features": 1,
+      "crs": "EPSG:3031",
+      "invalid_geometries": 1,
+      "columns": [
+        "id",
+        "geometry"
+      ]
+    },
+    {
+      "path": "honours_data/validation_polygons/thwaites_gabby_20241117_20241129.shp",
+      "sha256": "fc7da9515912b00f7100b9b7d206783745aa8710d9a7fcc811422f0f0c8e3895",
+      "features": 1,
+      "crs": "EPSG:3031",
+      "invalid_geometries": 0,
+      "columns": [
+        "id",
+        "geometry"
+      ]
+    },
+    {
+      "path": "honours_data/validation_polygons/thwaites_gabby_20241211_20241223.shp",
+      "sha256": "61ed1e006f97d074798063b14391ed07ffc067ae7e45ef5f7d17e8d418a15125",
+      "features": 1,
+      "crs": "EPSG:3031",
+      "invalid_geometries": 0,
+      "columns": [
+        "id",
+        "area km2",
+        "geometry"
+      ]
+    }
+  ]
+}

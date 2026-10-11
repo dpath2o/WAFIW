@@ -1,0 +1,771 @@
+{
+  "created_utc": "2026-10-11T01:26:14.243195+00:00",
+  "python": "3.12.14",
+  "versions": {
+    "numpy": "2.3.5",
+    "rasterio": "1.5.2",
+    "scipy": "1.17.0",
+    "scikit-image": "0.26.0",
+    "scikit-learn": "1.8.0",
+    "asf-search": "14.0.3",
+    "pygmt": "0.19.0"
+  },
+  "features": "mean_RGB_uint8",
+  "training_segments": 68,
+  "training_regions": [
+    "prydz",
+    "thwaites"
+  ],
+  "polarization": "HH",
+  "synthetic": false,
+  "validated": false,
+  "source_kind": "research_segment_annotations",
+  "label_source": "Gabby supplied annotations; canonical ten-scene selection",
+  "preprocessing_contract": null,
+  "requires_transfer_review": true,
+  "class_counts": {
+    "0": 27,
+    "2": 40,
+    "3": 1
+  },
+  "training_scenes": [
+    {
+      "scene": "prydz_20210129_20210210",
+      "region": "prydz",
+      "dates": [
+        "20210129",
+        "20210210"
+      ],
+      "shape": [
+        1466,
+        1490
+      ],
+      "files": {
+        "rgb": "prydz_20210129_20210210/rgb_image_20210129_20210210.npy",
+        "segments": "prydz_20210129_20210210/label_map_20210129_20210210.npy",
+        "annotations": "prydz_20210129_20210210/labelled_array_20210129_20210210.npy"
+      },
+      "sha256": {
+        "rgb": "bd6b9185427f878519da79494a31b39574c16bdc2eeeddfaa895d2cca2f72d4a",
+        "segments": "1b3914a3ff8b8b78df08d4b1a3cc4e482ce049a1fe5dcee054bb7837be74707b",
+        "annotations": "39de1ecba3a743b93029f1efd54c598d5fd58cc325620b0b79214571d43f83f5"
+      },
+      "segment_ids": [
+        13,
+        15,
+        19,
+        20,
+        21
+      ],
+      "class_counts": {
+        "0": 1,
+        "2": 3,
+        "3": 1
+      },
+      "ignored_unassigned_label": 0,
+      "unused_annotation_ids": []
+    },
+    {
+      "scene": "prydz_20210330_20210411",
+      "region": "prydz",
+      "dates": [
+        "20210330",
+        "20210411"
+      ],
+      "shape": [
+        1467,
+        1490
+      ],
+      "files": {
+        "rgb": "prydz_20210330_20210411/rgb_image_20210330_20210411.npy",
+        "segments": "prydz_20210330_20210411/label_map_20210330_20210411.npy",
+        "annotations": "prydz_20210330_20210411/labelled_array_20210330_20210411.npy"
+      },
+      "sha256": {
+        "rgb": "c09c84c3ead8fe524b6b305a5bafab5f510d0b4738d1c9d0ee42c9fcfcc79807",
+        "segments": "cdfe7cac86da38ab9bf46f38392eca21003467ca0ac5a4b53238f41f18e2abb0",
+        "annotations": "c8e3a2ab92979feffb5d915c41667bda168d5145a7fff94b912a77be622af09f"
+      },
+      "segment_ids": [
+        17,
+        18,
+        20,
+        22,
+        23
+      ],
+      "class_counts": {
+        "0": 1,
+        "2": 4
+      },
+      "ignored_unassigned_label": 0,
+      "unused_annotation_ids": []
+    },
+    {
+      "scene": "prydz_20210728_20210809",
+      "region": "prydz",
+      "dates": [
+        "20210728",
+        "20210809"
+      ],
+      "shape": [
+        1467,
+        1490
+      ],
+      "files": {
+        "rgb": "prydz_20210728_20210809/rgb_image_20210728_20210809.npy",
+        "segments": "prydz_20210728_20210809/label_map_20210728_20210809.npy",
+        "annotations": "prydz_20210728_20210809/labelled_array_20210728_20210809.npy"
+      },
+      "sha256": {
+        "rgb": "3d5b91cd7f10026e6c1b6ddf8777282bba67bac0fc9021e29aa4e833adb58bcd",
+        "segments": "2cb0997328e1af161ee9348ae53b9a4e519d5d72a61309127a99cd62772f0e76",
+        "annotations": "d8f3267e7f5e6cc352ccb1396d270820570ae6b194268dfd8d5a191bd8fea69e"
+      },
+      "segment_ids": [
+        22,
+        25,
+        26,
+        27,
+        28
+      ],
+      "class_counts": {
+        "0": 2,
+        "2": 3
+      },
+      "ignored_unassigned_label": null,
+      "unused_annotation_ids": []
+    },
+    {
+      "scene": "prydz_20210821_20210902",
+      "region": "prydz",
+      "dates": [
+        "20210821",
+        "20210902"
+      ],
+      "shape": [
+        1467,
+        1490
+      ],
+      "files": {
+        "rgb": "prydz_20210821_20210902/rgb_image_20210821_20210902.npy",
+        "segments": "prydz_20210821_20210902/label_map_20210821_20210902.npy",
+        "annotations": "prydz_20210821_20210902/labelled_array_20210821_20210902.npy"
+      },
+      "sha256": {
+        "rgb": "b2e3f220f7bfa84d8ca45b68e70a26c4667da853a36f7e8e096eafc33fee2566",
+        "segments": "2f222c0ea034c36f293ae62f245e9cf44884fc1d81fc6f75098727d9baf0ecb9",
+        "annotations": "5690a907dbc223d6c4a51cf1e260ec79e5033a1088ec1eb4711015542249453e"
+      },
+      "segment_ids": [
+        15,
+        16,
+        19,
+        20,
+        21
+      ],
+      "class_counts": {
+        "0": 1,
+        "2": 4
+      },
+      "ignored_unassigned_label": 0,
+      "unused_annotation_ids": []
+    },
+    {
+      "scene": "prydz_20211020_20211101",
+      "region": "prydz",
+      "dates": [
+        "20211020",
+        "20211101"
+      ],
+      "shape": [
+        1467,
+        1490
+      ],
+      "files": {
+        "rgb": "prydz_20211020_20211101/rgb_image_20211020_20211101.npy",
+        "segments": "prydz_20211020_20211101/label_map_20211020_20211101.npy",
+        "annotations": "prydz_20211020_20211101/labelled_array_20211020_20211101.npy"
+      },
+      "sha256": {
+        "rgb": "28fb15ffeb6007917f5aff0ae444e6ef1081403fb01c3e4ab48f7754678b2ba4",
+        "segments": "67bc16b528699192b990d7aa68292ebc81bdc14443422d41e2a23067481f900e",
+        "annotations": "ba9705767cf283f2c0d406117b6e69c206a123cbaf5b0fd55ea77b2c19cb0238"
+      },
+      "segment_ids": [
+        15,
+        18,
+        21,
+        23,
+        24
+      ],
+      "class_counts": {
+        "0": 1,
+        "2": 4
+      },
+      "ignored_unassigned_label": 0,
+      "unused_annotation_ids": []
+    },
+    {
+      "scene": "thwaites_20240708_20240720",
+      "region": "thwaites",
+      "dates": [
+        "20240708",
+        "20240720"
+      ],
+      "shape": [
+        1353,
+        1347
+      ],
+      "files": {
+        "rgb": "thwaites_20240708_20240720/HH_rgb_image_20240708_20240720.npy",
+        "segments": "thwaites_20240708_20240720/label_map_20240708_20240720.npy",
+        "annotations": "thwaites_20240708_20240720/labelled_array_20240708_20240720.npy"
+      },
+      "sha256": {
+        "rgb": "ba7a6697717cb963349bd8311bfa4127df97ef06d19cd4cb0b9e3231561368aa",
+        "segments": "40ccb70a22676cd609d2cce80f9bcbc00118859ba7c296b9eba19099af12d5bb",
+        "annotations": "bc0b073d0c381c04fe308cd7230712fc1643311fba77c97f434e437274d85d4b"
+      },
+      "segment_ids": [
+        35,
+        37,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        49,
+        51
+      ],
+      "class_counts": {
+        "0": 6,
+        "2": 5
+      },
+      "ignored_unassigned_label": null,
+      "unused_annotation_ids": []
+    },
+    {
+      "scene": "thwaites_20240813_20240825",
+      "region": "thwaites",
+      "dates": [
+        "20240813",
+        "20240825"
+      ],
+      "shape": [
+        1353,
+        1347
+      ],
+      "files": {
+        "rgb": "thwaites_20240813_20240825/HH_rgb_image_20240813_20240825.npy",
+        "segments": "thwaites_20240813_20240825/label_map_20240813_20240825.npy",
+        "annotations": "thwaites_20240813_20240825/labelled_array_20240813_20240825.npy"
+      },
+      "sha256": {
+        "rgb": "5a7d4bdd3e819ba734cfe4850173d0e28536b05e24d20fd7f4f5baa7f4f7930d",
+        "segments": "91a434a649231a598ed5568410f6b4a8f504952f9b1aad90fbb500f145a80ad8",
+        "annotations": "9132954d93403e90c0aa13a953f7c50091ebbea649aaf2300f523a11fb86498e"
+      },
+      "segment_ids": [
+        32,
+        36,
+        37,
+        38,
+        40,
+        41
+      ],
+      "class_counts": {
+        "0": 3,
+        "2": 3
+      },
+      "ignored_unassigned_label": 0,
+      "unused_annotation_ids": []
+    },
+    {
+      "scene": "thwaites_20241012_20241024",
+      "region": "thwaites",
+      "dates": [
+        "20241012",
+        "20241024"
+      ],
+      "shape": [
+        1353,
+        1347
+      ],
+      "files": {
+        "rgb": "thwaites_20241012_20241024/HH_rgb_image_20241012_20241024.npy",
+        "segments": "thwaites_20241012_20241024/label_map_20241012_20241024.npy",
+        "annotations": "thwaites_20241012_20241024/labelled_array_20241012_20241024.npy"
+      },
+      "sha256": {
+        "rgb": "b5943e3bffd18a4632c04a28606ac06c4308504c31a33557eacacfafd48ef0f9",
+        "segments": "21c2c411efb91583e7299ed75b5dc167d668b4d27960ee945926aa0f1566066a",
+        "annotations": "a2181c772474d93a58d2f0b5a4b2bfdd9d87c86b05f81e7f1c4d34433f5aa865"
+      },
+      "segment_ids": [
+        15,
+        21,
+        22,
+        23,
+        24,
+        25,
+        27,
+        28,
+        29,
+        30
+      ],
+      "class_counts": {
+        "0": 5,
+        "2": 5
+      },
+      "ignored_unassigned_label": null,
+      "unused_annotation_ids": []
+    },
+    {
+      "scene": "thwaites_20241024_20241105",
+      "region": "thwaites",
+      "dates": [
+        "20241024",
+        "20241105"
+      ],
+      "shape": [
+        1353,
+        1347
+      ],
+      "files": {
+        "rgb": "thwaites_20241024_20241105/HH_rgb_image_20241024_20241105.npy",
+        "segments": "thwaites_20241024_20241105/label_map_20241024_20241105.npy",
+        "annotations": "thwaites_20241024_20241105/labelled_array_20241024_20241105.npy"
+      },
+      "sha256": {
+        "rgb": "5f0e0aace2911fa84140a2868d9a48aec2ec299fc589291a5b3e5aa93a5a9e3d",
+        "segments": "3dfcaaf6819d4a567f46f07754c549db9b8be1c1b9249ab3100426b5c4068008",
+        "annotations": "72718c14c1f143ed6ff02c6b672d19e36049b948ab91b85084d93b47229f9870"
+      },
+      "segment_ids": [
+        19,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        29,
+        30
+      ],
+      "class_counts": {
+        "0": 4,
+        "2": 5
+      },
+      "ignored_unassigned_label": null,
+      "unused_annotation_ids": []
+    },
+    {
+      "scene": "thwaites_20241105_20241117",
+      "region": "thwaites",
+      "dates": [
+        "20241105",
+        "20241117"
+      ],
+      "shape": [
+        1352,
+        1347
+      ],
+      "files": {
+        "rgb": "thwaites_20241105_20241117/HH_rgb_image_20241105_20241117.npy",
+        "segments": "thwaites_20241105_20241117/label_map_20241105_20241117.npy",
+        "annotations": "thwaites_20241105_20241117/labelled_array_20241105_20241117.npy"
+      },
+      "sha256": {
+        "rgb": "b9ee78f74a14e0e2722f4de6bf73a5eb9a94e121c95541f8b0bb7ec2b335048f",
+        "segments": "ff1caeb8be428704a1f6dbe1e5b6f4ff86c548d5bcc62f3ee0d14d6c0c04bb14",
+        "annotations": "1473b95d7fce10562618a562986ae67a475395ed77598973f4a2ffe9eface7a6"
+      },
+      "segment_ids": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "class_counts": {
+        "0": 3,
+        "2": 4
+      },
+      "ignored_unassigned_label": 0,
+      "unused_annotation_ids": []
+    }
+  ],
+  "excluded_scenes": [
+    {
+      "scene": "prydz_20240708_20240720",
+      "reason": "RGB and segments duplicate Thwaites 20240708/20240720 with conflicting annotations; absent from reference training list"
+    }
+  ],
+  "method_note": "Existing RGB arrays have incomplete radiometric/grid provenance; reuse is an explicit candidate transfer, not preprocessing equivalence.",
+  "assessment": {
+    "unit": "annotated segment (not pixel or area)",
+    "folds": {
+      "acquisition_group": [
+        {
+          "held_out": "0",
+          "scenes": [
+            "prydz_20210129_20210210"
+          ],
+          "training_segments": 63,
+          "test_segments": 5,
+          "status": "assessed",
+          "class_order": [
+            0,
+            2,
+            3
+          ],
+          "confusion_matrix": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              2,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "balanced_accuracy": 0.5555555555555555,
+          "unseen_test_classes": [
+            3
+          ]
+        },
+        {
+          "held_out": "1",
+          "scenes": [
+            "prydz_20210330_20210411"
+          ],
+          "training_segments": 63,
+          "test_segments": 5,
+          "status": "assessed",
+          "class_order": [
+            0,
+            2,
+            3
+          ],
+          "confusion_matrix": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              4,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "balanced_accuracy": 1.0,
+          "unseen_test_classes": []
+        },
+        {
+          "held_out": "2",
+          "scenes": [
+            "prydz_20210728_20210809"
+          ],
+          "training_segments": 63,
+          "test_segments": 5,
+          "status": "assessed",
+          "class_order": [
+            0,
+            2,
+            3
+          ],
+          "confusion_matrix": [
+            [
+              2,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "balanced_accuracy": 1.0,
+          "unseen_test_classes": []
+        },
+        {
+          "held_out": "3",
+          "scenes": [
+            "prydz_20210821_20210902"
+          ],
+          "training_segments": 63,
+          "test_segments": 5,
+          "status": "assessed",
+          "class_order": [
+            0,
+            2,
+            3
+          ],
+          "confusion_matrix": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              4,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "balanced_accuracy": 1.0,
+          "unseen_test_classes": []
+        },
+        {
+          "held_out": "4",
+          "scenes": [
+            "prydz_20211020_20211101"
+          ],
+          "training_segments": 63,
+          "test_segments": 5,
+          "status": "assessed",
+          "class_order": [
+            0,
+            2,
+            3
+          ],
+          "confusion_matrix": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              4,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "balanced_accuracy": 1.0,
+          "unseen_test_classes": []
+        },
+        {
+          "held_out": "5",
+          "scenes": [
+            "thwaites_20240708_20240720"
+          ],
+          "training_segments": 57,
+          "test_segments": 11,
+          "status": "assessed",
+          "class_order": [
+            0,
+            2,
+            3
+          ],
+          "confusion_matrix": [
+            [
+              5,
+              1,
+              0
+            ],
+            [
+              0,
+              5,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "balanced_accuracy": 0.9166666666666667,
+          "unseen_test_classes": []
+        },
+        {
+          "held_out": "6",
+          "scenes": [
+            "thwaites_20240813_20240825"
+          ],
+          "training_segments": 62,
+          "test_segments": 6,
+          "status": "assessed",
+          "class_order": [
+            0,
+            2,
+            3
+          ],
+          "confusion_matrix": [
+            [
+              3,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "balanced_accuracy": 1.0,
+          "unseen_test_classes": []
+        },
+        {
+          "held_out": "7",
+          "scenes": [
+            "thwaites_20241012_20241024",
+            "thwaites_20241024_20241105",
+            "thwaites_20241105_20241117"
+          ],
+          "training_segments": 42,
+          "test_segments": 26,
+          "status": "assessed",
+          "class_order": [
+            0,
+            2,
+            3
+          ],
+          "confusion_matrix": [
+            [
+              12,
+              0,
+              0
+            ],
+            [
+              0,
+              14,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "balanced_accuracy": 1.0,
+          "unseen_test_classes": []
+        }
+      ],
+      "site": [
+        {
+          "held_out": "prydz",
+          "scenes": [
+            "prydz_20210129_20210210",
+            "prydz_20210330_20210411",
+            "prydz_20210728_20210809",
+            "prydz_20210821_20210902",
+            "prydz_20211020_20211101"
+          ],
+          "training_segments": 43,
+          "test_segments": 25,
+          "status": "assessed",
+          "class_order": [
+            0,
+            2,
+            3
+          ],
+          "confusion_matrix": [
+            [
+              6,
+              0,
+              0
+            ],
+            [
+              1,
+              17,
+              0
+            ],
+            [
+              1,
+              0,
+              0
+            ]
+          ],
+          "balanced_accuracy": 0.6481481481481481,
+          "unseen_test_classes": [
+            3
+          ]
+        },
+        {
+          "held_out": "thwaites",
+          "scenes": [
+            "thwaites_20240708_20240720",
+            "thwaites_20240813_20240825",
+            "thwaites_20241012_20241024",
+            "thwaites_20241024_20241105",
+            "thwaites_20241105_20241117"
+          ],
+          "training_segments": 25,
+          "test_segments": 43,
+          "status": "assessed",
+          "class_order": [
+            0,
+            2,
+            3
+          ],
+          "confusion_matrix": [
+            [
+              20,
+              1,
+              0
+            ],
+            [
+              0,
+              22,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "balanced_accuracy": 0.9761904761904762,
+          "unseen_test_classes": []
+        }
+      ]
+    },
+    "independent_validation": false,
+    "limitations": [
+      "Training annotations are not independent validation polygons.",
+      "Scene/site holdouts do not establish transfer to Davis or other stations.",
+      "Class 3 support must be reviewed separately; a single labelled segment cannot establish performance.",
+      "Shared acquisitions are grouped; pixel-random splits are not used."
+    ]
+  },
+  "model_sha256": "598ccfb99a0a4858856b9b5bb29157c3c40a02344892ad2c5fcd2427acca0233",
+  "model_artifact_distributed_separately": "WAFIW_HH_candidate.zip (portable feature table; not stored in Git)"
+}

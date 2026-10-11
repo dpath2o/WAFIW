@@ -77,12 +77,21 @@ class SegmentationSpec:
     device          : str = 'cpu'
     points_per_side : int = 32
     crop_n_layers   : int = 0
+    pred_iou_thresh : float = .85
+    stability_score_thresh : float = .85
+    crop_overlap_ratio : float = .5
+    box_nms_thresh : float = .3
+    min_mask_region_area : int = 50
     max_pixels      : int = 4_000_000
     def __post_init__(self):
         if self.backend not in ('slic', 'sam'):
             raise ValueError('Unknown segmentation backend')
         if self.downsample < 1 or self.n_segments < 1 or self.max_pixels < 1:
             raise ValueError('Invalid segmentation size')
+        if self.points_per_side < 1 or self.crop_n_layers < 0 or self.min_mask_region_area < 0:
+            raise ValueError('Invalid SAM sampling/crop settings')
+        if any(not 0 <= value <= 1 for value in (self.pred_iou_thresh, self.stability_score_thresh, self.crop_overlap_ratio, self.box_nms_thresh)):
+            raise ValueError('SAM thresholds must be between 0 and 1')
         if self.device not in ('cpu', 'mps', 'cuda'):
             raise ValueError('Unsupported device')
 
@@ -106,13 +115,19 @@ class WorkflowSpec:
     root         : str = './afiw_data'
     coastline    : str | None = None
     classifier   : str | None = None
+    allow_model_transfer : bool = False
+    require_classification : bool = False
+
+    def __post_init__(self):
+        if not isinstance(self.allow_model_transfer, bool) or not isinstance(self.require_classification, bool):
+            raise ValueError('Model-transfer and classification requirements must be booleans')
 
     @classmethod
     def load(cls, path):
         from dataclasses import replace
         path    = Path(path).resolve()
         d       = yaml.safe_load(path.read_text()) or {}
-        unknown = set(d)-{'run','acquisition','processing','segmentation','snap','root','coastline','classifier'}
+        unknown = set(d)-{'run','acquisition','processing','segmentation','snap','root','coastline','classifier','allow_model_transfer','require_classification'}
         if unknown:
             raise ValueError(f'Unknown config keys: {sorted(unknown)}')
         d.setdefault('root','./afiw_data')

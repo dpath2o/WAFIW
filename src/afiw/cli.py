@@ -6,7 +6,6 @@ from .core.types import WorkflowSpec
 from .workflows.primary import PrimaryWorkflow
 from .workflows.demo import run_demo
 from .products.bulletin import BulletinBuilder
-from .products.example import generate_research_example
 
 logger = logging.getLogger(__name__)
 
@@ -22,11 +21,68 @@ def primary_main(argv=None):
     cat.add_argument('--prepare-orbits',action='store_true',help='Prepare validated precise orbits in the local SNAP cache before processing')
     cat.add_argument('--orbit-cache-root',help='Sentinel-1 cache root; must match the cache used by SNAP')
     pre=sub.add_parser('preprocess');pre.add_argument('--safe',required=True);pre.add_argument('--output',required=True);pre.add_argument('--dry-run',action='store_true')
+    train = sub.add_parser('train-research', help='Reuse research segment annotations; save model and grouped assessment')
+    train.add_argument('--training-root', required = True)
+    train.add_argument('--output', required = True)
+    train.add_argument('--label-source', required = True)
+    train.add_argument('--polarization', choices = ['HH', 'HV'], default = 'HH')
+    train.add_argument('--scenes', nargs = '+', help='Explicit reviewed subset; default is the ten reference scenes')
+    manual = sub.add_parser('train-labels', help='Train from reviewed labels on a persisted WAFIW segment grid')
+    manual.add_argument('--manifest', required = True)
+    manual.add_argument('--labels', required = True)
+    manual.add_argument('--output', required = True)
+    manual.add_argument('--label-source', required = True)
+    render = sub.add_parser('render', help='Re-render or classify a persisted product')
+    produce = sub.add_parser('produce', help='Complete classified maps and optionally assemble a bulletin')
+    for command in (render, produce):
+        command.add_argument('--manifest', required = True)
+        command.add_argument('--output', required = True)
+        command.add_argument('--classifier')
+        command.add_argument('--allow-model-transfer', action = 'store_true', help='Explicit candidate reuse across sites/preprocessing; recorded in manifest')
+    render.add_argument('--require-classification', action = 'store_true')
+    produce.add_argument('--bulletin-output', help='Optional bulletin output directory')
+    produce.add_argument('--as-of', help='Bulletin date; default is second acquisition date')
+    validate = sub.add_parser('validate', help='Assess classified fast-ice outline within a reviewed domain')
+    for name in ('manifest', 'reference', 'domain', 'output', 'first-date', 'second-date', 'label-source'):
+        validate.add_argument('--' + name, required = True)
+    for command in (raw, cat):
+        command.add_argument('--require-classification', action = 'store_true', help='Fail before processing if a complete classified product cannot be configured')
     add_logging_arguments(p)
+    for command_parser in sub.choices.values():
+        add_logging_arguments(command_parser, suppress_defaults = True)
     args=p.parse_args(argv)
+    if args.command in ('train-research', 'train-labels', 'render', 'produce', 'validate', 'demo'):
+        args.config = None
     setup_from_args(args, args.command)
     if args.command=='demo':print(run_demo(args.output).manifest);return
-    spec=WorkflowSpec.load(args.config);workflow=PrimaryWorkflow(spec)
+    if args.command == 'train-research':
+        from .classify.research import train_research
+        print(train_research(args.training_root, args.output, args.label_source, args.polarization, args.scenes))
+        return
+    if args.command == 'train-labels':
+        from .workflows.maps import train_from_manifest
+        print(train_from_manifest(args.manifest, args.labels, args.output, args.label_source))
+        return
+    if args.command == 'validate':
+        from .workflows.validation import validate_outline
+        print(validate_outline(args.manifest, args.reference, args.domain, args.output,
+                               args.first_date, args.second_date, args.label_source))
+        return
+    if args.command in ('render', 'produce'):
+        from .workflows.maps import render_from_manifest
+        result = render_from_manifest(args.manifest, args.output, args.classifier,
+                                      args.allow_model_transfer, args.command == 'produce' or getattr(args, 'require_classification', False))
+        if args.command == 'produce' and args.bulletin_output:
+            record = json.loads(result.read_text())
+            as_of = args.as_of or record['second_time'][:10]
+            print(BulletinBuilder(result.parent, record['region']).build(as_of, args.bulletin_output))
+        print(result)
+        return
+    spec=WorkflowSpec.load(args.config)
+    if getattr(args, 'require_classification', False):
+        from dataclasses import replace
+        spec = replace(spec, require_classification = True)
+    workflow=PrimaryWorkflow(spec)
     if args.command=='doctor':
         import shutil,platform
         logger.info('Platform: %s', platform.platform());logger.info('Root: %s', workflow.paths.station)
@@ -64,11 +120,11 @@ def bulletin_main(argv=None):
         s=sub.add_parser(name);s.add_argument('--root',required=True);s.add_argument('--region',default='Davis');s.add_argument('--output',required=True)
         if name=='build':s.add_argument('--as-of',required=True);s.add_argument('--compile-latex',action='store_true')
         else:s.add_argument('--start-years',type=int,nargs='+',required=True);s.add_argument('--start-month',type=int,default=9);s.add_argument('--end-month',type=int,default=4)
-    ex=sub.add_parser('research-example');ex.add_argument('--template',default='examples/research_example');ex.add_argument('--output',required=True);ex.add_argument('--no-compile',action='store_true')
     add_logging_arguments(p)
+    for command_parser in sub.choices.values():
+        add_logging_arguments(command_parser, suppress_defaults = True)
     args=p.parse_args(argv)
     setup_from_args(args, args.command)
-    if args.command=='research-example':print(generate_research_example(args.template,args.output,not args.no_compile));return
     builder=BulletinBuilder(args.root,args.region)
     if args.command=='build':print(builder.build(args.as_of,args.output,args.compile_latex))
     else:

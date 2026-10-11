@@ -31,7 +31,7 @@ def require_pygmt():
         with pygmt.clib.Session() as session:
             session.info
     except (ImportError, OSError) as error:
-        raise RuntimeError('PyGMT/GMT unavailable. Install conda-forge pygmt, gmt and ghostscript; see docs/primary_maps.md') from error
+        raise RuntimeError('PyGMT/GMT unavailable. Install conda-forge pygmt, gmt and ghostscript; see docs/workflow.md') from error
     return pygmt
 
 @logged_step
