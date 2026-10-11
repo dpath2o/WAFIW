@@ -10,19 +10,16 @@ import re
 import tempfile
 import xml.etree.ElementTree as ET
 import zipfile
-
 import requests
 from afiw.core.provenance import sha256, write_json
 
-BASE_URL = 'https://step.esa.int/auxdata/orbits/Sentinel-1/POEORB/'
-NAME = re.compile(r'(S1[ABCD])_OPER_AUX_POEORB_OPOD_(\d{8}T\d{6})_V(\d{8}T\d{6})_(\d{8}T\d{6})\.EOF(?:\.zip)?')
+BASE_URL  = 'https://step.esa.int/auxdata/orbits/Sentinel-1/POEORB/'
+NAME      = re.compile(r'(S1[ABCD])_OPER_AUX_POEORB_OPOD_(\d{8}T\d{6})_V(\d{8}T\d{6})_(\d{8}T\d{6})\.EOF(?:\.zip)?')
 MAX_BYTES = 20 * 1024 * 1024
-
 
 def timestamp(value):
     parsed = datetime.fromisoformat(value.removeprefix('UTC=').replace('Z', '+00:00'))
-    return parsed.replace(tzinfo=timezone.utc) if parsed.tzinfo is None else parsed.astimezone(timezone.utc)
-
+    return parsed.replace(tzinfo = timezone.utc) if parsed.tzinfo is None else parsed.astimezone(timezone.utc)
 
 def orbit_name(name):
     match = NAME.fullmatch(name)
@@ -31,19 +28,17 @@ def orbit_name(name):
     mission, creation, start, end = match.groups()
     return mission, timestamp(creation), timestamp(start), timestamp(end)
 
-
-def scene_window(feature, margin_seconds=60):
-    props = feature['properties']
-    name = props.get('sceneName') or Path(props['url'].split('?')[0]).name
+def scene_window(feature, margin_seconds = 60):
+    props   = feature['properties']
+    name    = props.get('sceneName') or Path(props['url'].split('?')[0]).name
     mission = name[:3]
     if mission not in ('S1A', 'S1B', 'S1C', 'S1D'):
         raise ValueError('Cannot determine Sentinel-1 spacecraft from scene name')
     start, end = timestamp(props['startTime']), timestamp(props['stopTime'])
     if end <= start:
         raise ValueError('Invalid scene time interval')
-    margin = timedelta(seconds=margin_seconds)
+    margin = timedelta(seconds = margin_seconds)
     return mission, start - margin, end + margin, start
-
 
 def validate_eof(data, name, mission, start, end):
     """Check type, spacecraft, validity, OSV times and finite state vectors."""
@@ -75,7 +70,6 @@ def validate_eof(data, name, mission, start, end):
     if not times[0] <= start <= end <= times[-1]:
         raise ValueError('Orbit state vectors do not cover scene and margin')
 
-
 class Links(HTMLParser):
     def __init__(self):
         super().__init__()
@@ -87,12 +81,10 @@ class Links(HTMLParser):
             if NAME.fullmatch(href):
                 self.names.append(href)
 
-
-def public_get(url, session, limit=MAX_BYTES):
+def public_get(url, session, limit = MAX_BYTES):
     # Explicit no-op auth prevents Requests consulting developer netrc entries.
     # Reject redirects: new destinations require a reviewed provider change.
-    with session.get(url, auth=lambda request: request, allow_redirects=False,
-                     timeout=(15, 120), stream=True) as response:
+    with session.get(url, auth = lambda request: request, allow_redirects = False, timeout = (15, 120), stream = True) as response:
         if response.status_code == 404:
             return None
         if response.status_code != 200:
@@ -103,7 +95,6 @@ def public_get(url, session, limit=MAX_BYTES):
             if len(data) > limit:
                 raise ValueError('ESA orbit response exceeds size limit')
         return bytes(data)
-
 
 def prepare_scene_orbit(feature, cache_root=None, check_only=False, session=None):
     mission, start, end, acquisition = scene_window(feature)
@@ -138,7 +129,7 @@ def prepare_scene_orbit(feature, cache_root=None, check_only=False, session=None
     if not candidates:
         raise FileNotFoundError('No published ESA precise orbit covers this scene; recent scenes may need to wait for POEORB publication. No restituted fallback is applied.')
     _, name, url = max(candidates)
-    data = public_get(url, session)
+    data         = public_get(url, session)
     if data is None:
         raise FileNotFoundError('Listed orbit file disappeared; retry discovery')
     eof_name = name.removesuffix('.zip')
@@ -155,27 +146,28 @@ def prepare_scene_orbit(feature, cache_root=None, check_only=False, session=None
             if any(archive.read(member) != data for member in members[1:]):
                 raise ValueError('Conflicting copies in orbit ZIP')
     validate_eof(data, eof_name, mission, start, end)
-    folder.mkdir(parents=True, exist_ok=True)
+    folder.mkdir(parents = True, exist_ok = True)
     destination = folder / eof_name
     if destination.exists():
         raise FileExistsError(f'Existing orbit failed validation; review rather than overwrite: {destination}')
-    with tempfile.NamedTemporaryFile(dir=folder, suffix='.partial', delete=False) as handle:
+    with tempfile.NamedTemporaryFile(dir = folder, suffix = '.partial', delete = False) as handle:
         temporary = Path(handle.name)
         handle.write(data)
     try:
         temporary.replace(destination)
     finally:
         temporary.unlink(missing_ok=True)
-    write_json(destination.with_suffix('.download.json'), {
-        'source_url': url, 'sha256': sha256(destination), 'orbit_type': 'AUX_POEORB',
-        'spacecraft': mission, 'validity_start': orbit_name(eof_name)[2].isoformat(),
-        'validity_stop': orbit_name(eof_name)[3].isoformat(),
-        'prepared_at': datetime.now(timezone.utc).isoformat(), 'margin_seconds': 60,
-        'snap_processing_validated': False})
+    write_json(destination.with_suffix('.download.json'), {'source_url'                : url,
+                                                           'sha256'                    : sha256(destination),
+                                                           'orbit_type'                : 'AUX_POEORB',
+                                                           'spacecraft'                : mission,
+                                                           'validity_start'            : orbit_name(eof_name)[2].isoformat(),
+                                                           'validity_stop'             : orbit_name(eof_name)[3].isoformat(),
+                                                           'prepared_at'               : datetime.now(timezone.utc).isoformat(),
+                                                           'margin_seconds'            : 60,
+                                                           'snap_processing_validated' : False})
     return destination
-
 
 def prepare_pair_orbits(pair, cache_root=None, check_only=False):
     with requests.Session() as session:
-        return [prepare_scene_orbit(pair[key], cache_root, check_only, session)
-                for key in ('first', 'second')]
+        return [prepare_scene_orbit(pair[key], cache_root, check_only, session) for key in ('first', 'second')]

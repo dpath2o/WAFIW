@@ -36,7 +36,7 @@ segmentation:
   max_pixels: 4000000
 snap:
   executable: "/Applications/snap/bin/gpt" # or /Applications/.../gpt on your Mac
-  dem_path: null # REQUIRED for raw Sentinel-1 processing
+  dem_path: "../../../data/DEMS/davis_snap_wgs84.tif" # REQUIRED for raw Sentinel-1 processing
   dem_nodata: -9999
   dem_apply_egm: false # only correct for ellipsoidal WGS84 heights
   memory: 4G
