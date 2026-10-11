@@ -124,7 +124,7 @@ python scripts/run_primary.py --config configs/davis.yaml doctor
 python scripts/run_primary.py --config configs/davis.yaml search
 ```
 
-The first Davis search found 12 compatible October 2021 pairs. `search` retrieves public catalogue metadata only. Raw-scene download requires local Earthdata authentication through a token or the Earthdata entry in `~/.netrc`. Never commit credentials. Raw SAFE processing requires a prepared DEM; classification also needs a trusted model trained on compatible labelled features. Reuse of Gabby annotations and complete-product commands are covered in the consolidated workflow.
+The first Davis search found 12 compatible October 2021 pairs. `search` retrieves public catalogue metadata only. Raw-scene download requires local Earthdata authentication through a token or the Earthdata entry in `~/.netrc`. Never commit credentials. Raw SAFE processing requires a prepared DEM; classification also needs a trusted model trained on compatible labelled features. Reuse of Research segment annotations and complete-product commands are covered in the consolidated workflow.
 
 
 

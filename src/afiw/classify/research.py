@@ -45,6 +45,11 @@ def read_scene(directory, polarization):
     paths = {'rgb' : rgb_path,
              'segments' : directory / f'label_map_{dates}.npy',
              'annotations' : directory / f'labelled_array_{dates}.npy'}
+    missing = [str(path) for path in paths.values() if not path.is_file()]
+    if missing:
+        raise FileNotFoundError(f'Missing {polarization} annotation inputs: {missing}. '
+                                'Use the original SVM_trainingdata scene folders; '
+                                'a portable .npz model is input to produce --classifier, not train-research.')
     hashes = {key : sha256(path) for key, path in paths.items()}
     rgb, segments, annotations = (np.load(paths[key], allow_pickle = False)
                                   for key in ('rgb', 'segments', 'annotations'))
@@ -118,7 +123,7 @@ def assess(features, labels, reports, lengths):
 
 @logged_workflow
 def train_research(root, output, label_source, polarization = 'HH', scenes = None):
-    root, output = Path(root).resolve(), Path(output).resolve()
+    root, output = Path(root).expanduser().resolve(), Path(output).expanduser().resolve()
     report_path = output.with_suffix('.training.json')
     if output.suffix not in ('.joblib', '.npz'):
         raise ValueError('Research model output must end in .joblib or portable .npz')
@@ -129,10 +134,20 @@ def train_research(root, output, label_source, polarization = 'HH', scenes = Non
     names = list(REFERENCE_SCENES if scenes is None else scenes)
     if not names or len(set(names)) != len(names):
         raise ValueError('Select a nonempty list of unique scenes')
+    if any(Path(name).name != name or name in ('.', '..') for name in names):
+        raise ValueError('Scene names must be direct subdirectories')
+    if not root.is_dir():
+        raise FileNotFoundError(f'Training root must be a directory of annotated scenes: {root}')
+    missing = [name for name in names if not (root / name).is_dir()]
+    if missing:
+        models = sorted(path.name for path in root.glob('*.npz') if path.is_file())
+        hint = (f' Found portable model files: {models}; apply the chosen model with produce '
+                '--classifier instead. No raw-annotation import is needed for the supplied model bundle.'
+                if models else ' Copy the original SVM_trainingdata directory here or select available scenes with --scenes.')
+        raise FileNotFoundError(f'Training root {root} is missing annotated scene folders: {missing}.{hint}')
+    logger.info('Training input preflight: root=%s; scenes=%s; polarization=%s', root, names, polarization)
     rows, targets, reports, seen = [], [], [], {}
     for name in names:
-        if Path(name).name != name:
-            raise ValueError('Scene names must be direct subdirectories')
         x, y, report = read_scene(root / name, polarization)
         identity = (report['sha256']['rgb'], report['sha256']['segments'])
         if identity in seen:

@@ -20,7 +20,7 @@
   "synthetic": false,
   "validated": false,
   "source_kind": "research_segment_annotations",
-  "label_source": "Gabby supplied annotations; canonical ten-scene selection",
+  "label_source": "Research segment annotations; canonical ten-scene selection",
   "preprocessing_contract": null,
   "requires_transfer_review": true,
   "class_counts": {
@@ -766,6 +766,7 @@
       "Shared acquisitions are grouped; pixel-random splits are not used."
     ]
   },
-  "model_sha256": "598ccfb99a0a4858856b9b5bb29157c3c40a02344892ad2c5fcd2427acca0233",
+  "model_sha256": "76031a1c5147205ec03ac6970cd30f96e153041764c99135a4cb6efe05645ded",
+  "packaged_utc": "2026-10-11T04:33:25.966161+00:00",
   "model_artifact_distributed_separately": "WAFIW_HH_candidate.zip (portable feature table; not stored in Git)"
 }

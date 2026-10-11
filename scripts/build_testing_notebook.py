@@ -60,10 +60,10 @@ candidate SVM and a neighbouring training report. No LLM training is involved.
 Use a new model filename for a new training run.''')
 code('''RUN_RESEARCH_TRAINING = False
 TRAINING_ROOT = Path('/path/to/SVM_trainingdata')
-MODEL = Path.home() / 'afiw_data/models/gabby_HH_svm.npz'
+MODEL = PROJECT / 'afiw_data/models/fastice_HH_svm.npz'
 if RUN_RESEARCH_TRAINING:
     model_path = train_research(TRAINING_ROOT, MODEL,
-                               'Gabby annotations; reviewed source/history', polarization = 'HH')
+                               'Research segment annotations; reviewed source/history', polarization = 'HH')
     report = json.loads(model_path.with_suffix('.training.json').read_text())
     print(report['class_counts'])
     print(report['assessment'])

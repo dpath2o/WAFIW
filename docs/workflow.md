@@ -4,17 +4,24 @@ The primary product is a pair of separate **composite and classified maps**, the
 
 ## 1. Reuse existing training annotations
 
-The research method has two distinct learned components: a pretrained SAM segmentation checkpoint and a supervised SVM that assigns ice/ocean classes to segment-mean RGB features. The checkpoint alone does not provide fast-ice classification. Existing Gabby annotations supply the SVM labels, so new labels for each station are **not automatically required**.
+**Already have the supplied model bundle?** Extract `fastice_HH_svm.npz` and
+`fastice_HH_svm.training.json` into `afiw_data/models/` from the project root,
+then go directly to section 2. Do not pass this model directory as
+`--training-root`: that option requires the original scene folders containing
+RGB, segment and annotation `.npy` arrays. Missing scene folders are now checked
+before any import, with a message directing bundle users to `produce --classifier`.
+
+The research method has two distinct learned components: a pretrained SAM segmentation checkpoint and a supervised SVM that assigns ice/ocean classes to segment-mean RGB features. The checkpoint alone does not provide fast-ice classification. Existing research annotations supply the SVM labels, so new labels for each station are **not automatically required**.
 
 ```bash
 python scripts/run_primary.py train-research \
   --training-root /path/to/SVM_trainingdata \
-  --output "$HOME/afiw_data/models/gabby_HH_svm.npz" \
-  --label-source "Gabby annotations, reviewed source and annotation history" \
+  --output "afiw_data/models/fastice_HH_svm.npz" \
+  --label-source "Research segment annotations, reviewed source and annotation history" \
   --log-station Davis
 ```
 
-A supplied `WAFIW_HH_candidate.zip` contains the portable candidate and its report; extracting these into `~/afiw_data/models/` can replace this import step. The feature table is fitted automatically in the local runtime when the classifier is loaded.
+A supplied `WAFIW_HH_candidate.zip` contains the portable candidate and its report; extracting these into `afiw_data/models/` in the project directory can replace this import step. The feature table is fitted automatically in the local runtime when the classifier is loaded.
 
 The default selection is the ten Prydz/Thwaites folders used in the supplied `SAM-SVM.ipynb`. The additional `prydz_20240708_20240720` folder is excluded: its imagery/segments duplicate Thwaites and its annotations conflict. Custom subsets use `--scenes scene_name ...`; duplicates then fail instead of being silently counted twice.
 
@@ -37,7 +44,7 @@ The supplied Davis manifest says `classifier: null`, `status: segmentation_only`
 DAVIS_PAIR=20211002T143959_20211014T143959_45c821c8
 python scripts/run_primary.py produce \
   --manifest "afiw_data/davis/products/$DAVIS_PAIR/manifest.json" \
-  --classifier "$HOME/afiw_data/models/gabby_HH_svm.npz" \
+  --classifier "afiw_data/models/fastice_HH_svm.npz" \
   --allow-model-transfer \
   --output "afiw_data/davis/products/${DAVIS_PAIR}_classified_v2" \
   --bulletin-output "bulletins/davis_20211015" --as-of 2021-10-15
@@ -54,7 +61,7 @@ For composite-only diagnostics, use `render` instead of `produce`. The older `sc
 Retain existing station mask/DEM/resource paths, then update the station YAML deliberately:
 
 ```yaml
-classifier: ~/afiw_data/models/gabby_HH_svm.npz
+classifier: ../afiw_data/models/fastice_HH_svm.npz
 require_classification: true
 allow_model_transfer: true # candidate transfer; review scientific suitability
 ```
